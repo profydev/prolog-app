@@ -14,6 +14,7 @@ const Container = styled.div<ContainerProps>`
 `;
 
 const Home: NextPage = () => {
+  const a = "b";
   return (
     <Container theme="light">
       <Head>
