@@ -16,9 +16,11 @@ jobs:
         with:
           node-version: "14"
           cache: "npm"
+      # install dependencies
       - run: npm ci
+      # run ESLint
       - run: npm run lint
-      - run: npm run check-format
+      - run: npm run prettier
       - run: npm run build
       - name: Cypress run
         uses: cypress-io/github-action@v2
