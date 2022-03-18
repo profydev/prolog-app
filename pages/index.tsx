@@ -13,6 +13,50 @@ const Container = styled.div<ContainerProps>`
   ${(props) => props.theme === "dark" && "background: black"}
 `;
 
+const Main = styled.main`
+  min-height: 100vh;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Footer = styled.footer`
+  display: flex;
+  flex: 1;
+  padding: 2rem 0;
+  border-top: 1px solid #eaeaea;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+`;
+
+const Title = styled.h1`
+  margin: 0;
+  line-height: 1.15;
+  font-size: 4rem;
+  text-align: center;
+
+  a {
+    color: #0070f3;
+    text-decoration: none;
+  }
+
+  a:hover,
+  a:focus,
+  a:active {
+    text-decoration: underline;
+  }
+`;
+
 const Home: NextPage = () => {
   return (
     <Container theme="light">
@@ -22,10 +66,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
+      <Main>
+        <Title>
           Welcome to <a href="/about">Prolog</a>
-        </h1>
+        </Title>
 
         <p className={styles.description}>
           Get started by editing{" "}
@@ -61,9 +105,9 @@ const Home: NextPage = () => {
             </p>
           </a>
         </div>
-      </main>
+      </Main>
 
-      <footer className={styles.footer}>
+      <Footer>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
@@ -74,7 +118,7 @@ const Home: NextPage = () => {
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
-      </footer>
+      </Footer>
     </Container>
   );
 };
