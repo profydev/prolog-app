@@ -67,7 +67,7 @@ const Home: NextPage = () => {
       </Head>
 
       <Main>
-        <Title className={styles.title}>
+        <Title>
           Welcome to <a href="/about">Prolog</a>
         </Title>
 
