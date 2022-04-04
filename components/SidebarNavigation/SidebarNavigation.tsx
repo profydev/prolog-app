@@ -28,7 +28,10 @@ const List = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
-  padding: 0 16px;
+`;
+
+const LinkList = styled(List)`
+  flex: 1;
 `;
 
 export function SidebarNavigation() {
@@ -36,11 +39,11 @@ export function SidebarNavigation() {
     <Nav>
       <Logo src="/icons/logo-large.svg" />
 
-      <List>
+      <LinkList>
         {menuItems.map((menuItem, index) => (
           <MenuItemLink key={index} {...menuItem} />
         ))}
-      </List>
+      </LinkList>
 
       <List>
         <MenuItemButton
