@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 type MenuItemProps = {
   text: string;
-  href: string;
   iconSrc: string;
+  href: string;
 };
 
 const ListItem = styled.li`
@@ -23,7 +23,7 @@ const Icon = styled.img`
   margin-right: 12px;
 `;
 
-export function MenuItem({ text, href, iconSrc }: MenuItemProps) {
+export function MenuItemLink({ text, href, iconSrc }: MenuItemProps) {
   return (
     <ListItem>
       <Link href={href} passHref>

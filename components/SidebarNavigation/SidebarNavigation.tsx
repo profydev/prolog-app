@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { MenuItem } from "./MenuItem";
+import { MenuItemButton } from "./MenuItemButton";
+import { MenuItemLink } from "./MenuItemLink";
 
 const menuItems = [
   { text: "Projects", iconSrc: "/icons/projects.svg", href: "#" },
@@ -25,13 +26,21 @@ export function SidebarNavigation() {
     <Nav>
       <List>
         {menuItems.map((menuItem, index) => (
-          <MenuItem key={index} {...menuItem} />
+          <MenuItemLink key={index} {...menuItem} />
         ))}
       </List>
 
       <List>
-        <li>Support</li>
-        <li>Collapse</li>
+        <MenuItemButton
+          text="Support"
+          iconSrc="/icons/support.svg"
+          onClick={() => alert("Support")}
+        />
+        <MenuItemButton
+          text="Collapse"
+          iconSrc="/icons/arrow-left.svg"
+          onClick={() => alert("Collapse")}
+        />
       </List>
     </Nav>
   );
