@@ -7,6 +7,7 @@ type MenuItemProps = {
   iconSrc: string;
   href: string;
   isActive: boolean;
+  isCollapsed: boolean;
 };
 
 const ListItem = styled.li<{ isActive: boolean }>`
@@ -34,13 +35,19 @@ const Icon = styled.img`
   margin-right: 12px;
 `;
 
-export function MenuItemLink({ text, href, iconSrc, isActive }: MenuItemProps) {
+export function MenuItemLink({
+  text,
+  href,
+  iconSrc,
+  isActive,
+  isCollapsed,
+}: MenuItemProps) {
   return (
     <ListItem isActive={isActive}>
       <Link href={href} passHref>
         <Anchor>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <Icon src={iconSrc} alt={`${text} icon`} /> {text}
+          <Icon src={iconSrc} alt={`${text} icon`} /> {!isCollapsed && text}
         </Anchor>
       </Link>
     </ListItem>

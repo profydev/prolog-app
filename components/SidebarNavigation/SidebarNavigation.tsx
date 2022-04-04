@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useState } from "react";
 import styled from "styled-components";
 import { Routes } from "../../config/routes";
 import { MenuItemButton } from "./MenuItemButton";
@@ -12,8 +13,8 @@ const menuItems = [
   { text: "Settings", iconSrc: "/icons/settings.svg", href: Routes.settings },
 ];
 
-const Nav = styled.nav`
-  width: 248px;
+const Nav = styled.nav<{ isCollapsed: boolean }>`
+  width: ${(props) => (props.isCollapsed ? "50px" : "248px")};
   height: calc(100vh - 2 * 32px);
   padding: 32px 16px;
   display: flex;
@@ -21,8 +22,8 @@ const Nav = styled.nav`
   background: #101828;
 `;
 
-const Logo = styled.img`
-  width: 118px;
+const Logo = styled.img<{ isCollapsed: boolean }>`
+  width: ${(props) => (props.isCollapsed ? "23px" : "118px")};
   margin: 0 12px 24px;
 `;
 
@@ -38,15 +39,20 @@ const LinkList = styled(List)`
 
 export function SidebarNavigation() {
   const router = useRouter();
+  const [isCollapsed, setCollapsed] = useState(false);
   return (
-    <Nav>
-      <Logo src="/icons/logo-large.svg" />
+    <Nav isCollapsed={isCollapsed}>
+      <Logo
+        src={isCollapsed ? "/icons/logo-small.svg" : "/icons/logo-large.svg"}
+        isCollapsed={isCollapsed}
+      />
 
       <LinkList>
         {menuItems.map((menuItem, index) => (
           <MenuItemLink
             key={index}
             {...menuItem}
+            isCollapsed={isCollapsed}
             isActive={router.pathname === menuItem.href}
           />
         ))}
@@ -56,12 +62,14 @@ export function SidebarNavigation() {
         <MenuItemButton
           text="Support"
           iconSrc="/icons/support.svg"
+          isCollapsed={isCollapsed}
           onClick={() => alert("Support")}
         />
         <MenuItemButton
           text="Collapse"
           iconSrc="/icons/arrow-left.svg"
-          onClick={() => alert("Collapse")}
+          isCollapsed={isCollapsed}
+          onClick={() => setCollapsed(!isCollapsed)}
         />
       </List>
     </Nav>
