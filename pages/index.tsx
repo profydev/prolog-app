@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styled from "styled-components";
+import { SidebarNavigation } from "../components/SidebarNavigation";
 import styles from "../styles/Home.module.css";
 
 type ContainerProps = {
@@ -67,6 +68,7 @@ const Home: NextPage = () => {
       </Head>
 
       <Main>
+        <SidebarNavigation />
         <Title>
           Welcome to <a href="/about">Prolog</a>
         </Title>
