@@ -1,12 +1,15 @@
+import { Story as StoryType } from "@storybook/react";
 import { GlobalStyle } from "../styles/GlobalStyle";
+import { decorator as mockRouterDecorator } from "../__mocks__/next/router";
 
 export const decorators = [
-  (Story) => (
+  (Story: StoryType) => (
     <>
       <GlobalStyle />
       <Story />
     </>
   ),
+  mockRouterDecorator,
 ];
 
 export const parameters = {

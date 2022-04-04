@@ -6,10 +6,21 @@ type MenuItemProps = {
   text: string;
   iconSrc: string;
   href: string;
+  isActive: boolean;
 };
 
-const ListItem = styled.li`
-  padding: 8px 12px;
+const ListItem = styled.li<{ isActive: boolean }>`
+  height: 51px;
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  padding: 0 12px;
+  background: ${(props) => (props.isActive ? "#344054" : "transparent")};
+  border-radius: 6px;
+
+  &:first-child {
+    margin-top: 0;
+  }
 `;
 
 const Anchor = styled.a`
@@ -23,9 +34,9 @@ const Icon = styled.img`
   margin-right: 12px;
 `;
 
-export function MenuItemLink({ text, href, iconSrc }: MenuItemProps) {
+export function MenuItemLink({ text, href, iconSrc, isActive }: MenuItemProps) {
   return (
-    <ListItem>
+    <ListItem isActive={isActive}>
       <Link href={href} passHref>
         <Anchor>
           {/* eslint-disable-next-line @next/next/no-img-element */}

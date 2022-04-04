@@ -7,4 +7,10 @@ module.exports = {
   ],
   framework: "@storybook/react",
   staticDirs: ["../public"],
+  webpackFinal: async (config) => {
+    config.resolve.alias["next/router"] = require.resolve(
+      "../__mocks__/next/router.tsx"
+    );
+    return config;
+  },
 };
