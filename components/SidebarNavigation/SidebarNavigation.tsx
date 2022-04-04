@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import { Routes } from "../../config/routes";
+import { NavigationContext } from "../../contexts/Navigation";
 import { MenuItemButton } from "./MenuItemButton";
 import { MenuItemLink } from "./MenuItemLink";
 
@@ -39,12 +40,14 @@ const LinkList = styled(List)`
 
 export function SidebarNavigation() {
   const router = useRouter();
-  const [isCollapsed, setCollapsed] = useState(false);
+  const { isSidebarCollapsed, toggleSidebar } = useContext(NavigationContext);
   return (
-    <Nav isCollapsed={isCollapsed}>
+    <Nav isCollapsed={isSidebarCollapsed}>
       <Logo
-        src={isCollapsed ? "/icons/logo-small.svg" : "/icons/logo-large.svg"}
-        isCollapsed={isCollapsed}
+        src={
+          isSidebarCollapsed ? "/icons/logo-small.svg" : "/icons/logo-large.svg"
+        }
+        isCollapsed={isSidebarCollapsed}
       />
 
       <LinkList>
@@ -52,7 +55,7 @@ export function SidebarNavigation() {
           <MenuItemLink
             key={index}
             {...menuItem}
-            isCollapsed={isCollapsed}
+            isCollapsed={isSidebarCollapsed}
             isActive={router.pathname === menuItem.href}
           />
         ))}
@@ -62,14 +65,14 @@ export function SidebarNavigation() {
         <MenuItemButton
           text="Support"
           iconSrc="/icons/support.svg"
-          isCollapsed={isCollapsed}
+          isCollapsed={isSidebarCollapsed}
           onClick={() => alert("Support")}
         />
         <MenuItemButton
           text="Collapse"
           iconSrc="/icons/arrow-left.svg"
-          isCollapsed={isCollapsed}
-          onClick={() => setCollapsed(!isCollapsed)}
+          isCollapsed={isSidebarCollapsed}
+          onClick={() => toggleSidebar()}
         />
       </List>
     </Nav>
