@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import styled from "styled-components";
-import { Routes } from "../../config/routes";
-import { NavigationContext } from "../../contexts/Navigation";
+import { Routes } from "@config/routes";
+import { NavigationContext } from "@contexts/Navigation";
 import { MenuItemButton } from "./MenuItemButton";
 import { MenuItemLink } from "./MenuItemLink";
 
