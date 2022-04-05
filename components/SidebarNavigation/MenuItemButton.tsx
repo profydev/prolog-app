@@ -9,13 +9,13 @@ type MenuItemProps = {
 };
 
 const ListItem = styled.li`
-  padding: 8px 12px;
+  padding: ${({ theme }) => `${theme.spacing[2]} ${theme.spacing[3]}`};
 `;
 
 const Button = styled.button`
   display: flex;
   align-items: center;
-  color: #f2f4f7;
+  color: ${({ theme }) => theme.colors.gray[100]};
   text-decoration: none;
   cursor: pointer;
 
@@ -36,7 +36,7 @@ const Button = styled.button`
 `;
 
 const Icon = styled.img`
-  margin-right: 12px;
+  margin-right: ${({ theme }) => theme.spacing[3]};
 `;
 
 export function MenuItemButton({

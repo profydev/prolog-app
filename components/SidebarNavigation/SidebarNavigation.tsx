@@ -16,16 +16,16 @@ const menuItems = [
 
 const Nav = styled.nav<{ isCollapsed: boolean }>`
   width: ${(props) => (props.isCollapsed ? "50px" : "248px")};
-  height: calc(100vh - 2 * 32px);
-  padding: 32px 16px;
+  height: calc(100vh - 2 * ${({ theme }) => theme.spacing[8]});
+  padding: ${({ theme }) => `${theme.spacing[8]} ${theme.spacing[4]}`};
   display: flex;
   flex-direction: column;
-  background: #101828;
+  background: ${({ theme }) => theme.colors.gray[900]};
 `;
 
 const Logo = styled.img<{ isCollapsed: boolean }>`
   width: ${(props) => (props.isCollapsed ? "23px" : "118px")};
-  margin: 0 12px 24px;
+  margin: 0 ${({ theme }) => `${theme.spacing[3]} ${theme.spacing[6]}`};
 `;
 
 const List = styled.ul`

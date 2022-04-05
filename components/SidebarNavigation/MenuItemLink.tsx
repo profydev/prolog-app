@@ -14,9 +14,10 @@ const ListItem = styled.li<{ isActive: boolean }>`
   height: 51px;
   display: flex;
   align-items: center;
-  margin-top: 4px;
-  padding: 0 12px;
-  background: ${(props) => (props.isActive ? "#344054" : "transparent")};
+  margin-top: ${({ theme }) => theme.spacing[1]};
+  padding: 0 ${({ theme }) => theme.spacing[3]};
+  background: ${({ theme, isActive }) =>
+    isActive ? theme.colors.gray[700] : "transparent"};
   border-radius: 6px;
 
   &:first-child {
@@ -27,12 +28,12 @@ const ListItem = styled.li<{ isActive: boolean }>`
 const Anchor = styled.a`
   display: flex;
   align-items: center;
-  color: #f2f4f7;
+  color: ${({ theme }) => theme.colors.gray[100]};
   text-decoration: none;
 `;
 
 const Icon = styled.img`
-  margin-right: 12px;
+  margin-right: ${({ theme }) => theme.spacing[3]};
 `;
 
 export function MenuItemLink({
