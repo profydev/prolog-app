@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styled, { css } from "styled-components";
 import { Routes } from "@config/routes";
 import { NavigationContext } from "@contexts/Navigation";
 import { MenuItemButton } from "./MenuItemButton";
 import { MenuItemLink } from "./MenuItemLink";
+import { Button } from "@components/Button";
 
 const menuItems = [
   { text: "Projects", iconSrc: "/icons/projects.svg", href: Routes.projects },
@@ -67,10 +68,14 @@ const Logo = styled.img`
   }
 `;
 
-const MenuIcon = styled.img`
+const MenuButton = styled(Button)`
   @media (min-width: 768px) {
     display: none;
   }
+`;
+
+const MenuIcon = styled.img`
+  display: block;
 `;
 
 const List = styled.ul`
@@ -86,6 +91,7 @@ const LinkList = styled(List)`
 export function SidebarNavigation() {
   const router = useRouter();
   const { isSidebarCollapsed, toggleSidebar } = useContext(NavigationContext);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <Container isCollapsed={isSidebarCollapsed}>
       <Header>
@@ -97,7 +103,12 @@ export function SidebarNavigation() {
           }
           alt="logo"
         />
-        <MenuIcon src="/icons/menu.svg" alt="open menu" />
+        <MenuButton onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}>
+          <MenuIcon
+            src={isMobileMenuOpen ? "/icons/close.svg" : "/icons/menu.svg"}
+            alt="open menu"
+          />
+        </MenuButton>
       </Header>
       <Nav>
         <LinkList>
