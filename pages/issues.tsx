@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { SidebarNavigation } from "@components/SidebarNavigation";
 
-const Home: NextPage = () => {
+const Issues: NextPage = () => {
   return (
     <div>
       <Head>
@@ -18,4 +18,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Issues;
