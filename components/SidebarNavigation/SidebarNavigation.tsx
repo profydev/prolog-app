@@ -18,21 +18,24 @@ const menuItems = [
 const HEADER_HEIGHT = "64px";
 
 const Container = styled.div<{ isCollapsed: boolean }>`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
   ${(props) =>
     props.isCollapsed &&
     css`
-      ${Header} {
-        width: 50px;
-      }
-
-      ${Nav} {
-        width: 50px;
-      }
+      width: 83px;
 
       ${Logo} {
         width: 23px;
       }
     `};
+
+  @media (min-width: 768px) {
+    width: 280px;
+  }
 `;
 
 const Header = styled.header`
@@ -47,6 +50,7 @@ const Header = styled.header`
   z-index: 1000;
 
   @media (min-width: 768px) {
+    height: unset;
     width: 248px;
     padding: ${({ theme }) =>
       `${theme.spacing[8]} ${theme.spacing[4]} ${theme.spacing[6]}`};
@@ -87,12 +91,16 @@ const MenuOverlay = styled.div<{ isMobileMenuOpen: boolean }>`
   transition: opacity 300ms,
     transform 0s
       ${({ isMobileMenuOpen }) => (isMobileMenuOpen ? "0s" : "300ms")};
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const Nav = styled.nav<{ isMobileMenuOpen: boolean }>`
-  width: 248px;
-  height: calc(100vh - ${HEADER_HEIGHT} - ${({ theme }) => theme.spacing[8]});
+  width: 312px;
   padding: ${({ theme }) => `0 ${theme.spacing[4]} ${theme.spacing[8]}`};
+  flex: 1;
   display: flex;
   flex-direction: column;
   background: ${({ theme }) => theme.colors.gray[900]};
@@ -102,6 +110,11 @@ const Nav = styled.nav<{ isMobileMenuOpen: boolean }>`
   transform: ${({ isMobileMenuOpen }) =>
     isMobileMenuOpen ? "translateX(0)" : "translateX(-100%)"};
   transition: transform 300ms;
+
+  @media (min-width: 768px) {
+    width: calc(100% - ${({ theme }) => theme.spacing[8]});
+    transform: none;
+  }
 `;
 
 const List = styled.ul`
