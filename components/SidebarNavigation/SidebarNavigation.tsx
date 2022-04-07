@@ -6,6 +6,7 @@ import { NavigationContext } from "@contexts/Navigation";
 import { MenuItemButton } from "./MenuItemButton";
 import { MenuItemLink } from "./MenuItemLink";
 import { Button } from "@components/Button";
+import { theme } from "@styles/theme";
 
 const menuItems = [
   { text: "Projects", iconSrc: "/icons/projects.svg", href: Routes.projects },
@@ -15,7 +16,7 @@ const menuItems = [
   { text: "Settings", iconSrc: "/icons/settings.svg", href: Routes.settings },
 ];
 
-const HEADER_HEIGHT = "64px";
+const HEADER_HEIGHT = theme.spacing[16];
 
 const Container = styled.div<{ isCollapsed: boolean }>`
   width: 100%;
@@ -24,15 +25,15 @@ const Container = styled.div<{ isCollapsed: boolean }>`
   flex-direction: column;
 
   @media (min-width: 768px) {
-    width: 280px;
+    width: 17.5rem;
 
     ${(props) =>
       props.isCollapsed &&
       css`
-        width: 83px;
+        width: 5.1875rem;
 
         ${Logo} {
-          width: 23px;
+          width: 1.4375rem;
         }
       `};
   }
@@ -57,7 +58,7 @@ const Header = styled.header`
 `;
 
 const Logo = styled.img`
-  width: 118px;
+  width: 7.375rem;
 
   @media (min-width: 768px) {
     margin: 0 ${({ theme }) => `${theme.spacing[3]}`};
@@ -97,8 +98,8 @@ const MenuOverlay = styled.div<{ isMobileMenuOpen: boolean }>`
 `;
 
 const Nav = styled.nav<{ isMobileMenuOpen: boolean }>`
-  width: 312px;
-  padding: ${({ theme }) => `0 ${theme.spacing[2]} ${theme.spacing[8]}`};
+  width: 19.5rem;
+  padding: ${({ theme }) => `0 ${theme.spacing[2]} ${theme.spacing[6]}`};
   flex: 1;
   display: flex;
   flex-direction: column;
