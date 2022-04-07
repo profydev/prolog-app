@@ -48,7 +48,7 @@ const Header = styled.header`
   padding: 0 ${({ theme }) => theme.space[4]};
   background: ${({ theme }) => theme.color.gray[900]};
   position: relative;
-  z-index: 1000;
+  z-index: ${({ theme }) => theme.zIndex.header};
 
   @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
     height: unset;
@@ -83,7 +83,7 @@ const MenuOverlay = styled.div<{ isMobileMenuOpen: boolean }>`
   width: 100%;
   height: 100vh;
   background-color: ${({ theme }) => theme.color.gray[700]};
-  z-index: 999;
+  z-index: calc(${({ theme }) => theme.zIndex.header} - 1);
 
   opacity: ${({ isMobileMenuOpen }) => (isMobileMenuOpen ? "60%" : "0%")};
   transform: translateX(
@@ -106,7 +106,7 @@ const Nav = styled.nav<{ isMobileMenuOpen: boolean }>`
   flex-direction: column;
   background: ${({ theme }) => theme.color.gray[900]};
   position: relative;
-  z-index: 1000;
+  z-index: ${({ theme }) => theme.zIndex.header};
 
   transform: ${({ isMobileMenuOpen }) =>
     isMobileMenuOpen ? "translateX(0)" : "translateX(-100%)"};

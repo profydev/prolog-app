@@ -34,5 +34,8 @@ declare module "styled-components" {
     breakpoint: {
       desktop: string;
     };
+    zIndex: {
+      header: string;
+    };
   }
 }

@@ -31,4 +31,7 @@ export const theme = {
   breakpoint: {
     desktop: "64em",
   },
+  zIndex: {
+    header: 1000,
+  },
 };
