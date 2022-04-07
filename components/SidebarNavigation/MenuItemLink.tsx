@@ -10,8 +10,8 @@ type MenuItemProps = {
   isCollapsed: boolean;
 };
 
-const ListItem = styled.li<{ isActive: boolean }>`
-  height: 51px;
+export const ListItem = styled.li<{ isActive?: boolean }>`
+  height: ${({ theme }) => theme.spacing[12]};
   display: flex;
   align-items: center;
   margin-top: ${({ theme }) => theme.spacing[1]};
@@ -25,14 +25,14 @@ const ListItem = styled.li<{ isActive: boolean }>`
   }
 `;
 
-const Anchor = styled.a`
+export const Anchor = styled.a`
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.colors.gray[100]};
   text-decoration: none;
 `;
 
-const Icon = styled.img`
+export const Icon = styled.img`
   margin-right: ${({ theme }) => theme.spacing[3]};
 `;
 

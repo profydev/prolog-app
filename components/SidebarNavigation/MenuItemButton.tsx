@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-import { Button as UnstyledButton } from "@components/Button";
+import { Button } from "@components/Button";
+import { ListItem, Anchor, Icon } from "./MenuItemLink";
 
 type MenuItemProps = {
   className?: string;
@@ -9,21 +9,6 @@ type MenuItemProps = {
   onClick: () => void;
   isCollapsed: boolean;
 };
-
-const ListItem = styled.li`
-  padding: ${({ theme }) => `${theme.spacing[2]} ${theme.spacing[3]}`};
-`;
-
-const Button = styled(UnstyledButton)`
-  display: flex;
-  align-items: center;
-  color: ${({ theme }) => theme.colors.gray[100]};
-  text-decoration: none;
-`;
-
-const Icon = styled.img`
-  margin-right: ${({ theme }) => theme.spacing[3]};
-`;
 
 export function MenuItemButton({
   className,
@@ -34,10 +19,10 @@ export function MenuItemButton({
 }: MenuItemProps) {
   return (
     <ListItem className={className}>
-      <Button onClick={onClick}>
+      <Anchor as={Button} onClick={onClick}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <Icon src={iconSrc} alt={`${text} icon`} /> {!isCollapsed && text}
-      </Button>
+      </Anchor>
     </ListItem>
   );
 }

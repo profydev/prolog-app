@@ -131,7 +131,7 @@ const CollapseMenuItem = styled(MenuItemButton)`
   display: none;
 
   @media (min-width: 768px) {
-    display: block;
+    display: flex;
   }
 `;
 
