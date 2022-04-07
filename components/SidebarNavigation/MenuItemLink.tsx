@@ -33,6 +33,7 @@ export const Anchor = styled.a`
 `;
 
 export const Icon = styled.img`
+  width: ${({ theme }) => theme.spacing[6]};
   margin-right: ${({ theme }) => theme.spacing[3]};
 `;
 

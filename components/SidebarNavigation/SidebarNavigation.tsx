@@ -73,6 +73,7 @@ const MenuButton = styled(Button)`
 
 const MenuIcon = styled.img`
   display: block;
+  width: ${({ theme }) => theme.spacing[10]};
 `;
 
 const MenuOverlay = styled.div<{ isMobileMenuOpen: boolean }>`
