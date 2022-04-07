@@ -11,13 +11,13 @@ type MenuItemProps = {
 };
 
 export const ListItem = styled.li<{ isActive?: boolean }>`
-  height: ${({ theme }) => theme.spacing[12]};
+  height: ${({ theme }) => theme.space[12]};
   display: flex;
   align-items: center;
-  margin-top: ${({ theme }) => theme.spacing[1]};
-  padding: 0 ${({ theme }) => theme.spacing[3]};
+  margin-top: ${({ theme }) => theme.space[1]};
+  padding: 0 ${({ theme }) => theme.space[3]};
   background: ${({ theme, isActive }) =>
-    isActive ? theme.colors.gray[700] : "transparent"};
+    isActive ? theme.color.gray[700] : "transparent"};
   border-radius: 6px;
 
   &:first-child {
@@ -28,13 +28,13 @@ export const ListItem = styled.li<{ isActive?: boolean }>`
 export const Anchor = styled.a`
   display: flex;
   align-items: center;
-  color: ${({ theme }) => theme.colors.gray[100]};
+  color: ${({ theme }) => theme.color.gray[100]};
   text-decoration: none;
 `;
 
 export const Icon = styled.img`
-  width: ${({ theme }) => theme.spacing[6]};
-  margin-right: ${({ theme }) => theme.spacing[3]};
+  width: ${({ theme }) => theme.space[6]};
+  margin-right: ${({ theme }) => theme.space[3]};
 `;
 
 export function MenuItemLink({

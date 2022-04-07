@@ -16,7 +16,7 @@ const menuItems = [
   { text: "Settings", iconSrc: "/icons/settings.svg", href: Routes.settings },
 ];
 
-const HEADER_HEIGHT = theme.spacing[16];
+const HEADER_HEIGHT = theme.space[16];
 
 const Container = styled.div<{ isCollapsed: boolean }>`
   width: 100%;
@@ -24,7 +24,7 @@ const Container = styled.div<{ isCollapsed: boolean }>`
   display: flex;
   flex-direction: column;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+  @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
     width: 17.5rem;
 
     ${(props) =>
@@ -40,40 +40,40 @@ const Container = styled.div<{ isCollapsed: boolean }>`
 `;
 
 const Header = styled.header`
-  width: calc(100% - 2 * ${({ theme }) => theme.spacing[4]});
+  width: calc(100% - 2 * ${({ theme }) => theme.space[4]});
   height: ${HEADER_HEIGHT};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 ${({ theme }) => theme.spacing[4]};
-  background: ${({ theme }) => theme.colors.gray[900]};
+  padding: 0 ${({ theme }) => theme.space[4]};
+  background: ${({ theme }) => theme.color.gray[900]};
   position: relative;
   z-index: 1000;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+  @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
     height: unset;
     padding: ${({ theme }) =>
-      `${theme.spacing[8]} ${theme.spacing[4]} ${theme.spacing[6]}`};
+      `${theme.space[8]} ${theme.space[4]} ${theme.space[6]}`};
   }
 `;
 
 const Logo = styled.img`
   width: 7.375rem;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    margin: 0 ${({ theme }) => `${theme.spacing[3]}`};
+  @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
+    margin: 0 ${({ theme }) => `${theme.space[3]}`};
   }
 `;
 
 const MenuButton = styled(Button)`
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+  @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
     display: none;
   }
 `;
 
 const MenuIcon = styled.img`
   display: block;
-  width: ${({ theme }) => theme.spacing[10]};
+  width: ${({ theme }) => theme.space[10]};
 `;
 
 const MenuOverlay = styled.div<{ isMobileMenuOpen: boolean }>`
@@ -82,7 +82,7 @@ const MenuOverlay = styled.div<{ isMobileMenuOpen: boolean }>`
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: ${({ theme }) => theme.colors.gray[700]};
+  background-color: ${({ theme }) => theme.color.gray[700]};
   z-index: 999;
 
   opacity: ${({ isMobileMenuOpen }) => (isMobileMenuOpen ? "60%" : "0%")};
@@ -93,18 +93,18 @@ const MenuOverlay = styled.div<{ isMobileMenuOpen: boolean }>`
     transform 0s
       ${({ isMobileMenuOpen }) => (isMobileMenuOpen ? "0s" : "300ms")};
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+  @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
     display: none;
   }
 `;
 
 const Nav = styled.nav<{ isMobileMenuOpen: boolean }>`
   width: 19.5rem;
-  padding: ${({ theme }) => `0 ${theme.spacing[2]} ${theme.spacing[6]}`};
+  padding: ${({ theme }) => `0 ${theme.space[2]} ${theme.space[6]}`};
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) => theme.colors.gray[900]};
+  background: ${({ theme }) => theme.color.gray[900]};
   position: relative;
   z-index: 1000;
 
@@ -112,9 +112,9 @@ const Nav = styled.nav<{ isMobileMenuOpen: boolean }>`
     isMobileMenuOpen ? "translateX(0)" : "translateX(-100%)"};
   transition: transform 300ms;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: calc(100% - ${({ theme }) => theme.spacing[8]});
-    padding: ${({ theme }) => `0 ${theme.spacing[4]} ${theme.spacing[8]}`};
+  @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
+    width: calc(100% - ${({ theme }) => theme.space[8]});
+    padding: ${({ theme }) => `0 ${theme.space[4]} ${theme.space[8]}`};
     transform: none;
   }
 `;
@@ -132,7 +132,7 @@ const LinkList = styled(List)`
 const CollapseMenuItem = styled(MenuItemButton)`
   display: none;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+  @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
     display: flex;
   }
 `;

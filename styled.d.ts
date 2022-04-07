@@ -1,6 +1,6 @@
 import "styled-components";
 
-interface Colors {
+interface Color {
   100: string;
   200: string;
   300: string;
@@ -14,10 +14,10 @@ interface Colors {
 
 declare module "styled-components" {
   export interface DefaultTheme {
-    colors: {
-      gray: Colors;
+    color: {
+      gray: Color;
     };
-    spacing: {
+    space: {
       1: string;
       2: string;
       3: string;
@@ -31,7 +31,7 @@ declare module "styled-components" {
       20: string;
       24: string;
     };
-    breakpoints: {
+    breakpoint: {
       desktop: string;
     };
   }
