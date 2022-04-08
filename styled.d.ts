@@ -35,7 +35,7 @@ declare module "styled-components" {
       desktop: string;
     };
     zIndex: {
-      header: string;
+      header: number;
     };
   }
 }
