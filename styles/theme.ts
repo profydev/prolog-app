@@ -52,3 +52,11 @@ export function space(...names: Array<keyof DefaultTheme["space"]>) {
     return spaces.join(" ");
   };
 }
+
+export function breakpoint(name: keyof DefaultTheme["breakpoint"]) {
+  return ({ theme }: { theme: DefaultTheme }) => theme.breakpoint[name];
+}
+
+export function zIndex(name: keyof DefaultTheme["zIndex"]) {
+  return ({ theme }: { theme: DefaultTheme }) => theme.zIndex[name];
+}
