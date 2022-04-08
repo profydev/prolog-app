@@ -6,7 +6,7 @@ import { NavigationContext } from "@contexts/Navigation";
 import { MenuItemButton } from "./MenuItemButton";
 import { MenuItemLink } from "./MenuItemLink";
 import { Button } from "@components/Button";
-import { theme } from "@styles/theme";
+import { breakpoint, color, space, theme, zIndex } from "@styles/theme";
 
 const menuItems = [
   { text: "Projects", iconSrc: "/icons/projects.svg", href: Routes.projects },
@@ -16,7 +16,7 @@ const menuItems = [
   { text: "Settings", iconSrc: "/icons/settings.svg", href: Routes.settings },
 ];
 
-const HEADER_HEIGHT = theme.space[16];
+const HEADER_HEIGHT = space(16)({ theme });
 
 const Container = styled.div<{ isCollapsed: boolean }>`
   width: 100%;
@@ -24,7 +24,7 @@ const Container = styled.div<{ isCollapsed: boolean }>`
   display: flex;
   flex-direction: column;
 
-  @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
+  @media (min-width: ${breakpoint("desktop")}) {
     width: 17.5rem;
 
     ${(props) =>
@@ -40,40 +40,39 @@ const Container = styled.div<{ isCollapsed: boolean }>`
 `;
 
 const Header = styled.header`
-  width: calc(100% - 2 * ${({ theme }) => theme.space[4]});
+  width: calc(100% - 2 * ${space(4)});
   height: ${HEADER_HEIGHT};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 ${({ theme }) => theme.space[4]};
-  background: ${({ theme }) => theme.color.gray[900]};
+  padding: ${space(0, 4)};
+  background: ${color("gray", 900)};
   position: relative;
-  z-index: ${({ theme }) => theme.zIndex.header};
+  z-index: ${zIndex("header")};
 
-  @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
+  @media (min-width: ${breakpoint("desktop")}) {
     height: unset;
-    padding: ${({ theme }) =>
-      `${theme.space[8]} ${theme.space[4]} ${theme.space[6]}`};
+    padding: ${space(8, 4, 6)};
   }
 `;
 
 const Logo = styled.img`
   width: 7.375rem;
 
-  @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
-    margin: 0 ${({ theme }) => `${theme.space[3]}`};
+  @media (min-width: ${breakpoint("desktop")}) {
+    margin: ${space(0, 3)};
   }
 `;
 
 const MenuButton = styled(Button)`
-  @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
+  @media (min-width: ${breakpoint("desktop")}) {
     display: none;
   }
 `;
 
 const MenuIcon = styled.img`
   display: block;
-  width: ${({ theme }) => theme.space[10]};
+  width: ${space(10)};
 `;
 
 const MenuOverlay = styled.div<{ isMobileMenuOpen: boolean }>`
@@ -82,8 +81,8 @@ const MenuOverlay = styled.div<{ isMobileMenuOpen: boolean }>`
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: ${({ theme }) => theme.color.gray[700]};
-  z-index: calc(${({ theme }) => theme.zIndex.header} - 1);
+  background-color: ${color("gray", 700)};
+  z-index: ${(props) => zIndex("header")(props) - 1};
 
   opacity: ${({ isMobileMenuOpen }) => (isMobileMenuOpen ? "60%" : "0%")};
   transform: translateX(
@@ -93,28 +92,28 @@ const MenuOverlay = styled.div<{ isMobileMenuOpen: boolean }>`
     transform 0s
       ${({ isMobileMenuOpen }) => (isMobileMenuOpen ? "0s" : "300ms")};
 
-  @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
+  @media (min-width: ${breakpoint("desktop")}) {
     display: none;
   }
 `;
 
 const Nav = styled.nav<{ isMobileMenuOpen: boolean }>`
   width: 19.5rem;
-  padding: ${({ theme }) => `0 ${theme.space[2]} ${theme.space[6]}`};
+  padding: ${space(0, 2, 6)};
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) => theme.color.gray[900]};
+  background: ${color("gray", 900)};
   position: relative;
-  z-index: ${({ theme }) => theme.zIndex.header};
+  z-index: ${zIndex("header")};
 
   transform: ${({ isMobileMenuOpen }) =>
     isMobileMenuOpen ? "translateX(0)" : "translateX(-100%)"};
   transition: transform 300ms;
 
-  @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
-    width: calc(100% - ${({ theme }) => theme.space[8]});
-    padding: ${({ theme }) => `0 ${theme.space[4]} ${theme.space[8]}`};
+  @media (min-width: ${breakpoint("desktop")}) {
+    width: calc(100% - ${space(8)});
+    padding: ${space(0, 4, 8)};
     transform: none;
   }
 `;
@@ -132,7 +131,7 @@ const LinkList = styled(List)`
 const CollapseMenuItem = styled(MenuItemButton)`
   display: none;
 
-  @media (min-width: ${({ theme }) => theme.breakpoint.desktop}) {
+  @media (min-width: ${breakpoint("desktop")}) {
     display: flex;
   }
 `;
