@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import { SidebarNavigation } from "@components/SidebarNavigation";
-import { color, displayFont, textFont, space } from "@styles/theme";
+import { color, displayFont, textFont, space, breakpoint } from "@styles/theme";
 
 type PageContainerProps = {
   children: React.ReactNode;
@@ -12,7 +12,12 @@ type PageContainerProps = {
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   background: ${color("gray", 900)};
+
+  @media (min-width: ${breakpoint("desktop")}) {
+    flex-direction: row;
+  }
 `;
 
 const Main = styled.main`
@@ -20,15 +25,22 @@ const Main = styled.main`
 `;
 
 const ContentContainer = styled.div`
-  min-height: calc(100vh - ${space(3)});
-  margin-top: ${space(3)};
-  padding: ${space(8)};
+  min-height: calc(
+    100vh - 2 * ${space(8)} - ${({ theme }) => theme.size.headerHeight}
+  );
+  padding: ${space(8, 3)};
   background: white;
-  border-top-left-radius: ${space(10)};
+
+  @media (min-width: ${breakpoint("desktop")}) {
+    min-height: calc(100vh - ${space(3)} - 2 * ${space(8)});
+    margin-top: ${space(3)};
+    padding: ${space(8)};
+    border-top-left-radius: ${space(10)};
+  }
 `;
 
 const Title = styled.h1`
-  margin-bottom: ${space(1)};
+  margin: ${space(0, 0, 1)};
   color: ${color("gray", 900)};
   ${displayFont("sm", "medium")}
 `;

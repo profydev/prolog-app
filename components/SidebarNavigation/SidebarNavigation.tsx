@@ -6,7 +6,7 @@ import { NavigationContext } from "@contexts/Navigation";
 import { MenuItemButton } from "./MenuItemButton";
 import { MenuItemLink } from "./MenuItemLink";
 import { Button } from "@components/Button";
-import { breakpoint, color, space, theme, zIndex } from "@styles/theme";
+import { breakpoint, color, space, zIndex } from "@styles/theme";
 
 const menuItems = [
   { text: "Projects", iconSrc: "/icons/projects.svg", href: Routes.projects },
@@ -16,16 +16,14 @@ const menuItems = [
   { text: "Settings", iconSrc: "/icons/settings.svg", href: Routes.settings },
 ];
 
-const HEADER_HEIGHT = space(16)({ theme });
-
 const Container = styled.div<{ isCollapsed: boolean }>`
   width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
 
   @media (min-width: ${breakpoint("desktop")}) {
     width: 17.5rem;
+    height: 100vh;
 
     ${(props) =>
       props.isCollapsed &&
@@ -41,7 +39,7 @@ const Container = styled.div<{ isCollapsed: boolean }>`
 
 const Header = styled.header`
   width: calc(100% - 2 * ${space(4)});
-  height: ${HEADER_HEIGHT};
+  height: ${({ theme }) => theme.size.headerHeight};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -98,13 +96,15 @@ const MenuOverlay = styled.div<{ isMobileMenuOpen: boolean }>`
 `;
 
 const Nav = styled.nav<{ isMobileMenuOpen: boolean }>`
+  position: absolute;
+  top: ${({ theme }) => theme.size.headerHeight};
+  bottom: 0;
   width: 19.5rem;
   padding: ${space(0, 2, 6)};
   flex: 1;
   display: flex;
   flex-direction: column;
   background: ${color("gray", 900)};
-  position: relative;
   z-index: ${zIndex("header")};
 
   transform: ${({ isMobileMenuOpen }) =>
@@ -112,6 +112,8 @@ const Nav = styled.nav<{ isMobileMenuOpen: boolean }>`
   transition: transform 300ms;
 
   @media (min-width: ${breakpoint("desktop")}) {
+    position: relative;
+    top: 0;
     width: calc(100% - ${space(8)});
     padding: ${space(0, 4, 8)};
     transform: none;
