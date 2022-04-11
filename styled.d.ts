@@ -18,6 +18,7 @@ declare module "styled-components" {
       gray: Color;
     };
     space: {
+      0: string;
       1: string;
       2: string;
       3: string;

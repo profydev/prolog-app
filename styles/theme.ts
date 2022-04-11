@@ -1,3 +1,5 @@
+import { DefaultTheme } from "styled-components";
+
 export const theme = {
   color: {
     gray: {
@@ -15,6 +17,7 @@ export const theme = {
     },
   },
   space: {
+    0: "0",
     1: "0.25rem",
     2: "0.5rem",
     3: "0.75rem",
@@ -35,3 +38,25 @@ export const theme = {
     header: 1000,
   },
 };
+
+export function color(
+  name: keyof DefaultTheme["color"],
+  shade: keyof DefaultTheme["color"]["gray"]
+) {
+  return ({ theme }: { theme: DefaultTheme }) => theme.color[name][shade];
+}
+
+export function space(...names: Array<keyof DefaultTheme["space"]>) {
+  return ({ theme }: { theme: DefaultTheme }) => {
+    const spaces = names.map((name) => theme.space[name]);
+    return spaces.join(" ");
+  };
+}
+
+export function breakpoint(name: keyof DefaultTheme["breakpoint"]) {
+  return ({ theme }: { theme: DefaultTheme }) => theme.breakpoint[name];
+}
+
+export function zIndex(name: keyof DefaultTheme["zIndex"]) {
+  return ({ theme }: { theme: DefaultTheme }) => theme.zIndex[name];
+}
