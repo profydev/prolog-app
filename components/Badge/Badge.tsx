@@ -56,7 +56,7 @@ const Container = styled.div<{ size: BadgeSize; color: BadgeColor }>`
       case BadgeColor.gray:
         return css`
           background: ${color("gray", 100)};
-          color: ${color("primary", 700)};
+          color: ${color("gray", 700)};
         `;
       default:
         return css`
