@@ -1,4 +1,12 @@
-import { theme, color, space, breakpoint, zIndex, font } from "./theme";
+import {
+  theme,
+  color,
+  space,
+  breakpoint,
+  zIndex,
+  textFont,
+  displayFont,
+} from "./theme";
 
 describe("color utility function", () => {
   test("gets color from theme", () => {
@@ -43,12 +51,19 @@ describe("zIndex utility function", () => {
   });
 });
 
-describe("font utility function", () => {
-  test("gets font from theme", () => {
-    const fontSmMd = font("sm", "md")({ theme });
-    expect(fontSmMd[0]).toContain("font-size: 0.75rem;");
-    expect(fontSmMd[0]).toContain("line-height: 1.125rem;");
-    expect(fontSmMd[0]).toContain("font-weight: 500;");
+describe("font utility functions", () => {
+  test("textFont gets text font from theme", () => {
+    const fontSmMd = textFont("sm", "medium")({ theme });
+    expect(fontSmMd).toContain("font-size: 0.875rem;");
+    expect(fontSmMd).toContain("line-height: 1.25rem;");
+    expect(fontSmMd).toContain("font-weight: 500;");
+  });
+
+  test("displayFont gets font from theme", () => {
+    const displayFontSmMd = displayFont("sm", "medium")({ theme });
+    expect(displayFontSmMd).toContain("font-size: 1.875rem;");
+    expect(displayFontSmMd).toContain("line-height: 2.375rem;");
+    expect(displayFontSmMd).toContain("font-weight: 500;");
   });
 });
 
