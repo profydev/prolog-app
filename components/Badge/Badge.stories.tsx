@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Badge } from "./Badge";
+import { Badge, BadgeSize } from "./Badge";
 
 export default {
   title: "UI/Badge",
@@ -11,11 +11,13 @@ export default {
   },
 } as ComponentMeta<typeof Badge>;
 
-const Template: ComponentStory<typeof Badge> = () => (
+const Template: ComponentStory<typeof Badge> = ({ size }) => (
   <div style={{ padding: 50 }}>
-    <Badge>Label</Badge>
+    <Badge size={size}>Label</Badge>
   </div>
 );
 
 export const Default = Template.bind({});
-Default.parameters = {};
+Default.args = {
+  size: BadgeSize.sm,
+};
