@@ -24,3 +24,6 @@ Default.args = {
   size: BadgeSize.sm,
   color: BadgeColor.primary,
 };
+Default.parameters = {
+  viewMode: "docs",
+};
