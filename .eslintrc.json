@@ -1,7 +1,13 @@
 {
-  "extends": ["next/core-web-vitals", "eslint:recommended", "prettier"],
-  "plugins": ["cypress"],
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "plugins": ["cypress", "@typescript-eslint"],
   "env": {
     "cypress/globals": true
-  }
+  },
+  "parser": "@typescript-eslint/parser"
 }
