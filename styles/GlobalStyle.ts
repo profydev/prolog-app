@@ -5,7 +5,7 @@ export const GlobalStyle = createGlobalStyle`
   ${normalize}
   
   @font-face {
-    font-family: "Inter";
+    font-family: "Inter-md";
     src: url("/fonts/Inter.ttf");
     font-display: swap;
   }

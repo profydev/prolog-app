@@ -1,4 +1,4 @@
-import { theme, color, space, breakpoint, zIndex } from "./theme";
+import { theme, color, space, breakpoint, zIndex, font } from "./theme";
 
 describe("color utility function", () => {
   test("gets color from theme", () => {
@@ -40,6 +40,15 @@ describe("zIndex utility function", () => {
   test("gets z-index from theme", () => {
     const zIndexHeader = zIndex("header")({ theme });
     expect(zIndexHeader).toBe(1000);
+  });
+});
+
+describe("font utility function", () => {
+  test("gets font from theme", () => {
+    const fontSmMd = font("sm", "md")({ theme });
+    expect(fontSmMd[0]).toContain("font-size: 0.75rem;");
+    expect(fontSmMd[0]).toContain("line-height: 1.125rem;");
+    expect(fontSmMd[0]).toContain("font-weight: 500;");
   });
 });
 

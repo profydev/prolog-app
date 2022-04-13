@@ -1,6 +1,8 @@
 import "styled-components";
 
 interface Color {
+  25: string;
+  50: string;
   100: string;
   200: string;
   300: string;
@@ -12,10 +14,18 @@ interface Color {
   900: string;
 }
 
+interface Font {
+  md: string;
+}
+
 declare module "styled-components" {
   export interface DefaultTheme {
     color: {
       gray: Color;
+      primary: Color;
+      error: Color;
+      warning: Color;
+      success: Color;
     };
     space: {
       0: string;
@@ -37,6 +47,10 @@ declare module "styled-components" {
     };
     zIndex: {
       header: number;
+    };
+    font: {
+      xs: Font;
+      sm: Font;
     };
   }
 }
