@@ -105,6 +105,11 @@ export const theme = {
           line-height: 1.125rem;
           font-weight: 500;
         `,
+        semibold: `
+          font-size: 0.75rem;
+          line-height: 1.125rem;
+          font-weight: 500;
+        `,
       },
       sm: {
         regular: `
@@ -113,6 +118,11 @@ export const theme = {
           font-weight: 400;
         `,
         medium: `
+          font-size: 0.875rem;
+          line-height: 1.25rem;
+          font-weight: 500;
+        `,
+        semibold: `
           font-size: 0.875rem;
           line-height: 1.25rem;
           font-weight: 500;
@@ -129,6 +139,11 @@ export const theme = {
           line-height: 1.5rem;
           font-weight: 500;
         `,
+        semibold: `
+          font-size: 1rem;
+          line-height: 1.5rem;
+          font-weight: 600;
+        `,
       },
     },
     display: {
@@ -142,6 +157,28 @@ export const theme = {
           font-size: 1.875rem;
           line-height: 2.375rem;
           font-weight: 500;
+        `,
+        semibold: `
+          font-size: 1.875rem;
+          line-height: 2.375rem;
+          font-weight: 600;
+        `,
+      },
+      md: {
+        regular: `
+          font-size: 2.25rem;
+          line-height: 2.75rem;
+          font-weight: 400;
+        `,
+        medium: `
+          font-size: 2.25rem;
+          line-height: 2.75rem;
+          font-weight: 500;
+        `,
+        semibold: `
+          font-size: 2.25rem;
+          line-height: 2.75rem;
+          font-weight: 600;
         `,
       },
     },

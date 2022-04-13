@@ -17,6 +17,7 @@ interface Color {
 interface Font {
   regular: string;
   medium: string;
+  semibold: string;
 }
 
 declare module "styled-components" {
@@ -60,6 +61,7 @@ declare module "styled-components" {
       };
       display: {
         sm: Font;
+        md: Font;
       };
     };
   }
