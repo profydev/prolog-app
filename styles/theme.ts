@@ -83,6 +83,9 @@ export const theme = {
     20: "5rem",
     24: "6rem",
   },
+  size: {
+    headerHeight: "4rem",
+  },
   breakpoint: {
     desktop: "64em",
   },
@@ -90,19 +93,57 @@ export const theme = {
     header: 1000,
   },
   font: {
-    xs: {
-      md: `
-        font-size: 0.75rem;
-        line-height: 1.125rem;
-        font-weight: 500;
-      `,
+    text: {
+      xs: {
+        regular: `
+          font-size: 0.75rem;
+          line-height: 1.125rem;
+          font-weight: 400;
+        `,
+        medium: `
+          font-size: 0.75rem;
+          line-height: 1.125rem;
+          font-weight: 500;
+        `,
+      },
+      sm: {
+        regular: `
+          font-size: 0.875rem;
+          line-height: 1.25rem;
+          font-weight: 400;
+        `,
+        medium: `
+          font-size: 0.875rem;
+          line-height: 1.25rem;
+          font-weight: 500;
+        `,
+      },
+      md: {
+        regular: `
+          font-size: 1rem;
+          line-height: 1.5rem;
+          font-weight: 400;
+        `,
+        medium: `
+          font-size: 1rem;
+          line-height: 1.5rem;
+          font-weight: 500;
+        `,
+      },
     },
-    sm: {
-      md: `
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-        font-weight: 500;
-      `,
+    display: {
+      sm: {
+        regular: `
+          font-size: 1.875rem;
+          line-height: 2.375rem;
+          font-weight: 400;
+        `,
+        medium: `
+          font-size: 1.875rem;
+          line-height: 2.375rem;
+          font-weight: 500;
+        `,
+      },
     },
   },
 };
@@ -129,9 +170,17 @@ export function zIndex(name: keyof DefaultTheme["zIndex"]) {
   return ({ theme }: { theme: DefaultTheme }) => theme.zIndex[name];
 }
 
-export function font(
-  size: keyof DefaultTheme["font"],
-  weight: keyof DefaultTheme["font"]["sm"]
+export function textFont(
+  size: keyof DefaultTheme["font"]["text"],
+  weight: keyof DefaultTheme["font"]["text"]["sm"]
 ) {
-  return ({ theme }: { theme: DefaultTheme }) => theme.font[size][weight];
+  return ({ theme }: { theme: DefaultTheme }) => theme.font.text[size][weight];
+}
+
+export function displayFont(
+  size: keyof DefaultTheme["font"]["display"],
+  weight: keyof DefaultTheme["font"]["display"]["sm"]
+) {
+  return ({ theme }: { theme: DefaultTheme }) =>
+    theme.font.display[size][weight];
 }

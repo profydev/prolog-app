@@ -1,20 +1,14 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import { SidebarNavigation } from "@components/SidebarNavigation";
+import { PageContainer } from "@components/PageContainer";
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <Head>
-        <title>ProLog</title>
-        <meta name="description" content="Error monitoring" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <SidebarNavigation />
-      </main>
-    </div>
+    <PageContainer
+      title="Projects"
+      info="Overview of your projects sorted by alert level."
+    >
+      Projects Placeholder
+    </PageContainer>
   );
 };
 
