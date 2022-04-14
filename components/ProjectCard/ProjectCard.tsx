@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
+import capitalize from "lodash/capitalize";
 import { Badge, BadgeColor } from "@components/Badge";
 import { Project, ProjectLanguage, ProjectStatus } from "@api/project";
 import { color, displayFont, space, textFont } from "@styles/theme";
@@ -15,15 +16,9 @@ const languageNames = {
 };
 
 const statusColors = {
-  [ProjectStatus.info]: BadgeColor.success,
+  [ProjectStatus.stable]: BadgeColor.success,
   [ProjectStatus.warning]: BadgeColor.warning,
-  [ProjectStatus.error]: BadgeColor.error,
-};
-
-const statusText = {
-  [ProjectStatus.info]: "Stable",
-  [ProjectStatus.warning]: "Warning",
-  [ProjectStatus.error]: "Critical",
+  [ProjectStatus.critical]: BadgeColor.error,
 };
 
 const Container = styled.div`
@@ -126,7 +121,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <IssuesNumber>{numEvents24h}</IssuesNumber>
           </Issues>
           <Status>
-            <Badge color={statusColors[status]}>{statusText[status]}</Badge>
+            <Badge color={statusColors[status]}>{capitalize(status)}</Badge>
           </Status>
         </InfoContainer>
       </TopContainer>
