@@ -17,6 +17,7 @@
     "types": ["jest"],
     "baseUrl": ".",
     "paths": {
+      "@api/*": ["api/*"],
       "@components/*": ["components/*"],
       "@contexts/*": ["contexts/*"],
       "@styles/*": ["styles/*"],
