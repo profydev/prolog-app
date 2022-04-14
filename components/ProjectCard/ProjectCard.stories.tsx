@@ -12,21 +12,34 @@ export default {
   },
 } as ComponentMeta<typeof ProjectCard>;
 
-const Template: ComponentStory<typeof ProjectCard> = (props) => (
+const Template: ComponentStory<typeof ProjectCard> = (project) => (
   <div style={{ width: 500, padding: 50 }}>
-    <ProjectCard {...props} />
+    <ProjectCard project={project} />
   </div>
 );
 
 export const Default = Template.bind({});
 Default.args = {
+  id: "xzy",
+  name: "Frontend - Web",
+  language: ProjectLanguage.react,
+  numIssues: 420,
+  numEvents24h: 721,
+  status: ProjectStatus.critical,
+};
+Default.argTypes = {
+  language: {
+    control: "select",
+    options: Object.values(ProjectLanguage),
+  },
+  status: {
+    control: "select",
+    options: Object.values(ProjectStatus),
+  },
   project: {
-    id: "xzy",
-    name: "Frontend - Web",
-    language: ProjectLanguage.react,
-    numIssues: 420,
-    numEvents24h: 721,
-    status: ProjectStatus.critical,
+    table: {
+      disable: true,
+    },
   },
 };
 Default.parameters = {
