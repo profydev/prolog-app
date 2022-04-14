@@ -1,2 +1,3 @@
-export { useProjects, ProjectLanguage, ProjectStatus } from "./useProjects";
-export type { Project } from "./useProjects";
+export { useProjects } from "./useProjects";
+export { ProjectLanguage, ProjectStatus } from "./project.types";
+export type { Project } from "./project.types";
