@@ -3,10 +3,15 @@ import { ProjectCard } from "@components/ProjectCard";
 import { useProjects } from "@api/project/useProjects";
 import { breakpoint, space } from "@styles/theme";
 
-const Container = styled.div`
+const List = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: ${space(6)};
+
+  // reset list styles
+  list-style: none;
+  padding: 0;
+  margin: 0;
 
   @media (min-width: ${breakpoint("desktop")}) {
     grid-template-columns: repeat(auto-fit, 400px);
@@ -26,10 +31,12 @@ export function ProjectList() {
   }
 
   return (
-    <Container>
+    <List>
       {data?.map((project) => (
-        <ProjectCard key={project.id} project={project} />
+        <li key={project.id}>
+          <ProjectCard project={project} />
+        </li>
       ))}
-    </Container>
+    </List>
   );
 }
