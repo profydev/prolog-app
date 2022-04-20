@@ -13,6 +13,7 @@ module.exports = {
     config.resolve.alias["next/router"] = require.resolve(
       "../__mocks__/next/router.tsx"
     );
+    config.resolve.alias["@api"] = path.resolve("./api");
     config.resolve.alias["@components"] = path.resolve("./components");
     config.resolve.alias["@contexts"] = path.resolve("./contexts");
     config.resolve.alias["@styles"] = path.resolve("./styles");

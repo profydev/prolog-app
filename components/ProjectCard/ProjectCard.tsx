@@ -2,27 +2,11 @@ import Link from "next/link";
 import styled from "styled-components";
 import capitalize from "lodash/capitalize";
 import { Badge, BadgeColor } from "@components/Badge";
+import { Project, ProjectLanguage, ProjectStatus } from "@api/project";
 import { color, displayFont, space, textFont } from "@styles/theme";
 
-export enum ProjectLanguage {
-  react = "react",
-  node = "node",
-  python = "python",
-}
-
-export enum ProjectStatus {
-  stable = "stable",
-  warning = "warning",
-  critical = "critical",
-}
-
 type ProjectCardProps = {
-  id: string;
-  name: string;
-  language: ProjectLanguage;
-  numIssues: number;
-  numEvents24h: number;
-  status: ProjectStatus;
+  project: Project;
 };
 
 const languageNames = {
@@ -40,6 +24,7 @@ const statusColors = {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
   background: white;
   box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1),
     0px 1px 2px rgba(16, 24, 40, 0.06);
@@ -114,13 +99,8 @@ const ViewIssuesAnchor = styled.a`
   ${textFont("sm", "medium")}
 `;
 
-export function ProjectCard({
-  name,
-  language,
-  numIssues,
-  numEvents24h,
-  status,
-}: ProjectCardProps) {
+export function ProjectCard({ project }: ProjectCardProps) {
+  const { name, language, numIssues, numEvents24h, status } = project;
   return (
     <Container>
       <TopContainer>

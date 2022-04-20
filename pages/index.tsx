@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { PageContainer } from "@components/PageContainer";
+import { ProjectList } from "@components/ProjectList";
 
 const Home: NextPage = () => {
   return (
@@ -7,7 +8,7 @@ const Home: NextPage = () => {
       title="Projects"
       info="Overview of your projects sorted by alert level."
     >
-      Projects Placeholder
+      <ProjectList />
     </PageContainer>
   );
 };

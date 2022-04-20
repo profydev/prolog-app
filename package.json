@@ -16,9 +16,11 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.181",
+    "axios": "^0.26.1",
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-query": "^3.34.19",
     "styled-components": "^5.3.3",
     "styled-normalize": "^8.0.7"
   },
