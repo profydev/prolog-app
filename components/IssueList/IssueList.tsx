@@ -19,7 +19,7 @@ const Table = styled.table`
   border-collapse: collapse;
 `;
 
-const TableHead = styled.thead`
+const HeaderRow = styled.tr`
   border-bottom: 1px solid ${color("gray", 200)};
 `;
 
@@ -59,12 +59,14 @@ export function IssueList() {
   return (
     <Container>
       <Table>
-        <TableHead>
-          <HeaderCell>Issue</HeaderCell>
-          <HeaderCell>Level</HeaderCell>
-          <HeaderCell>Events</HeaderCell>
-          <HeaderCell>Users</HeaderCell>
-        </TableHead>
+        <thead>
+          <HeaderRow>
+            <HeaderCell>Issue</HeaderCell>
+            <HeaderCell>Level</HeaderCell>
+            <HeaderCell>Events</HeaderCell>
+            <HeaderCell>Users</HeaderCell>
+          </HeaderRow>
+        </thead>
         <tbody>
           {(issues.data || []).map((issue) => (
             <IssueRow
