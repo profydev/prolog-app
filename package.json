@@ -15,6 +15,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@fontsource/inter": "^4.5.7",
     "@types/lodash": "^4.14.181",
     "axios": "^0.26.1",
     "next": "12.1.0",
