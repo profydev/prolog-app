@@ -4,14 +4,18 @@ import { ProjectLanguage, useProjects } from "@api/project";
 import { color, space, textFont } from "@styles/theme";
 import { IssueRow } from "./IssueRow";
 
-const Table = styled.table`
-  width: 100%;
+const Container = styled.div`
   background: white;
   border: 1px solid ${color("gray", 200)};
   box-sizing: border-box;
   box-shadow: 0px 4px 8px -2px rgba(16, 24, 40, 0.1),
     0px 2px 4px -2px rgba(16, 24, 40, 0.06);
-  border-radius: 8px;
+  border-radius: ${space(2)};
+  overflow: hidden;
+`;
+
+const Table = styled.table`
+  width: 100%;
   border-collapse: collapse;
 `;
 
@@ -53,22 +57,24 @@ export function IssueList() {
   );
 
   return (
-    <Table>
-      <TableHead>
-        <HeaderCell>Issue</HeaderCell>
-        <HeaderCell>Level</HeaderCell>
-        <HeaderCell>Events</HeaderCell>
-        <HeaderCell>Users</HeaderCell>
-      </TableHead>
-      <tbody>
-        {(issues.data || []).map((issue) => (
-          <IssueRow
-            key={issue.id}
-            issue={issue}
-            projectLanguage={projectIdToLanguage[issue.projectId]}
-          />
-        ))}
-      </tbody>
-    </Table>
+    <Container>
+      <Table>
+        <TableHead>
+          <HeaderCell>Issue</HeaderCell>
+          <HeaderCell>Level</HeaderCell>
+          <HeaderCell>Events</HeaderCell>
+          <HeaderCell>Users</HeaderCell>
+        </TableHead>
+        <tbody>
+          {(issues.data || []).map((issue) => (
+            <IssueRow
+              key={issue.id}
+              issue={issue}
+              projectLanguage={projectIdToLanguage[issue.projectId]}
+            />
+          ))}
+        </tbody>
+      </Table>
+    </Container>
   );
 }
