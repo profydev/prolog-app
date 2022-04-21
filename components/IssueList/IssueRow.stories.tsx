@@ -14,9 +14,12 @@ export default {
 } as ComponentMeta<typeof IssueRow>;
 
 const Template: ComponentStory<typeof IssueRow> = (props) => (
-  <div style={{ padding: 50 }}>
-    <IssueRow {...props} />
-  </div>
+  <table style={{ borderCollapse: "collapse" }}>
+    <tbody>
+      <IssueRow {...props} />
+      <IssueRow {...props} />
+    </tbody>
+  </table>
 );
 
 export const Default = Template.bind({});
