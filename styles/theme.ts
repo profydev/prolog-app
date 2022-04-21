@@ -108,7 +108,7 @@ export const theme = {
         semibold: `
           font-size: 0.75rem;
           line-height: 1.125rem;
-          font-weight: 500;
+          font-weight: 600;
         `,
       },
       sm: {
@@ -125,7 +125,7 @@ export const theme = {
         semibold: `
           font-size: 0.875rem;
           line-height: 1.25rem;
-          font-weight: 500;
+          font-weight: 600;
         `,
       },
       md: {
