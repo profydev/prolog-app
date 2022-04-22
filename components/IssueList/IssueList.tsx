@@ -68,7 +68,7 @@ export function IssueList() {
           </HeaderRow>
         </thead>
         <tbody>
-          {(issues.data || []).map((issue) => (
+          {(issues.data?.items || []).map((issue) => (
             <IssueRow
               key={issue.id}
               issue={issue}

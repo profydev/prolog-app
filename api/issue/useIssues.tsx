@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import axios from "axios";
-import { Issue } from "./issue.types";
+import type { Page } from "@api/page";
+import type { Issue } from "./issue.types";
 
 async function getIssues() {
   const { data } = await axios.get("https://prolog-api.profy.dev/issue");
@@ -8,5 +9,5 @@ async function getIssues() {
 }
 
 export function useIssues() {
-  return useQuery<Issue[], Error>("issues", getIssues);
+  return useQuery<Page<Issue>, Error>("issues", getIssues);
 }
