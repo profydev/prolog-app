@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { useIssues } from "@api/issue";
 import { ProjectLanguage, useProjects } from "@api/project";
@@ -31,10 +32,11 @@ const HeaderCell = styled.th`
 `;
 
 export function IssueList() {
+  const [page, setPage] = useState(1);
+  const issuesPage = useIssues(page);
   const projects = useProjects();
-  const issues = useIssues();
 
-  if (projects.isLoading || issues.isLoading) {
+  if (projects.isLoading || issuesPage.isLoading) {
     return <div>Loading</div>;
   }
 
@@ -43,9 +45,9 @@ export function IssueList() {
     return <div>Error loading projects: {projects.error.message}</div>;
   }
 
-  if (issues.isError) {
-    console.error(issues.error);
-    return <div>Error loading issues: {issues.error.message}</div>;
+  if (issuesPage.isError) {
+    console.error(issuesPage.error);
+    return <div>Error loading issues: {issuesPage.error.message}</div>;
   }
 
   const projectIdToLanguage = (projects.data || []).reduce(
@@ -55,6 +57,7 @@ export function IssueList() {
     }),
     {} as Record<string, ProjectLanguage>
   );
+  const { items, meta } = issuesPage.data || {};
 
   return (
     <Container>
@@ -68,7 +71,7 @@ export function IssueList() {
           </HeaderRow>
         </thead>
         <tbody>
-          {(issues.data?.items || []).map((issue) => (
+          {(items || []).map((issue) => (
             <IssueRow
               key={issue.id}
               issue={issue}
@@ -77,6 +80,25 @@ export function IssueList() {
           ))}
         </tbody>
       </Table>
+      <div>
+        <div>
+          <button
+            onClick={() => setPage((page) => page - 1)}
+            disabled={page === 1}
+          >
+            Previous
+          </button>
+          <button
+            onClick={() => setPage((page) => page + 1)}
+            disabled={page === meta?.totalPages}
+          >
+            Next
+          </button>
+        </div>
+        <div>
+          Page {meta?.currentPage} of {meta?.totalPages}
+        </div>
+      </div>
     </Container>
   );
 }
