@@ -28,6 +28,7 @@ const ContentContainer = styled.div`
   min-height: calc(
     100vh - 2 * ${space(8)} - ${({ theme }) => theme.size.headerHeight}
   );
+  margin-top: ${({ theme }) => theme.size.headerHeight};
   padding: ${space(8, 3)};
   background: white;
 

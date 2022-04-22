@@ -1,15 +1,16 @@
-import type { NextPage } from "next";
 import { PageContainer } from "@components/PageContainer";
+import { IssueList } from "@components/IssueList";
+import type { NextPage } from "next";
 
-const Issues: NextPage = () => {
+const IssuesPage: NextPage = () => {
   return (
     <PageContainer
       title="Issues"
       info="Overview of errors, warnings, and events logged from your projects."
     >
-      Issues Placeholder
+      <IssueList />
     </PageContainer>
   );
 };
 
-export default Issues;
+export default IssuesPage;
