@@ -4,6 +4,7 @@ import capitalize from "lodash/capitalize";
 import { Badge, BadgeColor } from "@components/Badge";
 import { Project, ProjectLanguage, ProjectStatus } from "@api/project";
 import { color, displayFont, space, textFont } from "@styles/theme";
+import { Routes } from "@config/routes";
 
 type ProjectCardProps = {
   project: Project;
@@ -126,7 +127,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </InfoContainer>
       </TopContainer>
       <BottomContainer>
-        <Link href="/issues" passHref>
+        <Link href={Routes.issues} passHref>
           <ViewIssuesAnchor>View issues</ViewIssuesAnchor>
         </Link>
       </BottomContainer>
