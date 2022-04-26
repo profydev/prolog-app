@@ -6,6 +6,7 @@ type NavigationContextProviderProps = {
 
 const defaultContext = {
   isSidebarCollapsed: false,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   toggleSidebar: () => {},
 };
 

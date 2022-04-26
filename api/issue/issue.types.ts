@@ -12,5 +12,4 @@ export type Issue = {
   stack: string;
   level: IssueLevel;
   numEvents: number;
-  numUsers: number;
 };

@@ -1,13 +1,32 @@
-import { useQuery } from "react-query";
+import { useEffect } from "react";
+import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 import type { Page } from "@api/page";
 import type { Issue } from "./issue.types";
 
-async function getIssues() {
-  const { data } = await axios.get("https://prolog-api.profy.dev/issue");
+async function getIssues(page: number) {
+  const { data } = await axios.get(
+    `https://prolog-api.profy.dev/issue?page=${page}`
+  );
   return data;
 }
 
-export function useIssues() {
-  return useQuery<Page<Issue>, Error>("issues", getIssues);
+export function useIssues(page: number) {
+  const query = useQuery<Page<Issue>, Error>(
+    ["issues", page],
+    () => getIssues(page),
+
+    { keepPreviousData: true, staleTime: 60000 }
+  );
+
+  // Prefetch the next page!
+  const queryClient = useQueryClient();
+  useEffect(() => {
+    if (query.data?.meta.hasNextPage) {
+      queryClient.prefetchQuery(["projects", page + 1], () =>
+        getIssues(page + 1)
+      );
+    }
+  }, [query.data, page, queryClient]);
+  return query;
 }
