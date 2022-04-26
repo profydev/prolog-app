@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { PageContainer } from "@components/PageContainer";
+import { PageContainer } from "@features/ui";
 import { ProjectList } from "@features/projects";
 
 const Home: NextPage = () => {

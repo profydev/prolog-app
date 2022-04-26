@@ -1,4 +1,4 @@
-import { PageContainer } from "@components/PageContainer";
+import { PageContainer } from "@features/ui";
 import { IssueList } from "@features/issues";
 import type { NextPage } from "next";
 

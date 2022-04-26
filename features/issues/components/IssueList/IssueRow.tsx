@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import capitalize from "lodash/capitalize";
 import { color, space, textFont } from "@styles/theme";
-import { Badge, BadgeColor, BadgeSize } from "@components/Badge";
+import { Badge, BadgeColor, BadgeSize } from "@features/ui";
 import { IssueLevel } from "../../types/issue.types";
 import { ProjectLanguage } from "@features/projects";
 import type { Issue } from "../../types/issue.types";

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@components/Button";
+import { Button } from "@features/ui";
 import { ListItem, Anchor, Icon } from "./MenuItemLink";
 
 type MenuItemProps = {
