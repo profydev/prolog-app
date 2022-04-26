@@ -1,4 +1,5 @@
-import { useQuery } from "react-query";
+import { useEffect } from "react";
+import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 import type { Page } from "@api/page";
 import type { Issue } from "./issue.types";
@@ -11,10 +12,21 @@ async function getIssues(page: number) {
 }
 
 export function useIssues(page: number) {
-  return useQuery<Page<Issue>, Error>(
+  const query = useQuery<Page<Issue>, Error>(
     ["issues", page],
     () => getIssues(page),
 
     { keepPreviousData: true, staleTime: 60000 }
   );
+
+  // Prefetch the next page!
+  const queryClient = useQueryClient();
+  useEffect(() => {
+    if (query.data?.meta.hasNextPage) {
+      queryClient.prefetchQuery(["projects", page + 1], () =>
+        getIssues(page + 1)
+      );
+    }
+  }, [query.data, page, queryClient]);
+  return query;
 }
