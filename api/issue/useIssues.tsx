@@ -11,5 +11,10 @@ async function getIssues(page: number) {
 }
 
 export function useIssues(page: number) {
-  return useQuery<Page<Issue>, Error>(["issues", page], () => getIssues(page));
+  return useQuery<Page<Issue>, Error>(
+    ["issues", page],
+    () => getIssues(page),
+
+    { keepPreviousData: true, staleTime: 60000 }
+  );
 }
