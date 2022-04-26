@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
-import type { Page } from "@api/page";
+import type { Page } from "@typings/page.types";
 import type { Issue } from "../types/issue.types";
 
 async function getIssues(page: number) {

@@ -22,7 +22,8 @@
       "@contexts/*": ["contexts/*"],
       "@styles/*": ["styles/*"],
       "@config/*": ["config/*"],
-      "@features/*": ["features/*"]
+      "@features/*": ["features/*"],
+      "@typings/*": ["typings/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
