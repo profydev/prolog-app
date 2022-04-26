@@ -18,6 +18,7 @@ module.exports = {
     config.resolve.alias["@contexts"] = path.resolve("./contexts");
     config.resolve.alias["@styles"] = path.resolve("./styles");
     config.resolve.alias["@config"] = path.resolve("./config");
+    config.resolve.alias["@features"] = path.resolve("./features");
     return config;
   },
 };
