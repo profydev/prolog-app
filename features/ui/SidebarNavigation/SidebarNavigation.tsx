@@ -2,10 +2,10 @@ import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import styled, { css } from "styled-components";
 import { Routes } from "@config/routes";
-import { NavigationContext } from "@contexts/Navigation";
+import { NavigationContext } from "./NavigationContext";
 import { MenuItemButton } from "./MenuItemButton";
 import { MenuItemLink } from "./MenuItemLink";
-import { Button } from "@components/Button";
+import { Button } from "@features/ui";
 import { breakpoint, color, space, zIndex } from "@styles/theme";
 
 const menuItems = [

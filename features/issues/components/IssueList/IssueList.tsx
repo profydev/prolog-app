@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { useIssues } from "@api/issue";
-import { ProjectLanguage, useProjects } from "@api/project";
+import { useIssues } from "@features/issues";
+import { ProjectLanguage, useProjects } from "@features/projects";
 import { color, space, textFont } from "@styles/theme";
 import { IssueRow } from "./IssueRow";
 

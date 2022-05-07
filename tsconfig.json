@@ -17,11 +17,10 @@
     "types": ["jest"],
     "baseUrl": ".",
     "paths": {
-      "@api/*": ["api/*"],
-      "@components/*": ["components/*"],
-      "@contexts/*": ["contexts/*"],
       "@styles/*": ["styles/*"],
-      "@config/*": ["config/*"]
+      "@config/*": ["config/*"],
+      "@features/*": ["features/*"],
+      "@typings/*": ["typings/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
