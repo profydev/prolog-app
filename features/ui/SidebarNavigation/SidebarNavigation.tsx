@@ -52,12 +52,13 @@ const FixedContainer = styled.div`
 `;
 
 const Header = styled.header`
-  width: calc(100% - 2 * ${space(4)});
+  width: 100%;
   height: ${({ theme }) => theme.size.headerHeight};
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: ${space(0, 4)};
+  box-sizing: border-box;
   background: ${color("gray", 900)};
   position: relative;
   z-index: ${zIndex("header")};
@@ -128,8 +129,9 @@ const Nav = styled.nav<{ isMobileMenuOpen: boolean }>`
   @media (min-width: ${breakpoint("desktop")}) {
     position: relative;
     top: 0;
-    width: calc(100% - ${space(8)});
+    width: 100%;
     padding: ${space(0, 4, 8)};
+    box-sizing: border-box;
     transform: none;
   }
 `;
