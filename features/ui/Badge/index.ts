@@ -1,1 +1,1 @@
-export { Badge, BadgeColor, BadgeSize } from "./Badge";
+export { Badge, BadgeColor, BadgeSize } from "./badge";

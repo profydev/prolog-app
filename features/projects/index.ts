@@ -1,3 +1,3 @@
-export * from "./api/useProjects";
-export * from "./components/ProjectList";
+export * from "./api/use-projects";
+export * from "./components/project-list";
 export * from "./types/project.types";

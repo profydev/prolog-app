@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Badge, BadgeSize, BadgeColor } from "./Badge";
+import { Badge, BadgeSize, BadgeColor } from "./badge";
 
 export default {
   title: "UI/Badge",

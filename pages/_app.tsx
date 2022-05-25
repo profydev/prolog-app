@@ -6,7 +6,7 @@ import { ThemeProvider } from "styled-components";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { NavigationProvider } from "@features/ui";
-import { GlobalStyle } from "@styles/GlobalStyle";
+import { GlobalStyle } from "@styles/global-style";
 import { theme } from "@styles/theme";
 
 const queryClient = new QueryClient();
