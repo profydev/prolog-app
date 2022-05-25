@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useIssues } from "@features/issues";
 import { ProjectLanguage, useProjects } from "@features/projects";
 import { color, space, textFont } from "@styles/theme";
-import { IssueRow } from "./IssueRow";
+import { IssueRow } from "./Issue-row";
 
 const Container = styled.div`
   background: white;
