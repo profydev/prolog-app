@@ -32,5 +32,3 @@ describe("Project List", () => {
     });
   });
 });
-
-export {};

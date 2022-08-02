@@ -68,5 +68,3 @@ describe("Sidebar Navigation", () => {
     });
   });
 });
-
-export {};

@@ -82,5 +82,3 @@ describe("Project List", () => {
     });
   });
 });
-
-export {};
