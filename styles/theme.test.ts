@@ -66,5 +66,3 @@ describe("font utility functions", () => {
     expect(displayFontSmMd).toContain("font-weight: 500;");
   });
 });
-
-export {};
