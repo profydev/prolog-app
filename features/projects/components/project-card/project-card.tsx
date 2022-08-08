@@ -42,7 +42,7 @@ const TopContainer = styled.div`
 
 const BottomContainer = styled.div`
   padding: ${space(4, 6)};
-  border-top: 1px solid ${color("gray", 200)};
+  border-top: 3px solid ${color("gray", 200)};
   display: flex;
   justify-content: flex-end;
 `;
