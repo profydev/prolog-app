@@ -17,17 +17,15 @@ describe("Project List", () => {
     it("renders the projects", () => {
       const languageNames = ["React", "Node.js", "Python"];
 
-      cy.findByRole("main")
-        .findAllByRole("listitem")
+      cy.get("main")
+        .find("li")
         .each(($el, index) => {
           cy.wrap($el).contains(mockProjects[index].name);
           cy.wrap($el).contains(languageNames[index]);
           cy.wrap($el).contains(mockProjects[index].numIssues);
           cy.wrap($el).contains(mockProjects[index].numEvents24h);
           cy.wrap($el).contains(capitalize(mockProjects[index].status));
-          cy.wrap($el)
-            .findByRole("link")
-            .should("have.attr", "href", "/issues");
+          cy.wrap($el).find("a").should("have.attr", "href", "/issues");
         });
     });
   });

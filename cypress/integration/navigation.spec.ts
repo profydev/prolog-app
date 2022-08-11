@@ -9,19 +9,17 @@ describe("Sidebar Navigation", () => {
     });
 
     it("links are working", () => {
-      cy.findByRole("navigation").findByText("Issues").click();
+      cy.get("nav").contains("Issues").click();
       cy.url().should("eq", "http://localhost:3000/issues");
 
-      cy.findByRole("navigation").findByText("Projects").click();
+      cy.get("nav").contains("Projects").click();
       cy.url().should("eq", "http://localhost:3000/");
     });
 
     it("is collapsible", () => {
-      cy.findByText("Collapse").click();
-      cy.findByRole("navigation")
-        .findAllByRole("link")
-        .should("have.length", 5);
-      cy.findByRole("navigation").findByText("Issues").should("not.exist");
+      cy.get("nav").contains("Collapse").click();
+      cy.get("nav").find("a").should("have.length", 5);
+      cy.get("nav").contains("Issues").should("not.exist");
     });
   });
 
@@ -50,19 +48,17 @@ describe("Sidebar Navigation", () => {
       cy.wait(500);
       isNotInViewport("nav");
 
-      cy.findByAltText("open menu").click();
+      cy.get("img[alt='open menu']").click();
 
       cy.wait(500);
       isInViewport("nav");
 
-      cy.findByRole("navigation")
-        .findAllByRole("link")
-        .should("have.length", 5);
+      cy.get("nav").find("a").should("have.length", 5);
 
-      cy.findByText("Support").should("exist");
-      cy.findByText("Collapse").should("not.be.visible");
+      cy.get("nav").contains("Support").should("exist");
+      cy.get("nav").contains("Collapse").should("not.be.visible");
 
-      cy.findByAltText("close menu").click();
+      cy.get("img[alt='close menu']").click();
       cy.wait(500);
       isNotInViewport("nav");
     });
