@@ -3,10 +3,15 @@ import mockProjects from "../fixtures/projects.json";
 
 describe("Project List", () => {
   beforeEach(() => {
+    // setup request mock
     cy.intercept("GET", "https://prolog-api.profy.dev/project", {
       fixture: "projects.json",
     }).as("getProjects");
+
+    // open projects page
     cy.visit("http://localhost:3000");
+
+    // wait for request to resolve
     cy.wait("@getProjects");
   });
 
@@ -18,9 +23,11 @@ describe("Project List", () => {
     it("renders the projects", () => {
       const languageNames = ["React", "Node.js", "Python"];
 
+      // get all project cards
       cy.get("main")
         .find("li")
         .each(($el, index) => {
+          // check that project data is rendered
           cy.wrap($el).contains(mockProjects[index].name);
           cy.wrap($el).contains(languageNames[index]);
           cy.wrap($el).contains(mockProjects[index].numIssues);

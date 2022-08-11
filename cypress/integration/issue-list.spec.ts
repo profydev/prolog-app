@@ -4,6 +4,7 @@ import mockIssues3 from "../fixtures/issues-page-3.json";
 
 describe("Issue List", () => {
   beforeEach(() => {
+    // setup request mocks
     cy.intercept("GET", "https://prolog-api.profy.dev/project", {
       fixture: "projects.json",
     }).as("getProjects");
@@ -16,10 +17,16 @@ describe("Issue List", () => {
     cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=3", {
       fixture: "issues-page-3.json",
     });
+
+    // open issues page
     cy.visit("http://localhost:3000/issues");
+
+    // wait for request to resolve
     cy.wait("@getProjects");
     cy.wait("@getIssues");
-    cy.get("button").contains("Previous").as("prev-button");
+
+    // set button aliases
+    cy.get("button", { timeout: 10000 }).contains("Previous").as("prev-button");
     cy.get("button").contains("Next").as("next-button");
   });
 
