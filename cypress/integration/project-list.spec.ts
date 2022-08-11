@@ -5,8 +5,9 @@ describe("Project List", () => {
   beforeEach(() => {
     cy.intercept("GET", "https://prolog-api.profy.dev/project", {
       fixture: "projects.json",
-    });
+    }).as("getProjects");
     cy.visit("http://localhost:3000");
+    cy.wait("@getProjects");
   });
 
   context("desktop resolution", () => {

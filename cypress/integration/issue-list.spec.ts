@@ -6,10 +6,10 @@ describe("Issue List", () => {
   beforeEach(() => {
     cy.intercept("GET", "https://prolog-api.profy.dev/project", {
       fixture: "projects.json",
-    });
+    }).as("getProjects");
     cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=1", {
       fixture: "issues-page-1.json",
-    });
+    }).as("getIssues");
     cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=2", {
       fixture: "issues-page-2.json",
     });
@@ -17,6 +17,8 @@ describe("Issue List", () => {
       fixture: "issues-page-3.json",
     });
     cy.visit("http://localhost:3000/issues");
+    cy.wait("@getProjects");
+    cy.wait("@getIssues");
     cy.get("button").contains("Previous").as("prev-button");
     cy.get("button").contains("Next").as("next-button");
   });
