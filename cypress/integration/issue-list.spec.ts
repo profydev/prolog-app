@@ -40,7 +40,7 @@ describe("Issue List", () => {
         .find("tbody")
         .find("tr")
         .each(($el, index) => {
-          const issue = mockIssues1.items[index - 1];
+          const issue = mockIssues1.items[index];
           const firstLineOfStackTrace = issue.stack.split("\n")[1].trim();
           cy.wrap($el).contains(issue.name);
           cy.wrap($el).contains(issue.message);
