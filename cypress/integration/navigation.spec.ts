@@ -9,23 +9,19 @@ describe("Sidebar Navigation", () => {
     });
 
     it("links are working", () => {
-      // check that issues link leads to the right page
+      // check that each link leads to the correct page
       cy.get("nav").contains("Issues").click();
       cy.url().should("eq", "http://localhost:3000/issues");
 
-      // check that projects link leads to the right page
       cy.get("nav").contains("Projects").click();
       cy.url().should("eq", "http://localhost:3000/");
 
-      // check that issues link leads to the right page
       cy.get("nav").contains("Alerts").click();
       cy.url().should("eq", "http://localhost:3000/alerts");
 
-      // check that issues link leads to the right page
       cy.get("nav").contains("Users").click();
       cy.url().should("eq", "http://localhost:3000/users");
 
-      // check that issues link leads to the right page
       cy.get("nav").contains("Settings").click();
       cy.url().should("eq", "http://localhost:3000/settings");
     });
