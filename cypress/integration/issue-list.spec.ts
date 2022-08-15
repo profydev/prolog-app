@@ -37,11 +37,9 @@ describe("Issue List", () => {
 
     it("renders the issues", () => {
       cy.get("main")
+        .find("tbody")
         .find("tr")
         .each(($el, index) => {
-          // skip the header row
-          if (index === 0) return;
-
           const issue = mockIssues1.items[index - 1];
           const firstLineOfStackTrace = issue.stack.split("\n")[1].trim();
           cy.wrap($el).contains(issue.name);
