@@ -9,21 +9,30 @@ describe("Sidebar Navigation", () => {
     });
 
     it("links are working", () => {
-      // check that issues link leads to the right page
+      // check that each link leads to the correct page
       cy.get("nav").contains("Issues").click();
       cy.url().should("eq", "http://localhost:3000/issues");
 
-      // check that projects link leads to the right page
       cy.get("nav").contains("Projects").click();
       cy.url().should("eq", "http://localhost:3000/");
+
+      cy.get("nav").contains("Alerts").click();
+      cy.url().should("eq", "http://localhost:3000/alerts");
+
+      cy.get("nav").contains("Users").click();
+      cy.url().should("eq", "http://localhost:3000/users");
+
+      cy.get("nav").contains("Settings").click();
+      cy.url().should("eq", "http://localhost:3000/settings");
     });
 
     it("is collapsible", () => {
       // collapse navigation
       cy.get("nav").contains("Collapse").click();
 
-      // check that links still exist
-      cy.get("nav").find("a").should("have.length", 5);
+      // check that links still exist and are functionable
+      cy.get("nav").find("a").should("have.length", 5).eq(1).click();
+      cy.url().should("eq", "http://localhost:3000/issues");
 
       // check that text is not rendered
       cy.get("nav").contains("Issues").should("not.exist");
