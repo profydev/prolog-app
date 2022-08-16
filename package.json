@@ -16,7 +16,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
-    "*.{ts,tsx}": "tsc-files --noEmit",
+    "*.{ts,tsx}": "tsc-files --noEmit --incremental false",
     "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
   },
   "dependencies": {
