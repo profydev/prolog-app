@@ -1,4 +1,67 @@
-import { DefaultTheme } from "styled-components";
+type Color = {
+  25: string;
+  50: string;
+  100: string;
+  200: string;
+  300: string;
+  400: string;
+  500: string;
+  600: string;
+  700: string;
+  800: string;
+  900: string;
+};
+
+type Font = {
+  regular: string;
+  medium: string;
+  semibold: string;
+};
+
+export type Theme = {
+  color: {
+    gray: Color;
+    primary: Color;
+    error: Color;
+    warning: Color;
+    success: Color;
+  };
+  space: {
+    0: string;
+    1: string;
+    2: string;
+    3: string;
+    4: string;
+    5: string;
+    6: string;
+    8: string;
+    10: string;
+    12: string;
+    16: string;
+    20: string;
+    24: string;
+  };
+  size: {
+    headerHeight: string;
+  };
+  breakpoint: {
+    desktop: string;
+  };
+  zIndex: {
+    header: number;
+  };
+  font: {
+    text: {
+      xs: Font;
+      sm: Font;
+      md: Font;
+    };
+    display: {
+      sm: Font;
+      md: Font;
+    };
+  };
+};
 
 export const theme = {
   color: {
@@ -186,38 +249,37 @@ export const theme = {
 };
 
 export function color(
-  name: keyof DefaultTheme["color"],
-  shade: keyof DefaultTheme["color"]["gray"]
+  name: keyof Theme["color"],
+  shade: keyof Theme["color"]["gray"]
 ) {
-  return ({ theme }: { theme: DefaultTheme }) => theme.color[name][shade];
+  return ({ theme }: { theme: Theme }) => theme.color[name][shade];
 }
 
-export function space(...names: Array<keyof DefaultTheme["space"]>) {
-  return ({ theme }: { theme: DefaultTheme }) => {
+export function space(...names: Array<keyof Theme["space"]>) {
+  return ({ theme }: { theme: Theme }) => {
     const spaces = names.map((name) => theme.space[name]);
     return spaces.join(" ");
   };
 }
 
-export function breakpoint(name: keyof DefaultTheme["breakpoint"]) {
-  return ({ theme }: { theme: DefaultTheme }) => theme.breakpoint[name];
+export function breakpoint(name: keyof Theme["breakpoint"]) {
+  return ({ theme }: { theme: Theme }) => theme.breakpoint[name];
 }
 
-export function zIndex(name: keyof DefaultTheme["zIndex"]) {
-  return ({ theme }: { theme: DefaultTheme }) => theme.zIndex[name];
+export function zIndex(name: keyof Theme["zIndex"]) {
+  return ({ theme }: { theme: Theme }) => theme.zIndex[name];
 }
 
 export function textFont(
-  size: keyof DefaultTheme["font"]["text"],
-  weight: keyof DefaultTheme["font"]["text"]["sm"]
+  size: keyof Theme["font"]["text"],
+  weight: keyof Theme["font"]["text"]["sm"]
 ) {
-  return ({ theme }: { theme: DefaultTheme }) => theme.font.text[size][weight];
+  return ({ theme }: { theme: Theme }) => theme.font.text[size][weight];
 }
 
 export function displayFont(
-  size: keyof DefaultTheme["font"]["display"],
-  weight: keyof DefaultTheme["font"]["display"]["sm"]
+  size: keyof Theme["font"]["display"],
+  weight: keyof Theme["font"]["display"]["sm"]
 ) {
-  return ({ theme }: { theme: DefaultTheme }) =>
-    theme.font.display[size][weight];
+  return ({ theme }: { theme: Theme }) => theme.font.display[size][weight];
 }
