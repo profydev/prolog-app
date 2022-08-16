@@ -12,11 +12,11 @@ type MenuItemProps = {
 };
 
 export const ListItem = styled.li<{ isActive?: boolean }>`
-  height: ${space(12)};
+  height: 40px;
   display: flex;
   align-items: center;
-  margin-top: ${space(1)};
-  padding: ${space(0, 3)};
+  margin-top: ${space(0)};
+  padding: ${space(1)};
   background: ${(props) =>
     props.isActive ? color("gray", 700)(props) : "transparent"};
   border-radius: 6px;
@@ -29,7 +29,7 @@ export const ListItem = styled.li<{ isActive?: boolean }>`
 export const Anchor = styled.a`
   display: flex;
   align-items: center;
-  color: ${color("gray", 100)};
+  color: #aaa;
   text-decoration: none;
 `;
 
