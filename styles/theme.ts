@@ -1,4 +1,4 @@
-interface Color {
+type Color = {
   25: string;
   50: string;
   100: string;
@@ -10,13 +10,13 @@ interface Color {
   700: string;
   800: string;
   900: string;
-}
+};
 
-interface Font {
+type Font = {
   regular: string;
   medium: string;
   semibold: string;
-}
+};
 
 export type Theme = {
   color: {
