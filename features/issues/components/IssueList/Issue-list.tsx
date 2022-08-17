@@ -96,6 +96,8 @@ export function IssueList() {
   );
   const { items, meta } = issuesPage.data || {};
 
+  const a = 1;
+
   return (
     <Container>
       <Table>
