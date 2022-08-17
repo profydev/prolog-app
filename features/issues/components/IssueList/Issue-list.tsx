@@ -96,8 +96,6 @@ export function IssueList() {
   );
   const { items, meta } = issuesPage.data || {};
 
-  const a = 1;
-
   return (
     <Container>
       <Table>
@@ -125,7 +123,7 @@ export function IssueList() {
             onClick={() => navigateToPage(page - 1)}
             disabled={page === 1}
           >
-            Previous
+            Prev
           </PaginationButton>
           <PaginationButton
             onClick={() => navigateToPage(page + 1)}
