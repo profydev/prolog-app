@@ -123,7 +123,7 @@ export function IssueList() {
             onClick={() => navigateToPage(page - 1)}
             disabled={page === 1}
           >
-            Previous
+            Prev
           </PaginationButton>
           <PaginationButton
             onClick={() => navigateToPage(page + 1)}
