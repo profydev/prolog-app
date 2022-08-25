@@ -4,6 +4,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    domains: ["prolog-api.profy.dev"],
+  },
 };
 
 module.exports = nextConfig;
