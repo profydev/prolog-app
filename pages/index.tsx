@@ -1,16 +1,24 @@
+import { Routes } from "@config/routes";
+import styled from "styled-components";
 import type { NextPage } from "next";
-import { PageContainer } from "@features/ui";
-import { ProjectList } from "@features/projects";
 
-const Home: NextPage = () => {
+const Header = styled.header`
+  width: 100%;
+  height: 80px;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  background: white;
+`;
+
+const IssuesPage: NextPage = () => {
   return (
-    <PageContainer
-      title="Projects"
-      info="Overview of your projects sorted by alert level."
-    >
-      <ProjectList />
-    </PageContainer>
+    <div>
+      <Header>
+        <a href={Routes.projects}>Open Dashboard</a>
+      </Header>
+    </div>
   );
 };
 
-export default Home;
+export default IssuesPage;
