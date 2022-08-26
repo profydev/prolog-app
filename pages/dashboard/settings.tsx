@@ -1,7 +1,7 @@
 import { PageContainer } from "@features/ui";
 import type { NextPage } from "next";
 
-const IssuesPage: NextPage = () => {
+const SettingsPage: NextPage = () => {
   return (
     <PageContainer title="Settings" info="The account settings">
       This page has yet to be implemented
@@ -9,4 +9,4 @@ const IssuesPage: NextPage = () => {
   );
 };
 
-export default IssuesPage;
+export default SettingsPage;

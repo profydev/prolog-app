@@ -1,7 +1,7 @@
 import { PageContainer } from "@features/ui";
 import type { NextPage } from "next";
 
-const IssuesPage: NextPage = () => {
+const UsersPage: NextPage = () => {
   return (
     <PageContainer
       title="Issues"
@@ -12,4 +12,4 @@ const IssuesPage: NextPage = () => {
   );
 };
 
-export default IssuesPage;
+export default UsersPage;
