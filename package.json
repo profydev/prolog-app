@@ -16,7 +16,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
-    "*.{ts,tsx}": "tsc-files --noEmit --incremental false",
+    "*.{ts,tsx}": "bash -c 'tsc --noEmit'",
     "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
   },
   "dependencies": {
@@ -56,7 +56,6 @@
     "lint-staged": "^12.3.5",
     "lodash": "^4.17.21",
     "prettier": "^2.3.0",
-    "tsc-files": "^1.1.3",
     "typescript": "4.6.2"
   }
 }
