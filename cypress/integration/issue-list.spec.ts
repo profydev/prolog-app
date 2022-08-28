@@ -19,7 +19,7 @@ describe("Issue List", () => {
     });
 
     // open issues page
-    cy.visit("http://localhost:3000/issues");
+    cy.visit(`http://localhost:3000/dashboard/issues`);
 
     // wait for request to resolve
     cy.wait("@getProjects");

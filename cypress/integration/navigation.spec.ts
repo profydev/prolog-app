@@ -1,6 +1,6 @@
 describe("Sidebar Navigation", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000");
+    cy.visit("http://localhost:3000/dashboard");
   });
 
   context("desktop resolution", () => {
@@ -11,19 +11,19 @@ describe("Sidebar Navigation", () => {
     it("links are working", () => {
       // check that each link leads to the correct page
       cy.get("nav").contains("Issues").click();
-      cy.url().should("eq", "http://localhost:3000/issues");
+      cy.url().should("eq", "http://localhost:3000/dashboard/issues");
 
       cy.get("nav").contains("Projects").click();
-      cy.url().should("eq", "http://localhost:3000/");
+      cy.url().should("eq", "http://localhost:3000/dashboard");
 
       cy.get("nav").contains("Alerts").click();
-      cy.url().should("eq", "http://localhost:3000/alerts");
+      cy.url().should("eq", "http://localhost:3000/dashboard/alerts");
 
       cy.get("nav").contains("Users").click();
-      cy.url().should("eq", "http://localhost:3000/users");
+      cy.url().should("eq", "http://localhost:3000/dashboard/users");
 
       cy.get("nav").contains("Settings").click();
-      cy.url().should("eq", "http://localhost:3000/settings");
+      cy.url().should("eq", "http://localhost:3000/dashboard/settings");
     });
 
     it("is collapsible", () => {
@@ -32,7 +32,7 @@ describe("Sidebar Navigation", () => {
 
       // check that links still exist and are functionable
       cy.get("nav").find("a").should("have.length", 5).eq(1).click();
-      cy.url().should("eq", "http://localhost:3000/issues");
+      cy.url().should("eq", "http://localhost:3000/dashboard/issues");
 
       // check that text is not rendered
       cy.get("nav").contains("Issues").should("not.exist");

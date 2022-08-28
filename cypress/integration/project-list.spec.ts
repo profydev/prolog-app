@@ -9,7 +9,7 @@ describe("Project List", () => {
     }).as("getProjects");
 
     // open projects page
-    cy.visit("http://localhost:3000");
+    cy.visit("http://localhost:3000/dashboard");
 
     // wait for request to resolve
     cy.wait("@getProjects");
@@ -33,7 +33,9 @@ describe("Project List", () => {
           cy.wrap($el).contains(mockProjects[index].numIssues);
           cy.wrap($el).contains(mockProjects[index].numEvents24h);
           cy.wrap($el).contains(capitalize(mockProjects[index].status));
-          cy.wrap($el).find("a").should("have.attr", "href", "/issues");
+          cy.wrap($el)
+            .find("a")
+            .should("have.attr", "href", "/dashboard/issues");
         });
     });
   });
