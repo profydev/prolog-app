@@ -15,7 +15,6 @@ export function useIssues(page: number) {
   const query = useQuery<Page<Issue>, Error>(
     ["issues", page],
     () => getIssues(page),
-
     { keepPreviousData: true, staleTime: 60000 }
   );
 

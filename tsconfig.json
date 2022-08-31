@@ -20,7 +20,8 @@
       "@config/*": ["config/*"],
       "@features/*": ["features/*"],
       "@typings/*": ["typings/*"]
-    }
+    },
+    "noEmit": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "cypress"]
