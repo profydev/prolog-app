@@ -1,0 +1,7 @@
+# Taken from https://www.aleksandrhovhannisyan.com/blog/crlf-vs-lf-normalizing-line-endings-in-git/#typewriters-and-the-carriage-return
+
+# All files are checked into the repo with LF
+* text=auto
+
+# These files are checked out using CRLF locally so bash scripts work on Windows
+*.bat eol=crlf
