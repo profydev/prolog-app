@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useIssues } from "@features/issues";
-import { ProjectLanguage, useProjects } from "@features/projects";
+import { useProjects } from "@features/projects";
 import { color, space, textFont } from "@styles/theme";
 import { IssueRow } from "./issue-row";
 
@@ -87,13 +87,6 @@ export function IssueList() {
     return <div>Error loading issues: {issuesPage.error.message}</div>;
   }
 
-  const projectIdToLanguage = (projects.data || []).reduce(
-    (prev, project) => ({
-      ...prev,
-      [project.id]: project.language,
-    }),
-    {} as Record<string, ProjectLanguage>
-  );
   const { items, meta } = issuesPage.data || {};
 
   return (
@@ -108,12 +101,9 @@ export function IssueList() {
           </HeaderRow>
         </thead>
         <tbody>
-          {(items || []).map((issue) => (
-            <IssueRow
-              key={issue.id}
-              issue={issue}
-              projectLanguage={projectIdToLanguage[issue.projectId]}
-            />
+          {(items || []).map((issue, index) => (
+            // uses index as key only for this exercise
+            <IssueRow key={index} issue={issue} />
           ))}
         </tbody>
       </Table>

@@ -1,3 +1,5 @@
+import type { ProjectLanguage } from "@features/projects";
+
 export enum IssueLevel {
   info = "info",
   warning = "warning",
@@ -7,6 +9,7 @@ export enum IssueLevel {
 export type Issue = {
   id: string;
   projectId: string;
+  language: ProjectLanguage;
   name: string;
   message: string;
   stack: string;

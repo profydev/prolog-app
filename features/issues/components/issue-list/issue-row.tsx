@@ -3,11 +3,9 @@ import capitalize from "lodash/capitalize";
 import { color, space, textFont } from "@styles/theme";
 import { Badge, BadgeColor, BadgeSize } from "@features/ui";
 import { IssueLevel } from "../../types/issue.types";
-import { ProjectLanguage } from "@features/projects";
 import type { Issue } from "../../types/issue.types";
 
 type IssueRowProps = {
-  projectLanguage: ProjectLanguage;
   issue: Issue;
 };
 
@@ -47,16 +45,13 @@ const ErrorType = styled.span`
   ${textFont("sm", "medium")}
 `;
 
-export function IssueRow({ projectLanguage, issue }: IssueRowProps) {
-  const { name, message, stack, level, numEvents } = issue;
+export function IssueRow({ issue }: IssueRowProps) {
+  const { name, message, stack, level, numEvents, language } = issue;
   const firstLineOfStackTrace = stack.split("\n")[1];
   return (
     <Row>
       <IssueCell>
-        <LanguageIcon
-          src={`/icons/${projectLanguage}.svg`}
-          alt={projectLanguage}
-        />
+        <LanguageIcon src={`/icons/${language}.svg`} alt={language} />
         <div>
           <ErrorTypeAndMessage>
             <ErrorType>{name}:&nbsp;</ErrorType>

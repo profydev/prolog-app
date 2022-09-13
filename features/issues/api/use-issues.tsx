@@ -1,14 +1,12 @@
 import { useEffect } from "react";
 import { useQuery, useQueryClient } from "react-query";
-import axios from "axios";
 import type { Page } from "@typings/page.types";
 import type { Issue } from "../types/issue.types";
+import data from "./issues-page-1.json";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function getIssues(page: number) {
-  const { data } = await axios.get(
-    `https://prolog-api.profy.dev/issue?page=${page}`
-  );
-  return data;
+  return Promise.resolve(data as Page<Issue>);
 }
 
 export function useIssues(page: number) {
