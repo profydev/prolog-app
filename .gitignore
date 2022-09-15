@@ -37,7 +37,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-.vscode
+.vscode/settings.json
 .eslintcache
 
 # Cypress test videos
