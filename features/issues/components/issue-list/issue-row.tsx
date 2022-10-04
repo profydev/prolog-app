@@ -7,7 +7,6 @@ import { ProjectLanguage } from "@features/projects";
 import type { Issue } from "../../types/issue.types";
 
 type IssueRowProps = {
-  projectLanguage: ProjectLanguage;
   issue: Issue;
 };
 
@@ -47,15 +46,15 @@ const ErrorType = styled.span`
   ${textFont("sm", "medium")}
 `;
 
-export function IssueRow({ projectLanguage, issue }: IssueRowProps) {
+export function IssueRow({ issue }: IssueRowProps) {
   const { name, message, stack, level, numEvents } = issue;
   const firstLineOfStackTrace = stack.split("\n")[1];
   return (
     <Row>
       <IssueCell>
         <LanguageIcon
-          src={`/icons/${projectLanguage}.svg`}
-          alt={projectLanguage}
+          src={`/icons/${ProjectLanguage.react}.svg`}
+          alt={ProjectLanguage.react}
         />
         <div>
           <ErrorTypeAndMessage>

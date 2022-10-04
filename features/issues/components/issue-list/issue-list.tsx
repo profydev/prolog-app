@@ -1,9 +1,8 @@
-import { useRouter } from "next/router";
+import { useState } from "react";
 import styled from "styled-components";
-import { useIssues } from "@features/issues";
-import { ProjectLanguage, useProjects } from "@features/projects";
 import { color, space, textFont } from "@styles/theme";
 import { IssueRow } from "./issue-row";
+import { Issue } from "../../types/issue.types";
 
 const Container = styled.div`
   background: white;
@@ -62,39 +61,29 @@ const PageNumber = styled.span`
 `;
 
 export function IssueList() {
-  const router = useRouter();
-  const page = Number(router.query.page || 1);
-  const navigateToPage = (newPage: number) =>
-    router.push({
-      pathname: router.pathname,
-      query: { page: newPage },
-    });
+  // hard-coded issues data
+  const items = [
+    {
+      id: "mock-id",
+      projectId: "6d5fff43-d691-445d-a41a-7d0c639080e6",
+      name: "Mock Error",
+      message: "This is hard-coded data that doesn't come from an API",
+      stack: "Some mock stack trace",
+      level: "error",
+      numEvents: 105,
+      numUsers: 56,
+    } as Issue,
+  ];
 
-  const issuesPage = useIssues(page);
-  const projects = useProjects();
+  // hard-coded meta data used for pagination
+  const meta = {
+    hasNextPage: true,
+    currentPage: 1,
+    totalPages: 7,
+  };
 
-  if (projects.isLoading || issuesPage.isLoading) {
-    return <div>Loading</div>;
-  }
-
-  if (projects.isError) {
-    console.error(projects.error);
-    return <div>Error loading projects: {projects.error.message}</div>;
-  }
-
-  if (issuesPage.isError) {
-    console.error(issuesPage.error);
-    return <div>Error loading issues: {issuesPage.error.message}</div>;
-  }
-
-  const projectIdToLanguage = (projects.data || []).reduce(
-    (prev, project) => ({
-      ...prev,
-      [project.id]: project.language,
-    }),
-    {} as Record<string, ProjectLanguage>
-  );
-  const { items, meta } = issuesPage.data || {};
+  // state variable used for pagination
+  const [page, setPage] = useState(1);
 
   return (
     <Container>
@@ -109,32 +98,28 @@ export function IssueList() {
         </thead>
         <tbody>
           {(items || []).map((issue) => (
-            <IssueRow
-              key={issue.id}
-              issue={issue}
-              projectLanguage={projectIdToLanguage[issue.projectId]}
-            />
+            <IssueRow key={issue.id} issue={issue} />
           ))}
         </tbody>
       </Table>
       <PaginationContainer>
         <div>
           <PaginationButton
-            onClick={() => navigateToPage(page - 1)}
+            onClick={() => setPage(page - 1)}
             disabled={page === 1}
           >
             Previous
           </PaginationButton>
           <PaginationButton
-            onClick={() => navigateToPage(page + 1)}
-            disabled={page === meta?.totalPages}
+            onClick={() => setPage(page + 1)}
+            disabled={!meta.hasNextPage}
           >
             Next
           </PaginationButton>
         </div>
         <PageInfo>
-          Page <PageNumber>{meta?.currentPage}</PageNumber> of{" "}
-          <PageNumber>{meta?.totalPages}</PageNumber>
+          Page <PageNumber>{meta.currentPage}</PageNumber> of{" "}
+          <PageNumber>{meta.totalPages}</PageNumber>
         </PageInfo>
       </PaginationContainer>
     </Container>
