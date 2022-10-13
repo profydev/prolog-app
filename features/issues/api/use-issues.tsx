@@ -4,10 +4,12 @@ import axios from "axios";
 import type { Page } from "@typings/page.types";
 import type { Issue } from "../types/issue.types";
 
-async function getIssues(page: number) {
-  const { data } = await axios.get(
-    `https://prolog-api.profy.dev/issue?page=${page}`
-  );
+async function getIssues(page: number, options?: { signal?: AbortSignal }) {
+  const { data } = await axios.get("https://prolog-api.profy.dev/v2/issue", {
+    params: { page, status: "open" },
+    signal: options?.signal,
+    headers: { Authorization: "my-access-token" },
+  });
   return data;
 }
 
@@ -18,7 +20,7 @@ const commonQueryOptions = {
 export function useIssues(page: number) {
   const query = useQuery<Page<Issue>, Error>(
     ["issues", page],
-    () => getIssues(page),
+    ({ signal }) => getIssues(page, { signal }),
     { ...commonQueryOptions, staleTime: 60000 }
   );
 
@@ -28,7 +30,7 @@ export function useIssues(page: number) {
     if (query.data?.meta.hasNextPage) {
       queryClient.prefetchQuery(
         ["issues", page + 1],
-        () => getIssues(page + 1),
+        async ({ signal }) => getIssues(page + 1, { signal }),
         commonQueryOptions
       );
     }

@@ -1,8 +1,12 @@
+import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import { useIssues } from "@features/issues";
-import { ProjectLanguage, useProjects } from "@features/projects";
+import { ProjectLanguage } from "@features/projects";
 import { color, space, textFont } from "@styles/theme";
+import { Issue } from "@features/issues";
 import { IssueRow } from "./issue-row";
 
 const Container = styled.div`
@@ -62,39 +66,102 @@ const PageNumber = styled.span`
 `;
 
 export function IssueList() {
-  const router = useRouter();
-  const page = Number(router.query.page || 1);
-  const navigateToPage = (newPage: number) =>
-    router.push({
-      pathname: router.pathname,
-      query: { page: newPage },
-    });
+  const [page, setPage] = useState(1);
 
-  const issuesPage = useIssues(page);
-  const projects = useProjects();
+  /********* THE "SIMPLE" APPROACH *********/
+  // const [data, setData] = useState({ items: [], meta: undefined });
+  // const [invalidated, setInvalidated] = useState(0);
+  // useEffect(() => {
+  //   axios
+  //     .get("https://prolog-api.profy.dev/v2/issue?status=open", {
+  //       headers: { Authorization: "my-access-token" },
+  //     })
+  //     .then(({ data }) => setData(data));
+  // }, [invalidated]);
+  // const { items, meta } = data;
 
-  if (projects.isLoading || issuesPage.isLoading) {
-    return <div>Loading</div>;
-  }
+  // const onClickResolve = (issueId) => {
+  //   // optimistic update: remove issue from the list
+  //   setData((issues) => issues.filter((issue) => issue.id !== issueId));
 
-  if (projects.isError) {
-    console.error(projects.error);
-    return <div>Error loading projects: {projects.error.message}</div>;
-  }
+  //   axios
+  //     .patch(
+  //       `https://prolog-api.profy.dev/v2/issue/${issueId}`,
+  //       { status: "resolved" },
+  //       { headers: { Authorization: "my-access-token" } }
+  //     )
+  //     .then(() => {
+  //       setInvalidated((count) => count + 1);
+  //     });
+  // };
 
-  if (issuesPage.isError) {
-    console.error(issuesPage.error);
-    return <div>Error loading issues: {issuesPage.error.message}</div>;
-  }
+  /********* THE EFFICIENT APPROACH *********/
+  const issuePage = useIssues(page);
 
-  const projectIdToLanguage = (projects.data || []).reduce(
-    (prev, project) => ({
-      ...prev,
-      [project.id]: project.language,
-    }),
-    {} as Record<string, ProjectLanguage>
+  const queryClient = useQueryClient();
+  const ongoingMutationCount = useRef(0);
+  const resolveIssueMutation = useMutation(
+    (issueId) =>
+      axios.patch(
+        `https://prolog-api.profy.dev/v2/issue/${issueId}`,
+        { status: "resolved" },
+        { headers: { Authorization: "my-access-token" } }
+      ),
+    {
+      onMutate: async (issueId: string) => {
+        ongoingMutationCount.current += 1;
+
+        await queryClient.cancelQueries(["issues"]);
+
+        const currentPage = queryClient.getQueryData<{ items: Issue[] }>([
+          "issues",
+          page,
+        ]);
+        const nextPage = queryClient.getQueryData<{ items: Issue[] }>([
+          "issues",
+          page + 1,
+        ]);
+
+        if (!currentPage) {
+          return;
+        }
+
+        const newItems = currentPage.items.filter(({ id }) => id !== issueId);
+
+        if (nextPage?.items.length) {
+          const lastIssueOnPage =
+            currentPage.items[currentPage.items.length - 1];
+          const indexOnNextPage = nextPage.items.findIndex(
+            (issue) => issue.id === lastIssueOnPage.id
+          );
+          const nextIssue = nextPage.items[indexOnNextPage + 1];
+          if (nextIssue) {
+            newItems.push(nextIssue);
+          }
+        }
+
+        queryClient.setQueryData(["issues", page], {
+          ...currentPage,
+          items: newItems,
+        });
+
+        return { currentIssuesPage: currentPage };
+      },
+      onError: (err, issueId, context) => {
+        if (context?.currentIssuesPage) {
+          queryClient.setQueryData(["issues", page], context.currentIssuesPage);
+        }
+      },
+      onSettled: () => {
+        ongoingMutationCount.current -= 1;
+        if (ongoingMutationCount.current === 0) {
+          queryClient.invalidateQueries(["issues"]);
+        }
+      },
+    }
   );
-  const { items, meta } = issuesPage.data || {};
+
+  const { items, meta } = issuePage.data || {};
 
   return (
     <Container>
@@ -112,7 +179,9 @@ export function IssueList() {
             <IssueRow
               key={issue.id}
               issue={issue}
-              projectLanguage={projectIdToLanguage[issue.projectId]}
+              projectLanguage={ProjectLanguage.react}
+              // resolveIssue={() => onClickResolve(issue.id)}
+              resolveIssue={() => resolveIssueMutation.mutate(issue.id)}
             />
           ))}
         </tbody>
@@ -120,13 +189,13 @@ export function IssueList() {
       <PaginationContainer>
         <div>
           <PaginationButton
-            onClick={() => navigateToPage(page - 1)}
+            onClick={() => setPage(page - 1)}
             disabled={page === 1}
           >
             Previous
           </PaginationButton>
           <PaginationButton
-            onClick={() => navigateToPage(page + 1)}
+            onClick={() => setPage(page + 1)}
             disabled={page === meta?.totalPages}
           >
             Next
