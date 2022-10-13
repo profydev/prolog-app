@@ -11,19 +11,25 @@ async function getIssues(page: number) {
   return data;
 }
 
+const commonQueryOptions = {
+  staleTime: 60000,
+};
+
 export function useIssues(page: number) {
   const query = useQuery<Page<Issue>, Error>(
     ["issues", page],
     () => getIssues(page),
-    { keepPreviousData: true, staleTime: 60000 }
+    { ...commonQueryOptions, staleTime: 60000 }
   );
 
   // Prefetch the next page!
   const queryClient = useQueryClient();
   useEffect(() => {
     if (query.data?.meta.hasNextPage) {
-      queryClient.prefetchQuery(["projects", page + 1], () =>
-        getIssues(page + 1)
+      queryClient.prefetchQuery(
+        ["issues", page + 1],
+        () => getIssues(page + 1),
+        commonQueryOptions
       );
     }
   }, [query.data, page, queryClient]);

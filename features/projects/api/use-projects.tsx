@@ -8,5 +8,7 @@ async function getProjects() {
 }
 
 export function useProjects() {
-  return useQuery<Project[], Error>(["projects"], getProjects);
+  return useQuery<Project[], Error>(["projects"], getProjects, {
+    staleTime: 60000,
+  });
 }
