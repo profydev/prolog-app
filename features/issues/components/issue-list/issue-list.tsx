@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { useIssues } from "@features/issues";
-import { ProjectLanguage, useProjects } from "@features/projects";
+import { ProjectLanguage } from "@features/projects";
 import { color, space, textFont } from "@styles/theme";
 import { IssueRow } from "./issue-row";
+import { useState } from "react";
 
 const Container = styled.div`
   background: white;
@@ -61,40 +61,13 @@ const PageNumber = styled.span`
   ${textFont("sm", "medium")}
 `;
 
+const mockData = { items: [], meta: undefined };
+
 export function IssueList() {
-  const router = useRouter();
-  const page = Number(router.query.page || 1);
-  const navigateToPage = (newPage: number) =>
-    router.push({
-      pathname: router.pathname,
-      query: { page: newPage },
-    });
+  const [page, setPage] = useState(1);
 
-  const issuesPage = useIssues(page);
-  const projects = useProjects();
-
-  if (projects.isLoading || issuesPage.isLoading) {
-    return <div>Loading</div>;
-  }
-
-  if (projects.isError) {
-    console.error(projects.error);
-    return <div>Error loading projects: {projects.error.message}</div>;
-  }
-
-  if (issuesPage.isError) {
-    console.error(issuesPage.error);
-    return <div>Error loading issues: {issuesPage.error.message}</div>;
-  }
-
-  const projectIdToLanguage = (projects.data || []).reduce(
-    (prev, project) => ({
-      ...prev,
-      [project.id]: project.language,
-    }),
-    {} as Record<string, ProjectLanguage>
-  );
-  const { items, meta } = issuesPage.data || {};
+  const { items, meta } = mockData;
+  const onClickResolve = (issueId: string) => null;
 
   return (
     <Container>
@@ -112,7 +85,8 @@ export function IssueList() {
             <IssueRow
               key={issue.id}
               issue={issue}
-              projectLanguage={projectIdToLanguage[issue.projectId]}
+              projectLanguage={ProjectLanguage.react}
+              resolveIssue={() => onClickResolve(issue.id)}
             />
           ))}
         </tbody>
@@ -120,13 +94,13 @@ export function IssueList() {
       <PaginationContainer>
         <div>
           <PaginationButton
-            onClick={() => navigateToPage(page - 1)}
+            onClick={() => setPage(page - 1)}
             disabled={page === 1}
           >
             Previous
           </PaginationButton>
           <PaginationButton
-            onClick={() => navigateToPage(page + 1)}
+            onClick={() => setPage(page + 1)}
             disabled={page === meta?.totalPages}
           >
             Next
