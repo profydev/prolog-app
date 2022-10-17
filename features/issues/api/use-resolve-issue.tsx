@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { useRef } from "react";
-import { Issue } from "@features/issues";
+import { axios } from "@api/axios";
 import * as GetIssues from "./use-get-issues";
+import type { Issue } from "@features/issues";
 
 async function resolveIssue(issueId: string) {
   const { data } = await axios.patch(
-    `https://prolog-api.profy.dev/v2/issue/${issueId}`,
+    `/issue/${issueId}`,
     { status: "resolved" },
     { headers: { Authorization: "my-access-token" } }
   );
