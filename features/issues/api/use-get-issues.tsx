@@ -17,7 +17,6 @@ async function getIssues(page: number, options?: { signal?: AbortSignal }) {
   const { data } = await axios.get("/issue", {
     params: { page, status: "open" },
     signal: options?.signal,
-    headers: { Authorization: "my-access-token" },
   });
   return data;
 }
