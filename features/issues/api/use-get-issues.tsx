@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import { axios } from "@api/axios";
 import type { Page } from "@typings/page.types";
 import type { Issue } from "@features/issues";
 
@@ -14,7 +14,7 @@ export function getQueryKey(page?: number) {
 }
 
 async function getIssues(page: number, options?: { signal?: AbortSignal }) {
-  const { data } = await axios.get("https://prolog-api.profy.dev/v2/issue", {
+  const { data } = await axios.get("/issue", {
     params: { page, status: "open" },
     signal: options?.signal,
     headers: { Authorization: "my-access-token" },
