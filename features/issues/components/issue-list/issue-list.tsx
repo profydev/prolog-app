@@ -1,13 +1,12 @@
-import { useRef, useState } from "react";
-import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useIssues } from "@features/issues";
 import { ProjectLanguage } from "@features/projects";
 import { color, space, textFont } from "@styles/theme";
 import { Issue } from "@features/issues";
 import { IssueRow } from "./issue-row";
+import { Page } from "@typings/page.types";
 
 const Container = styled.div`
   background: white;
@@ -68,37 +67,46 @@ const PageNumber = styled.span`
 export function IssueList() {
   const [page, setPage] = useState(1);
 
-  /********* THE "SIMPLE" APPROACH *********/
-  // const [data, setData] = useState({ items: [], meta: undefined });
-  // const [invalidated, setInvalidated] = useState(0);
-  // useEffect(() => {
-  //   axios
-  //     .get("https://prolog-api.profy.dev/v2/issue?status=open", {
-  //       headers: { Authorization: "my-access-token" },
-  //     })
-  //     .then(({ data }) => setData(data));
-  // }, [invalidated]);
-  // const { items, meta } = data;
+  const issuePage = useQuery<Page<Issue>, Error>(
+    ["issues", page],
+    async ({ signal }) => {
+      const { data } = await axios.get(
+        "https://prolog-api.profy.dev/v2/issue",
+        {
+          params: { page, status: "open" },
+          signal,
+          headers: { Authorization: "my-access-token" },
+        }
+      );
+      return data;
+    },
+    { staleTime: 60000, keepPreviousData: true }
+  );
 
-  // const onClickResolve = (issueId) => {
-  //   // optimistic update: remove issue from the list
-  //   setData((issues) => issues.filter((issue) => issue.id !== issueId));
-
-  //   axios
-  //     .patch(
-  //       `https://prolog-api.profy.dev/v2/issue/${issueId}`,
-  //       { status: "resolved" },
-  //       { headers: { Authorization: "my-access-token" } }
-  //     )
-  //     .then(() => {
-  //       setInvalidated((count) => count + 1);
-  //     });
-  // };
-
-  /********* THE EFFICIENT APPROACH *********/
-  const issuePage = useIssues(page);
-
+  // Prefetch the next page!
   const queryClient = useQueryClient();
+  useEffect(() => {
+    if (issuePage.data?.meta.hasNextPage) {
+      queryClient.prefetchQuery(
+        ["issues", page + 1],
+        async ({ signal }) => {
+          const { data } = await axios.get(
+            "https://prolog-api.profy.dev/v2/issue",
+            {
+              params: { page, status: "open" },
+              signal,
+              headers: { Authorization: "my-access-token" },
+            }
+          );
+          return data;
+        },
+        { staleTime: 60000 }
+      );
+    }
+  }, [issuePage.data, page, queryClient]);
+
+  const { items, meta } = issuePage.data || {};
+
   const ongoingMutationCount = useRef(0);
   const resolveIssueMutation = useMutation(
     (issueId) =>
@@ -161,8 +169,6 @@ export function IssueList() {
     }
   );
 
-  const { items, meta } = issuePage.data || {};
-
   return (
     <Container>
       <Table>
@@ -180,7 +186,6 @@ export function IssueList() {
               key={issue.id}
               issue={issue}
               projectLanguage={ProjectLanguage.react}
-              // resolveIssue={() => onClickResolve(issue.id)}
               resolveIssue={() => resolveIssueMutation.mutate(issue.id)}
             />
           ))}
