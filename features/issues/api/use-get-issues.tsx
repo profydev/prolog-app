@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { axios } from "@api/axios";
+import { getIssues } from "@api/issues";
 import type { Page } from "@typings/page.types";
 import type { Issue } from "@features/issues";
 
@@ -13,18 +13,10 @@ export function getQueryKey(page?: number) {
   return [QUERY_KEY, page];
 }
 
-async function getIssues(page: number, options?: { signal?: AbortSignal }) {
-  const { data } = await axios.get("/issue", {
-    params: { page, status: "open" },
-    signal: options?.signal,
-  });
-  return data;
-}
-
 export function useGetIssues(page: number) {
   const query = useQuery<Page<Issue>, Error>(
     getQueryKey(page),
-    ({ signal }) => getIssues(page, { signal }),
+    ({ signal }) => getIssues(page, { status: "open" }, { signal }),
     { keepPreviousData: true }
   );
 
@@ -33,7 +25,7 @@ export function useGetIssues(page: number) {
   useEffect(() => {
     if (query.data?.meta.hasNextPage) {
       queryClient.prefetchQuery(getQueryKey(page + 1), ({ signal }) =>
-        getIssues(page + 1, { signal })
+        getIssues(page + 1, { status: "open" }, { signal })
       );
     }
   }, [query.data, page, queryClient]);

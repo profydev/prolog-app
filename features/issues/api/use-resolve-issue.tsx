@@ -1,15 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRef } from "react";
-import { axios } from "@api/axios";
+import { resolveIssue } from "@api/issues";
 import * as GetIssues from "./use-get-issues";
 import type { Issue } from "@features/issues";
-
-async function resolveIssue(issueId: string) {
-  const { data } = await axios.patch(`/issue/${issueId}`, {
-    status: "resolved",
-  });
-  return data;
-}
 
 export function useResolveIssue(page: number) {
   const queryClient = useQueryClient();
