@@ -1,7 +1,7 @@
 import styled from "styled-components";
+import { breakpoint, space } from "@styles/theme";
 import { ProjectCard } from "../project-card";
 import { useProjects } from "../../api/use-projects";
-import { breakpoint, space } from "@styles/theme";
 
 const List = styled.ul`
   display: grid;
