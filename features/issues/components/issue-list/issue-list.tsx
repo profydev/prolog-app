@@ -1,12 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { ProjectLanguage } from "@features/projects";
 import { color, space, textFont } from "@styles/theme";
-import { Issue } from "@features/issues";
 import { IssueRow } from "./issue-row";
-import { Page } from "@typings/page.types";
+import { useGetIssues, useResolveIssue } from "../../api";
 
 const Container = styled.div`
   background: white;
@@ -67,107 +64,10 @@ const PageNumber = styled.span`
 export function IssueList() {
   const [page, setPage] = useState(1);
 
-  const issuePage = useQuery<Page<Issue>, Error>(
-    ["issues", page],
-    async ({ signal }) => {
-      const { data } = await axios.get(
-        "https://prolog-api.profy.dev/v2/issue",
-        {
-          params: { page, status: "open" },
-          signal,
-          headers: { Authorization: "my-access-token" },
-        }
-      );
-      return data;
-    },
-    { staleTime: 60000, keepPreviousData: true }
-  );
-
-  // Prefetch the next page!
-  const queryClient = useQueryClient();
-  useEffect(() => {
-    if (issuePage.data?.meta.hasNextPage) {
-      queryClient.prefetchQuery(
-        ["issues", page + 1],
-        async ({ signal }) => {
-          const { data } = await axios.get(
-            "https://prolog-api.profy.dev/v2/issue",
-            {
-              params: { page, status: "open" },
-              signal,
-              headers: { Authorization: "my-access-token" },
-            }
-          );
-          return data;
-        },
-        { staleTime: 60000 }
-      );
-    }
-  }, [issuePage.data, page, queryClient]);
+  const issuePage = useGetIssues(page);
+  const resolveIssue = useResolveIssue(page);
 
   const { items, meta } = issuePage.data || {};
-
-  const ongoingMutationCount = useRef(0);
-  const resolveIssueMutation = useMutation(
-    (issueId) =>
-      axios.patch(
-        `https://prolog-api.profy.dev/v2/issue/${issueId}`,
-        { status: "resolved" },
-        { headers: { Authorization: "my-access-token" } }
-      ),
-    {
-      onMutate: async (issueId: string) => {
-        ongoingMutationCount.current += 1;
-
-        await queryClient.cancelQueries(["issues"]);
-
-        const currentPage = queryClient.getQueryData<{ items: Issue[] }>([
-          "issues",
-          page,
-        ]);
-        const nextPage = queryClient.getQueryData<{ items: Issue[] }>([
-          "issues",
-          page + 1,
-        ]);
-
-        if (!currentPage) {
-          return;
-        }
-
-        const newItems = currentPage.items.filter(({ id }) => id !== issueId);
-
-        if (nextPage?.items.length) {
-          const lastIssueOnPage =
-            currentPage.items[currentPage.items.length - 1];
-          const indexOnNextPage = nextPage.items.findIndex(
-            (issue) => issue.id === lastIssueOnPage.id
-          );
-          const nextIssue = nextPage.items[indexOnNextPage + 1];
-          if (nextIssue) {
-            newItems.push(nextIssue);
-          }
-        }
-
-        queryClient.setQueryData(["issues", page], {
-          ...currentPage,
-          items: newItems,
-        });
-
-        return { currentIssuesPage: currentPage };
-      },
-      onError: (err, issueId, context) => {
-        if (context?.currentIssuesPage) {
-          queryClient.setQueryData(["issues", page], context.currentIssuesPage);
-        }
-      },
-      onSettled: () => {
-        ongoingMutationCount.current -= 1;
-        if (ongoingMutationCount.current === 0) {
-          queryClient.invalidateQueries(["issues"]);
-        }
-      },
-    }
-  );
 
   return (
     <Container>
@@ -186,7 +86,7 @@ export function IssueList() {
               key={issue.id}
               issue={issue}
               projectLanguage={ProjectLanguage.react}
-              resolveIssue={() => resolveIssueMutation.mutate(issue.id)}
+              resolveIssue={() => resolveIssue.mutate(issue.id)}
             />
           ))}
         </tbody>
