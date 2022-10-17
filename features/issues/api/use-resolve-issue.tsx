@@ -5,11 +5,9 @@ import * as GetIssues from "./use-get-issues";
 import type { Issue } from "@features/issues";
 
 async function resolveIssue(issueId: string) {
-  const { data } = await axios.patch(
-    `/issue/${issueId}`,
-    { status: "resolved" },
-    { headers: { Authorization: "my-access-token" } }
-  );
+  const { data } = await axios.patch(`/issue/${issueId}`, {
+    status: "resolved",
+  });
   return data;
 }
 
