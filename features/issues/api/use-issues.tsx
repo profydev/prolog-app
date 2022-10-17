@@ -21,7 +21,7 @@ export function useIssues(page: number) {
   const query = useQuery<Page<Issue>, Error>(
     ["issues", page],
     ({ signal }) => getIssues(page, { signal }),
-    { ...commonQueryOptions, staleTime: 60000 }
+    { ...commonQueryOptions, keepPreviousData: true }
   );
 
   // Prefetch the next page!
