@@ -25,17 +25,15 @@ export function useGetIssues(page: number) {
   const query = useQuery<Page<Issue>, Error>(
     getQueryKey(page),
     ({ signal }) => getIssues(page, { signal }),
-    { staleTime: 60000, keepPreviousData: true }
+    { keepPreviousData: true }
   );
 
   // Prefetch the next page!
   const queryClient = useQueryClient();
   useEffect(() => {
     if (query.data?.meta.hasNextPage) {
-      queryClient.prefetchQuery(
-        getQueryKey(page + 1),
-        ({ signal }) => getIssues(page + 1, { signal }),
-        { staleTime: 60000 }
+      queryClient.prefetchQuery(getQueryKey(page + 1), ({ signal }) =>
+        getIssues(page + 1, { signal })
       );
     }
   }, [query.data, page, queryClient]);
