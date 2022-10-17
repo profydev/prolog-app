@@ -4,20 +4,28 @@ import axios from "axios";
 import type { Page } from "@typings/page.types";
 import type { Issue } from "@features/issues";
 
+const QUERY_KEY = "issues";
+
+export function getQueryKey(page?: number) {
+  if (page === undefined) {
+    return [QUERY_KEY];
+  }
+  return [QUERY_KEY, page];
+}
+
+async function getIssues(page: number, options?: { signal?: AbortSignal }) {
+  const { data } = await axios.get("https://prolog-api.profy.dev/v2/issue", {
+    params: { page, status: "open" },
+    signal: options?.signal,
+    headers: { Authorization: "my-access-token" },
+  });
+  return data;
+}
+
 export function useGetIssues(page: number) {
   const query = useQuery<Page<Issue>, Error>(
-    ["issues", page],
-    async ({ signal }) => {
-      const { data } = await axios.get(
-        "https://prolog-api.profy.dev/v2/issue",
-        {
-          params: { page, status: "open" },
-          signal,
-          headers: { Authorization: "my-access-token" },
-        }
-      );
-      return data;
-    },
+    getQueryKey(page),
+    ({ signal }) => getIssues(page, { signal }),
     { staleTime: 60000, keepPreviousData: true }
   );
 
@@ -26,18 +34,8 @@ export function useGetIssues(page: number) {
   useEffect(() => {
     if (query.data?.meta.hasNextPage) {
       queryClient.prefetchQuery(
-        ["issues", page + 1],
-        async ({ signal }) => {
-          const { data } = await axios.get(
-            "https://prolog-api.profy.dev/v2/issue",
-            {
-              params: { page: page + 1, status: "open" },
-              signal,
-              headers: { Authorization: "my-access-token" },
-            }
-          );
-          return data;
-        },
+        getQueryKey(page + 1),
+        ({ signal }) => getIssues(page + 1, { signal }),
         { staleTime: 60000 }
       );
     }
