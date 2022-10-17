@@ -38,7 +38,7 @@ const Container = styled.div<{ size: BadgeSize; color: BadgeColor }>`
         `;
       case BadgeSize.md:
         return css`
-          padding: 0 0.625rem};
+          padding: 0 0.625rem;
           height: 1.5rem;
           ${textFont("sm", "medium")}
         `;
