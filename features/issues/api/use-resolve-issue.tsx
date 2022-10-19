@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRef } from "react";
 import { resolveIssue } from "@api/issues";
 import * as GetIssues from "./use-get-issues";
-import type { Issue } from "../types";
+import type { Issue } from "@api/issues.types";
 
 export function useResolveIssue(page: number) {
   const queryClient = useQueryClient();
