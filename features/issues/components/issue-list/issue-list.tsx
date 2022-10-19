@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { ProjectLanguage } from "@features/projects";
+import { ProjectLanguage } from "@api/projects.types";
 import { color, space, textFont } from "@styles/theme";
 import { IssueRow } from "./issue-row";
 import { useGetIssues, useResolveIssue } from "../../api";

@@ -4,7 +4,8 @@ import capitalize from "lodash/capitalize";
 import { Badge, BadgeColor } from "@features/ui";
 import { color, displayFont, space, textFont } from "@styles/theme";
 import { Routes } from "@config/routes";
-import { Project, ProjectLanguage, ProjectStatus } from "../../types";
+import { ProjectLanguage, ProjectStatus } from "@api/projects.types";
+import type { Project } from "@api/projects.types";
 
 type ProjectCardProps = {
   project: Project;
