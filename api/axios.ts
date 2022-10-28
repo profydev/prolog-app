@@ -22,8 +22,16 @@ function authRequestInterceptor(config: AxiosRequestConfig) {
   return config;
 }
 
-export const axios = Axios.create({
+const axios = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
 });
 
 axios.interceptors.request.use(authRequestInterceptor);
+
+export default async function customInstance<T>(
+  config: AxiosRequestConfig,
+  options?: AxiosRequestConfig
+): Promise<T> {
+  const { data } = await axios({ ...config, ...options });
+  return data;
+}
