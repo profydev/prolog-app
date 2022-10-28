@@ -43,3 +43,6 @@ yarn-error.log*
 
 # Cypress test videos
 cypress/videos/
+
+# generated api file
+api/generated-api.ts
