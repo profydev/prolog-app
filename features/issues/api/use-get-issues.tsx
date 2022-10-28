@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getIssues } from "@api/issues";
-import type { Page } from "@typings/page.types";
-import type { Issue } from "@api/issues.types";
+import type { IssuePage } from "@api/issues.types";
 
 const QUERY_KEY = "issues";
 
@@ -14,7 +13,7 @@ export function getQueryKey(page?: number) {
 }
 
 export function useGetIssues(page: number) {
-  const query = useQuery<Page<Issue>, Error>(
+  const query = useQuery<IssuePage, Error>(
     getQueryKey(page),
     ({ signal }) => getIssues(page, { status: "open" }, { signal }),
     { keepPreviousData: true }

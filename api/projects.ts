@@ -1,9 +1,6 @@
-import { axios } from "./axios";
-import type { Project } from "./projects.types";
-
-const ENDPOINT = "/project";
+import { projectControllerFindAll } from "./generated-api";
 
 export async function getProjects() {
-  const { data } = await axios.get<Project[]>(ENDPOINT);
+  const data = await projectControllerFindAll();
   return data;
 }

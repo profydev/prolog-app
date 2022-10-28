@@ -1,27 +1,23 @@
-import { axios } from "./axios";
-import type { Issue } from "./issues.types";
-import type { Page } from "@typings/page.types";
-
-type IssueFilters = {
-  status?: "open" | "resolved";
-};
-
-const ENDPOINT = "/issue";
+import {
+  issueControllerFindAllV2,
+  issueControllerUpdateV2,
+} from "./generated-api";
+import { IssueFilters } from "./issues.types";
 
 export async function getIssues(
   page: number,
-  filters: IssueFilters = {},
+  filters: Omit<IssueFilters, "page">,
   options?: { signal?: AbortSignal }
 ) {
-  const { data } = await axios.get<Page<Issue>>(ENDPOINT, {
-    params: { page, ...filters },
-    signal: options?.signal,
-  });
+  const data = await issueControllerFindAllV2(
+    { page, ...filters },
+    { signal: options?.signal }
+  );
   return data;
 }
 
 export async function resolveIssue(issueId: string) {
-  const { data } = await axios.patch(`${ENDPOINT}/${issueId}`, {
+  const data = await issueControllerUpdateV2(issueId, {
     status: "resolved",
   });
   return data;
