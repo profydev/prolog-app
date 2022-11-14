@@ -10,26 +10,25 @@ describe("Sidebar Navigation", () => {
 
     it("links are working", () => {
       // check that each link leads to the correct page
-      cy.get("nav").contains("Issues").click();
-      cy.url().should("eq", "http://localhost:3000/dashboard/issues");
-      // wait for page to re-render to prevent the following error
-      // cy...() failed because the element you are chaining off of has become detached or removed from the dom
-      cy.wait(100);
+      cy.get("nav")
+        .contains("Projects")
+        .should("have.attr", "href", "/dashboard");
 
-      cy.get("nav").contains("Projects").click();
-      cy.url().should("eq", "http://localhost:3000/dashboard");
-      cy.wait(100);
+      cy.get("nav")
+        .contains("Issues")
+        .should("have.attr", "href", "/dashboard/issues");
 
-      cy.get("nav").contains("Alerts").click();
-      cy.url().should("eq", "http://localhost:3000/dashboard/alerts");
-      cy.wait(100);
+      cy.get("nav")
+        .contains("Alerts")
+        .should("have.attr", "href", "/dashboard/alerts");
 
-      cy.get("nav").contains("Users").click();
-      cy.url().should("eq", "http://localhost:3000/dashboard/users");
-      cy.wait(100);
+      cy.get("nav")
+        .contains("Users")
+        .should("have.attr", "href", "/dashboard/users");
 
-      cy.get("nav").contains("Settings").click();
-      cy.url().should("eq", "http://localhost:3000/dashboard/settings");
+      cy.get("nav")
+        .contains("Settings")
+        .should("have.attr", "href", "/dashboard/settings");
     });
 
     it("is collapsible", () => {
