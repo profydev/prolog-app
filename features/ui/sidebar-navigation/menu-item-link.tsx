@@ -26,7 +26,7 @@ export const ListItem = styled.li<{ isActive?: boolean }>`
   }
 `;
 
-export const Anchor = styled.a`
+export const Anchor = styled(Link)`
   display: flex;
   align-items: center;
   color: ${color("gray", 100)};
@@ -47,12 +47,9 @@ export function MenuItemLink({
 }: MenuItemProps) {
   return (
     <ListItem isActive={isActive}>
-      <Link href={href} passHref>
-        <Anchor>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <Icon src={iconSrc} alt={`${text} icon`} /> {!isCollapsed && text}
-        </Anchor>
-      </Link>
+      <Anchor href={href}>
+        <Icon src={iconSrc} alt={`${text} icon`} /> {!isCollapsed && text}
+      </Anchor>
     </ListItem>
   );
 }

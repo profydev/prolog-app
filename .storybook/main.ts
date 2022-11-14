@@ -1,6 +1,9 @@
 const path = require("path");
 
 module.exports = {
+  core: {
+    builder: "webpack5",
+  },
   stories: ["../**/*.stories.mdx", "../**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
@@ -9,6 +12,12 @@ module.exports = {
   ],
   framework: "@storybook/react",
   staticDirs: ["../public"],
+  env: (config) => ({
+    ...config,
+    // ensure that new next/link is enabled in storybook
+    // required for sidebar navigation stories
+    __NEXT_NEW_LINK_BEHAVIOR: true,
+  }),
   webpackFinal: async (config) => {
     config.resolve.alias["next/router"] = require.resolve(
       "../__mocks__/next/router.tsx"

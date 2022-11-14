@@ -10,20 +10,25 @@ describe("Sidebar Navigation", () => {
 
     it("links are working", () => {
       // check that each link leads to the correct page
-      cy.get("nav").contains("Issues").click();
-      cy.url().should("eq", "http://localhost:3000/dashboard/issues");
+      cy.get("nav")
+        .contains("Projects")
+        .should("have.attr", "href", "/dashboard");
 
-      cy.get("nav").contains("Projects").click();
-      cy.url().should("eq", "http://localhost:3000/dashboard");
+      cy.get("nav")
+        .contains("Issues")
+        .should("have.attr", "href", "/dashboard/issues");
 
-      cy.get("nav").contains("Alerts").click();
-      cy.url().should("eq", "http://localhost:3000/dashboard/alerts");
+      cy.get("nav")
+        .contains("Alerts")
+        .should("have.attr", "href", "/dashboard/alerts");
 
-      cy.get("nav").contains("Users").click();
-      cy.url().should("eq", "http://localhost:3000/dashboard/users");
+      cy.get("nav")
+        .contains("Users")
+        .should("have.attr", "href", "/dashboard/users");
 
-      cy.get("nav").contains("Settings").click();
-      cy.url().should("eq", "http://localhost:3000/dashboard/settings");
+      cy.get("nav")
+        .contains("Settings")
+        .should("have.attr", "href", "/dashboard/settings");
     });
 
     it("is collapsible", () => {
