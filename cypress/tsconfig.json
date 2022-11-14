@@ -8,6 +8,6 @@
     "types": ["cypress", "node"],
     "isolatedModules": false
   },
-  "include": ["**/*.ts", "cypress"],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }
