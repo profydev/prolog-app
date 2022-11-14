@@ -99,7 +99,7 @@ const Status = styled.div`
   flex: 1;
 `;
 
-const ViewIssuesAnchor = styled.a`
+const ViewIssuesAnchor = styled(Link)`
   text-decoration: none;
   ${textFont("sm", "medium")}
 `;
@@ -131,9 +131,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </InfoContainer>
       </TopContainer>
       <BottomContainer>
-        <Link href={Routes.issues} passHref>
-          <ViewIssuesAnchor>View issues</ViewIssuesAnchor>
-        </Link>
+        <ViewIssuesAnchor href={Routes.issues}>View issues</ViewIssuesAnchor>
       </BottomContainer>
     </Container>
   );
