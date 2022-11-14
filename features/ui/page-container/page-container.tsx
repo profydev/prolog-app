@@ -53,10 +53,13 @@ const Info = styled.div`
 `;
 
 export function PageContainer({ children, title, info }: PageContainerProps) {
+  // combine title in a single string to prevent below warning
+  // "Warning: A title element received an array with more than 1 element as children."
+  const documentTitle = `ProLog - ${title}`;
   return (
     <Container>
       <Head>
-        <title>ProLog - {title}</title>
+        <title>{documentTitle}</title>
         <meta name="description" content="Error monitoring" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
