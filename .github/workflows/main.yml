@@ -27,6 +27,6 @@ jobs:
       - run: npm run build
       # run tests with Cypress
       - name: Cypress run
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
           start: npm start
