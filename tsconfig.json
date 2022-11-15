@@ -16,9 +16,10 @@
     "types": ["jest"],
     "baseUrl": ".",
     "paths": {
-      "@styles/*": ["styles/*"],
+      "@api/*": ["api/*"],
       "@config/*": ["config/*"],
       "@features/*": ["features/*"],
+      "@styles/*": ["styles/*"],
       "@typings/*": ["typings/*"]
     },
     "noEmit": true

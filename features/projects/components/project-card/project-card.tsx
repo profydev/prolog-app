@@ -2,13 +2,10 @@ import Link from "next/link";
 import styled from "styled-components";
 import capitalize from "lodash/capitalize";
 import { Badge, BadgeColor } from "@features/ui";
-import {
-  Project,
-  ProjectLanguage,
-  ProjectStatus,
-} from "../../types/project.types";
 import { color, displayFont, space, textFont } from "@styles/theme";
 import { Routes } from "@config/routes";
+import { ProjectLanguage, ProjectStatus } from "@api/projects.types";
+import type { Project } from "@api/projects.types";
 
 type ProjectCardProps = {
   project: Project;
