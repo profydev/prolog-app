@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useRouter } from "next/router";
 import styled from "styled-components";
-import { ProjectLanguage } from "@api/projects.types";
 import { color, space, textFont } from "@styles/theme";
+import { ProjectLanguage } from "@api/projects.types";
+import { useProjects } from "@features/projects";
+import { useGetIssues } from "../../api";
 import { IssueRow } from "./issue-row";
-import { useGetIssues, useResolveIssue } from "../../api";
 
 const Container = styled.div`
   background: white;
@@ -62,12 +63,39 @@ const PageNumber = styled.span`
 `;
 
 export function IssueList() {
-  const [page, setPage] = useState(1);
+  const router = useRouter();
+  const page = Number(router.query.page || 1);
+  const navigateToPage = (newPage: number) =>
+    router.push({
+      pathname: router.pathname,
+      query: { page: newPage },
+    });
 
-  const issuePage = useGetIssues(page);
-  const resolveIssue = useResolveIssue(page);
+  const issuesPage = useGetIssues(page);
+  const projects = useProjects();
 
-  const { items, meta } = issuePage.data || {};
+  if (projects.isLoading || issuesPage.isLoading) {
+    return <div>Loading</div>;
+  }
+
+  if (projects.isError) {
+    console.error(projects.error);
+    return <div>Error loading projects: {projects.error.message}</div>;
+  }
+
+  if (issuesPage.isError) {
+    console.error(issuesPage.error);
+    return <div>Error loading issues: {issuesPage.error.message}</div>;
+  }
+
+  const projectIdToLanguage = (projects.data || []).reduce(
+    (prev, project) => ({
+      ...prev,
+      [project.id]: project.language,
+    }),
+    {} as Record<string, ProjectLanguage>
+  );
+  const { items, meta } = issuesPage.data || {};
 
   return (
     <Container>
@@ -85,8 +113,7 @@ export function IssueList() {
             <IssueRow
               key={issue.id}
               issue={issue}
-              projectLanguage={ProjectLanguage.react}
-              resolveIssue={() => resolveIssue.mutate(issue.id)}
+              projectLanguage={projectIdToLanguage[issue.projectId]}
             />
           ))}
         </tbody>
@@ -94,13 +121,13 @@ export function IssueList() {
       <PaginationContainer>
         <div>
           <PaginationButton
-            onClick={() => setPage(page - 1)}
+            onClick={() => navigateToPage(page - 1)}
             disabled={page === 1}
           >
             Previous
           </PaginationButton>
           <PaginationButton
-            onClick={() => setPage(page + 1)}
+            onClick={() => navigateToPage(page + 1)}
             disabled={page === meta?.totalPages}
           >
             Next

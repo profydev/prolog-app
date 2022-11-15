@@ -16,7 +16,7 @@ export function getQueryKey(page?: number) {
 export function useGetIssues(page: number) {
   const query = useQuery<Page<Issue>, Error>(
     getQueryKey(page),
-    ({ signal }) => getIssues(page, { status: "open" }, { signal }),
+    ({ signal }) => getIssues(page, { signal }),
     { keepPreviousData: true }
   );
 
@@ -25,7 +25,7 @@ export function useGetIssues(page: number) {
   useEffect(() => {
     if (query.data?.meta.hasNextPage) {
       queryClient.prefetchQuery(getQueryKey(page + 1), ({ signal }) =>
-        getIssues(page + 1, { status: "open" }, { signal })
+        getIssues(page + 1, { signal })
       );
     }
   }, [query.data, page, queryClient]);
