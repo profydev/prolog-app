@@ -12,6 +12,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      ## Set API base URL from GitHub secrets
+      NEXT_PUBLIC_API_BASE_URL: ${{secrets.NEXT_PUBLIC_API_BASE_URL}}
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
