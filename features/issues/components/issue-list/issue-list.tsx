@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { useIssues } from "@features/issues";
-import { ProjectLanguage, useProjects } from "@features/projects";
 import { color, space, textFont } from "@styles/theme";
+import { ProjectLanguage } from "@api/projects.types";
+import { useProjects } from "@features/projects";
+import { useGetIssues } from "../../api";
 import { IssueRow } from "./issue-row";
 
 const Container = styled.div`
@@ -70,7 +71,7 @@ export function IssueList() {
       query: { page: newPage },
     });
 
-  const issuesPage = useIssues(page);
+  const issuesPage = useGetIssues(page);
   const projects = useProjects();
 
   if (projects.isLoading || issuesPage.isLoading) {

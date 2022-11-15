@@ -14,13 +14,21 @@ Watch this video for a tour through the codebase.
 
 ## Getting Started
 
-This project is built with Next.js, TypeScript, Cypress & styled-components among others. To start working on the project, first clone the repository and install the dependencies.
+### 1. Clone & Install
+
+This project is built with Next.js, TypeScript, Cypress & styled-components among others. To start working on the project, first clone the repository on your local machine and install the dependencies.
 
 ```bash
 npm install
 ```
 
-Then run the development server:
+### 2. Create .env File
+
+**copy the `.env.template` file to a new file called `.env`.** This file contains the required environment variables that are injected by Next.js via the `dotenv` package.
+
+### 3. Run Development Server
+
+Finally, run the development server:
 
 ```bash
 npm run dev
