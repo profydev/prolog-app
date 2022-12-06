@@ -23,11 +23,10 @@ module.exports = {
       "../__mocks__/next/router.tsx"
     );
     config.resolve.alias["@api"] = path.resolve("./api");
-    config.resolve.alias["@components"] = path.resolve("./components");
-    config.resolve.alias["@contexts"] = path.resolve("./contexts");
-    config.resolve.alias["@styles"] = path.resolve("./styles");
     config.resolve.alias["@config"] = path.resolve("./config");
     config.resolve.alias["@features"] = path.resolve("./features");
+    config.resolve.alias["@styles"] = path.resolve("./styles");
+    config.resolve.alias["@typings"] = path.resolve("./typings");
     return config;
   },
 };

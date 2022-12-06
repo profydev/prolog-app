@@ -3,7 +3,7 @@ import { Story as StoryType } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../styles/global-style";
 import { theme } from "../styles/theme";
-import { NavigationProvider } from "../features/ui";
+import { NavigationProvider } from "../features/layout";
 import { decorator as mockRouterDecorator } from "../__mocks__/next/router";
 
 export const decorators = [
