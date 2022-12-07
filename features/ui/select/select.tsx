@@ -26,12 +26,12 @@ export function Select<T>({
   value,
   onChange,
   placeholder = "Choose an option",
-  defaultValue = "",
-  iconSrc = "",
+  defaultValue,
+  iconSrc,
   disabled = false,
-  label = "",
-  hint = "",
-  errorMessage = "",
+  label,
+  hint,
+  errorMessage,
   ...props
 }: SelectProps<T>) {
   const [showDropdown, setShowDropdown] = useState(false);
