@@ -1,19 +1,27 @@
 import React, { ReactNode } from "react";
 import * as S from "./option.styled";
 
-type OptionProps = {
+type OptionProps<P> = {
   children: ReactNode;
-  value: unknown;
+  value: P;
   isSelected: boolean;
-  onClick: (value: unknown) => void;
+  onClick: (value: P) => void;
+  onKeyDown: (event: React.KeyboardEvent, value: P) => void;
 };
 
-export function Option({ children, value, onClick, isSelected }: OptionProps) {
+export function Option<P>({
+  children,
+  value,
+  onClick,
+  onKeyDown,
+  isSelected,
+}: OptionProps<P>) {
   return (
     <S.ListItem
       isCurrentlySelected={isSelected}
       aria-selected={isSelected}
       onClick={() => onClick(value)}
+      onKeyDown={(event) => onKeyDown(event, value)}
       role="option"
       tabIndex={0}
     >

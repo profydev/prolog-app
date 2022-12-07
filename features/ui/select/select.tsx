@@ -3,15 +3,15 @@ import { useClickAway } from "react-use";
 import { Option } from "./option";
 import * as S from "./select.styled";
 
-type Option = {
-  value: unknown;
+type Option<T> = {
+  value: T;
   label: React.ReactNode;
 };
 
-type SelectProps = Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> & {
-  options: Option[];
+type SelectProps<T> = Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> & {
+  options: Option<T>[];
   value: unknown;
-  onChange: (value: unknown) => void;
+  onChange: (value: T) => void;
   errorMessage?: string;
   defaultValue?: string;
   placeholder?: string;
@@ -22,7 +22,7 @@ type SelectProps = Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> & {
   hint?: string;
 };
 
-export function Select({
+export function Select<T>({
   options,
   value,
   onChange,
@@ -35,7 +35,7 @@ export function Select({
   errorMessage = "",
   width = "",
   ...props
-}: SelectProps) {
+}: SelectProps<T>) {
   const [showDropdown, setShowDropdown] = useState(false);
   const ref = useRef(null);
 
@@ -44,12 +44,32 @@ export function Select({
     setShowDropdown(false);
   });
 
-  const showDropdownHandler = () =>
+  const toggleDropdown = () =>
     setShowDropdown((prevShowDropdown) => !prevShowDropdown);
 
-  const onClickOption = (newValue: unknown) => {
+  const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.code === "Space" || event.code === "ArrowDown") {
+      event.preventDefault();
+      toggleDropdown();
+    }
+    if (event.code === "Escape") {
+      setShowDropdown(false);
+    }
+  };
+
+  const onClickOption = (newValue: T) => {
     onChange(newValue);
     setShowDropdown(false);
+  };
+
+  const onKeyDownOption = (event: React.KeyboardEvent, value: T) => {
+    if (event.code === "Space") {
+      event.preventDefault();
+      onClickOption(value);
+    }
+    if (event.code === "Escape") {
+      setShowDropdown(false);
+    }
   };
 
   const selectedOption = options.find(
@@ -61,12 +81,13 @@ export function Select({
       {label && <S.Label>{label}</S.Label>}
 
       <S.SelectedOption
-        onClick={showDropdownHandler}
-        selectedOption={selectedOption}
+        onClick={toggleDropdown}
+        hasValue={!!selectedOption}
+        hasError={!!errorMessage}
         disabled={disabled}
-        errorMessage={errorMessage}
         aria-expanded={showDropdown}
         width={width}
+        onKeyDown={onKeyDown}
       >
         <S.LeftContainer>
           {iconSrc && <S.OptionalIcon src={iconSrc} />}
@@ -92,6 +113,7 @@ export function Select({
             value={option.value}
             isSelected={value === option.value}
             onClick={onClickOption}
+            onKeyDown={onKeyDownOption}
           >
             {option.label}
           </Option>

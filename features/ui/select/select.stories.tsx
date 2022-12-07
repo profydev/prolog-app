@@ -25,7 +25,7 @@ const Template: ComponentStory<typeof Select> = (props) => {
         {...props}
         options={options}
         value={selectedValue}
-        onChange={(value) => setSelectedValue(value as number)}
+        onChange={(value) => setSelectedValue(value)}
       />
     </div>
   );
