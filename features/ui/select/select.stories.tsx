@@ -20,7 +20,7 @@ const options = [
 const Template: ComponentStory<typeof Select> = (props) => {
   const [selectedValue, setSelectedValue] = useState<number>();
   return (
-    <div style={{ padding: 50, height: 400 }}>
+    <div style={{ padding: 50, height: 400, width: 320 }}>
       <Select
         {...props}
         options={options}
@@ -40,7 +40,6 @@ Default.args = {
   hint: "This is a hint text to help user.",
   defaultValue: "Demi Wilkinson",
   errorMessage: "",
-  width: "",
 };
 Default.parameters = {
   viewMode: "docs",

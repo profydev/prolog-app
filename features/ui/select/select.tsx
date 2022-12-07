@@ -17,7 +17,6 @@ type SelectProps<T> = Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> & {
   placeholder?: string;
   disabled?: boolean;
   iconSrc?: string;
-  width?: string | number;
   label?: string;
   hint?: string;
 };
@@ -33,7 +32,6 @@ export function Select<T>({
   label = "",
   hint = "",
   errorMessage = "",
-  width = "",
   ...props
 }: SelectProps<T>) {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -77,7 +75,7 @@ export function Select<T>({
   );
 
   return (
-    <S.Container ref={ref} width={width} {...props}>
+    <S.Container ref={ref} {...props}>
       {label && <S.Label>{label}</S.Label>}
 
       <S.SelectedOption
@@ -86,13 +84,12 @@ export function Select<T>({
         hasError={!!errorMessage}
         disabled={disabled}
         aria-expanded={showDropdown}
-        width={width}
         onKeyDown={onKeyDown}
+        tabIndex={disabled ? -1 : 0}
+        aria-haspopup="listbox"
       >
-        <S.LeftContainer>
-          {iconSrc && <S.OptionalIcon src={iconSrc} />}
-          {selectedOption?.label || placeholder}
-        </S.LeftContainer>
+        {iconSrc && <S.OptionalIcon src={iconSrc} />}
+        <S.SelectedText>{selectedOption?.label || placeholder}</S.SelectedText>
 
         <S.SelectArrowIcon
           src="/icons/chevron-down.svg"
@@ -100,9 +97,9 @@ export function Select<T>({
         />
       </S.SelectedOption>
 
-      {hint && !showDropdown && !errorMessage && <S.Hint>{hint}</S.Hint>}
+      {hint && !errorMessage && <S.Hint>{hint}</S.Hint>}
 
-      {errorMessage && !showDropdown && !disabled && (
+      {errorMessage && !disabled && (
         <S.ErrorMessage>{errorMessage}</S.ErrorMessage>
       )}
 

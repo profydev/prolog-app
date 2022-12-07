@@ -18,7 +18,7 @@ export function Option<P>({
 }: OptionProps<P>) {
   return (
     <S.ListItem
-      isCurrentlySelected={isSelected}
+      isSelected={isSelected}
       aria-selected={isSelected}
       onClick={() => onClick(value)}
       onKeyDown={(event) => onKeyDown(event, value)}
@@ -26,10 +26,7 @@ export function Option<P>({
       tabIndex={0}
     >
       {children}
-      <S.ListItemIcon
-        isCurrentlySelected={isSelected}
-        src="/icons/checked.svg"
-      />
+      {isSelected && <S.ListItemIcon src="/icons/checked.svg" />}
     </S.ListItem>
   );
 }
