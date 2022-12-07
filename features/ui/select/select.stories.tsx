@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Select, Option } from "./";
-
+import { Select } from "./select";
 export default {
   title: "UI/Select",
   component: Select,
@@ -9,30 +8,29 @@ export default {
     layout: "fullscreen",
   },
 } as ComponentMeta<typeof Select>;
-
-const selectData = [
-  "Phoenix Baker",
-  "Olivia Rhye",
-  "Lana Steiner",
-  "Demi Wilkinson",
-  "Candice Wu",
-  "Natali Craig",
-  "Drew Cano",
+const options = [
+  { label: "Phoenix Baker", value: 1 },
+  { label: "Olivia Rhye", value: 2 },
+  { label: "Lana Steiner", value: 3 },
+  { label: "Demi Wilkinson", value: 4 },
+  { label: "Candice Wu", value: 5 },
+  { label: "Natali Craig", value: 6 },
+  { label: "Drew Cano", value: 7 },
 ];
-
 const Template: ComponentStory<typeof Select> = (props) => {
+  const [selectedValue, setSelectedValue] = useState<number>();
   return (
     <div style={{ padding: 50, height: 400 }}>
-      <Select {...props}>
-        {selectData.map((name) => (
-          <Option key={name} value={name}>
-            {name}
-          </Option>
-        ))}
-      </Select>
+      <Select
+        {...props}
+        options={options}
+        value={selectedValue}
+        onChange={(value) => setSelectedValue(value as number)}
+      />
     </div>
   );
 };
+
 export const Default = Template.bind({});
 Default.args = {
   disabled: false,

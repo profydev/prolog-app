@@ -1,17 +1,17 @@
-import React, {
-  useState,
-  ReactNode,
-  useCallback,
-  useMemo,
-  useRef,
-  SelectHTMLAttributes,
-} from "react";
+import React, { useState, useRef } from "react";
 import { useClickAway } from "react-use";
-import { SelectContext } from "./select-context";
+import { Option } from "./option";
 import * as S from "./select.styled";
 
-type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
-  children: ReactNode | ReactNode[];
+type Option = {
+  value: unknown;
+  label: React.ReactNode;
+};
+
+type SelectProps = Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> & {
+  options: Option[];
+  value: unknown;
+  onChange: (value: unknown) => void;
   errorMessage?: string;
   defaultValue?: string;
   placeholder?: string;
@@ -23,6 +23,9 @@ type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
 };
 
 export function Select({
+  options,
+  value,
+  onChange,
   placeholder = "Choose an option",
   defaultValue = "",
   iconSrc = "",
@@ -31,10 +34,8 @@ export function Select({
   hint = "",
   errorMessage = "",
   width = "",
-  children,
   ...props
 }: SelectProps) {
-  const [selectedOption, setSelectedOption] = useState(defaultValue || "");
   const [showDropdown, setShowDropdown] = useState(false);
   const ref = useRef(null);
 
@@ -43,55 +44,59 @@ export function Select({
     setShowDropdown(false);
   });
 
-  const showDropdownHandler = useCallback(
-    () => setShowDropdown((prevShowDropdown) => !prevShowDropdown),
-    []
-  );
+  const showDropdownHandler = () =>
+    setShowDropdown((prevShowDropdown) => !prevShowDropdown);
 
-  const updateSelectedOption = useCallback((option: string) => {
-    setSelectedOption(option);
+  const onClickOption = (newValue: unknown) => {
+    onChange(newValue);
     setShowDropdown(false);
-  }, []);
+  };
 
-  const value = useMemo(
-    () => ({ selectedOption, changeSelectedOption: updateSelectedOption }),
-    [selectedOption, updateSelectedOption]
+  const selectedOption = options.find(
+    (option) => option.value === (value || defaultValue)
   );
 
   return (
-    <SelectContext.Provider value={value}>
-      <S.Container ref={ref} width={width} {...props}>
-        {label && <S.Label>{label}</S.Label>}
+    <S.Container ref={ref} width={width} {...props}>
+      {label && <S.Label>{label}</S.Label>}
 
-        <S.SelectedOption
-          onClick={showDropdownHandler}
-          selectedOption={selectedOption}
-          disabled={disabled}
-          errorMessage={errorMessage}
-          aria-expanded={showDropdown}
-          width={width}
-        >
-          <S.LeftContainer>
-            {iconSrc && <S.OptionalIcon src={iconSrc} />}
-            {selectedOption || placeholder}
-          </S.LeftContainer>
+      <S.SelectedOption
+        onClick={showDropdownHandler}
+        selectedOption={selectedOption}
+        disabled={disabled}
+        errorMessage={errorMessage}
+        aria-expanded={showDropdown}
+        width={width}
+      >
+        <S.LeftContainer>
+          {iconSrc && <S.OptionalIcon src={iconSrc} />}
+          {selectedOption?.label || placeholder}
+        </S.LeftContainer>
 
-          <S.SelectArrowIcon
-            src="/icons/chevron-down.svg"
-            showDropdown={showDropdown}
-          />
-        </S.SelectedOption>
+        <S.SelectArrowIcon
+          src="/icons/chevron-down.svg"
+          showDropdown={showDropdown}
+        />
+      </S.SelectedOption>
 
-        {hint && !showDropdown && !errorMessage && <S.Hint>{hint}</S.Hint>}
+      {hint && !showDropdown && !errorMessage && <S.Hint>{hint}</S.Hint>}
 
-        {errorMessage && !showDropdown && !disabled && (
-          <S.ErrorMessage>{errorMessage}</S.ErrorMessage>
-        )}
+      {errorMessage && !showDropdown && !disabled && (
+        <S.ErrorMessage>{errorMessage}</S.ErrorMessage>
+      )}
 
-        <S.List showDropdown={showDropdown} role="listbox" tabIndex={-1}>
-          {children}
-        </S.List>
-      </S.Container>
-    </SelectContext.Provider>
+      <S.List showDropdown={showDropdown} role="listbox" tabIndex={-1}>
+        {options.map((option) => (
+          <Option
+            key={String(option.value)}
+            value={option.value}
+            isSelected={value === option.value}
+            onClick={onClickOption}
+          >
+            {option.label}
+          </Option>
+        ))}
+      </S.List>
+    </S.Container>
   );
 }
