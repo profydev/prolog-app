@@ -1,4 +1,4 @@
-import { PageContainer } from "@features/layout";
+import { PageContainer } from "@features/ui";
 import type { NextPage } from "next";
 
 const UsersPage: NextPage = () => {

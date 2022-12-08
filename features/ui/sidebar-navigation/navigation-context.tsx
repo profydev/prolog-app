@@ -6,6 +6,9 @@ type NavigationContextProviderProps = {
 
 const defaultContext = {
   isSidebarCollapsed: false,
+  isMobileMenuOpen: false,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setMobileMenuOpen: () => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   toggleSidebar: () => {},
 };
@@ -18,11 +21,16 @@ export function NavigationProvider({
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(
     defaultContext.isSidebarCollapsed
   );
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(
+    defaultContext.isMobileMenuOpen
+  );
 
   return (
     <NavigationContext.Provider
       value={{
         isSidebarCollapsed,
+        isMobileMenuOpen,
+        setMobileMenuOpen: () => setMobileMenuOpen((isOpen) => !isOpen),
         toggleSidebar: () => setSidebarCollapsed((isCollapsed) => !isCollapsed),
       }}
     >

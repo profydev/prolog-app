@@ -5,7 +5,7 @@ import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { NavigationProvider } from "@features/layout";
+import { NavigationProvider } from "@features/ui";
 import { GlobalStyle } from "@styles/global-style";
 import { theme } from "@styles/theme";
 import { queryClient } from "@api/query-client";
@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <GlobalStyle />
           <Component {...pageProps} />
         </NavigationProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>
     </ThemeProvider>
   );

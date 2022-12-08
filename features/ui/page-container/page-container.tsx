@@ -3,6 +3,7 @@ import Head from "next/head";
 import styled from "styled-components";
 import { SidebarNavigation } from "../sidebar-navigation";
 import { color, displayFont, textFont, space, breakpoint } from "@styles/theme";
+import { FiltersProvider } from "@features/issues";
 
 type PageContainerProps = {
   children: React.ReactNode;
@@ -57,21 +58,23 @@ export function PageContainer({ children, title, info }: PageContainerProps) {
   // "Warning: A title element received an array with more than 1 element as children."
   const documentTitle = `ProLog - ${title}`;
   return (
-    <Container>
-      <Head>
-        <title>{documentTitle}</title>
-        <meta name="description" content="Error monitoring" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <FiltersProvider>
+      <Container>
+        <Head>
+          <title>{documentTitle}</title>
+          <meta name="description" content="Error monitoring" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <SidebarNavigation />
-      <Main>
-        <ContentContainer>
-          <Title>{title}</Title>
-          <Info>{info}</Info>
-          {children}
-        </ContentContainer>
-      </Main>
-    </Container>
+        <SidebarNavigation />
+        <Main>
+          <ContentContainer>
+            <Title>{title}</Title>
+            <Info>{info}</Info>
+            {children}
+          </ContentContainer>
+        </Main>
+      </Container>
+    </FiltersProvider>
   );
 }
