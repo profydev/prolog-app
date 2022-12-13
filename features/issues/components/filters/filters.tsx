@@ -1,11 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-  useContext,
-} from "react";
-import { useRouter } from "next/router";
+import React, { useState, useCallback, useContext } from "react";
 import { useWindowSize } from "react-use";
 import { Select, Option, Input, NavigationContext } from "@features/ui";
 import { useFilters } from "../../hooks/use-filters";
@@ -16,15 +9,14 @@ import * as S from "./filters.styled";
 export function Filters() {
   const { handleFilters, filters } = useFilters();
   const { data: projects } = useProjects();
-  const router = useRouter();
-  const routerQueryProjectName =
-    (router.query.projectName as string)?.toLowerCase() || undefined;
+
   const [inputValue, setInputValue] = useState<string>("");
   const projectNames = projects?.map((project) => project.name.toLowerCase());
-  const isFirst = useRef(true);
+
   const { width } = useWindowSize();
   const isMobileScreen = width <= 1023;
   const { isMobileMenuOpen } = useContext(NavigationContext);
+
   const handleChange = (input: string) => {
     setInputValue(input);
 
@@ -64,34 +56,6 @@ export function Filters() {
       handleFilters({ project: projectName?.toLowerCase() }),
     [handleFilters]
   );
-
-  useEffect(() => {
-    const newObj: { [key: string]: string } = {
-      ...filters,
-    };
-
-    Object.keys(newObj).forEach((key) => {
-      if (newObj[key] === undefined) {
-        delete newObj[key];
-      }
-    });
-
-    const url = {
-      pathname: router.pathname,
-      query: {
-        page: router.query.page || 1,
-        ...newObj,
-      },
-    };
-
-    if (routerQueryProjectName && isFirst) {
-      handleProjectName(routerQueryProjectName);
-      setInputValue(routerQueryProjectName || "");
-      isFirst.current = false;
-    }
-
-    router.push(url, undefined, { shallow: false });
-  }, [filters.level, filters.status, filters.project, router.query.page]);
 
   return (
     <S.Container>
