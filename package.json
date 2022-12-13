@@ -30,7 +30,8 @@
     "react-dom": "^18.2.0",
     "react-use": "^17.4.0",
     "styled-components": "^5.3.6",
-    "styled-normalize": "^8.0.7"
+    "styled-normalize": "^8.0.7",
+    "use-debounce": "^9.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
