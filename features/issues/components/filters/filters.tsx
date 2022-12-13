@@ -2,15 +2,33 @@ import React, { useState, useCallback, useContext } from "react";
 import { useWindowSize } from "react-use";
 import { Select, Option, Input, NavigationContext } from "@features/ui";
 import { useFilters } from "../../hooks/use-filters";
-import { IssueLevel, IssueStatus } from "@api/issues.types";
+import { IssueFilters, IssueLevel, IssueStatus } from "@api/issues.types";
 import { useProjects } from "@features/projects";
 import * as S from "./filters.styled";
+import { capitalize } from "lodash";
+
+function getStatusDefaultValue(filters: IssueFilters) {
+  if (!filters.status) {
+    return "Status";
+  }
+  if (filters.status === IssueStatus.open) {
+    return "Unresolved";
+  }
+  return "Resolved";
+}
+
+function getLevelDefaultValue(filters: IssueFilters) {
+  if (!filters.level) {
+    return "Level";
+  }
+  return capitalize(filters.level);
+}
 
 export function Filters() {
   const { handleFilters, filters } = useFilters();
   const { data: projects } = useProjects();
 
-  const [inputValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState(filters.project || "");
   const projectNames = projects?.map((project) => project.name.toLowerCase());
 
   const { width } = useWindowSize();
@@ -61,7 +79,7 @@ export function Filters() {
     <S.Container>
       <Select
         placeholder="Status"
-        defaultValue="Status"
+        defaultValue={getStatusDefaultValue(filters)}
         width={isMobileScreen ? "97%" : "8rem"}
         style={{
           ...(isMobileMenuOpen && {
@@ -82,7 +100,7 @@ export function Filters() {
 
       <Select
         placeholder="Level"
-        defaultValue="Level"
+        defaultValue={getLevelDefaultValue(filters)}
         width={isMobileScreen ? "97%" : "8rem"}
         style={{
           ...(isMobileMenuOpen && {
