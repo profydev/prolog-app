@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useWindowSize } from "react-use";
 import { useDebouncedCallback } from "use-debounce";
 import { capitalize } from "lodash";
-import { Select, Option, Input, NavigationContext } from "@features/ui";
+import { Select, Option, Input } from "@features/ui";
 import { IssueFilters, IssueLevel, IssueStatus } from "@api/issues.types";
 import { useFilters } from "../../hooks/use-filters";
 import * as S from "./filters.styled";
@@ -32,7 +32,6 @@ export function Filters() {
 
   const { width } = useWindowSize();
   const isMobileScreen = width <= 1023;
-  const { isMobileMenuOpen } = useContext(NavigationContext);
 
   const handleChange = (project: string) => {
     setInputValue(project);
@@ -62,11 +61,6 @@ export function Filters() {
         placeholder="Status"
         defaultValue={getStatusDefaultValue(filters)}
         width={isMobileScreen ? "97%" : "8rem"}
-        style={{
-          ...(isMobileMenuOpen && {
-            opacity: 0,
-          }),
-        }}
       >
         <Option value={undefined} handleCallback={handleStatus}>
           --None--
@@ -83,11 +77,6 @@ export function Filters() {
         placeholder="Level"
         defaultValue={getLevelDefaultValue(filters)}
         width={isMobileScreen ? "97%" : "8rem"}
-        style={{
-          ...(isMobileMenuOpen && {
-            opacity: 0,
-          }),
-        }}
       >
         <Option value={undefined} handleCallback={handleLevel}>
           --None--
@@ -109,12 +98,6 @@ export function Filters() {
         label="project name"
         placeholder="Project Name"
         iconSrc="/icons/search-icon.svg"
-        style={{
-          ...(isMobileScreen && { width: "94%", marginRight: "3rem" }),
-          ...(isMobileMenuOpen && {
-            opacity: 0,
-          }),
-        }}
       />
     </S.Container>
   );
