@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { breakpoint } from "@styles/theme";
+import { Select as UnstyledSelect, Input as UnstyledInput } from "@features/ui";
 
 export const Container = styled.div`
   display: flex;
@@ -12,7 +13,20 @@ export const Container = styled.div`
     flex-direction: row;
     justify-content: flex-end;
     order: initial;
-    gap: 3rem;
     flex-wrap: wrap;
+  }
+`;
+
+export const Select = styled(UnstyledSelect)`
+  width: 100%;
+  @media (min-width: ${breakpoint("desktop")}) {
+    width: 10rem;
+  }
+`;
+
+export const Input = styled(UnstyledInput)`
+  width: 100%;
+  @media (min-width: ${breakpoint("desktop")}) {
+    width: 17.5rem;
   }
 `;

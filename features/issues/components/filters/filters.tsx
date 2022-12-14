@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useWindowSize } from "react-use";
 import { useDebouncedCallback } from "use-debounce";
 import { capitalize } from "lodash";
-import { Select, Option, Input } from "@features/ui";
+import { Option } from "@features/ui";
 import { IssueFilters, IssueLevel, IssueStatus } from "@api/issues.types";
 import { useFilters } from "../../hooks/use-filters";
 import * as S from "./filters.styled";
@@ -30,9 +29,6 @@ export function Filters() {
   const debouncedHandleFilters = useDebouncedCallback(handleFilters, 300);
   const [inputValue, setInputValue] = useState(filters.project || "");
 
-  const { width } = useWindowSize();
-  const isMobileScreen = width <= 1023;
-
   const handleChange = (project: string) => {
     setInputValue(project);
     debouncedHandleFilters({ project: project.toLowerCase() });
@@ -57,10 +53,9 @@ export function Filters() {
 
   return (
     <S.Container>
-      <Select
+      <S.Select
         placeholder="Status"
         defaultValue={getStatusDefaultValue(filters)}
-        width={isMobileScreen ? "97%" : "8rem"}
       >
         <Option value={undefined} handleCallback={handleStatus}>
           --None--
@@ -71,12 +66,11 @@ export function Filters() {
         <Option value="Resolved" handleCallback={handleStatus}>
           Resolved
         </Option>
-      </Select>
+      </S.Select>
 
-      <Select
+      <S.Select
         placeholder="Level"
         defaultValue={getLevelDefaultValue(filters)}
-        width={isMobileScreen ? "97%" : "8rem"}
       >
         <Option value={undefined} handleCallback={handleLevel}>
           --None--
@@ -90,9 +84,9 @@ export function Filters() {
         <Option value="Info" handleCallback={handleLevel}>
           Info
         </Option>
-      </Select>
+      </S.Select>
 
-      <Input
+      <S.Input
         handleChange={handleChange}
         value={inputValue}
         label="project name"
