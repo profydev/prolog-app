@@ -1,27 +1,21 @@
 import React, { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { capitalize } from "lodash";
-import { Option } from "@features/ui";
-import { IssueFilters, IssueLevel, IssueStatus } from "@api/issues.types";
+import { IssueLevel, IssueStatus } from "@api/issues.types";
 import { useFilters } from "../../hooks/use-filters";
 import * as S from "./filters.styled";
 
-function getStatusDefaultValue(filters: IssueFilters) {
-  if (!filters.status) {
-    return "Status";
-  }
-  if (filters.status === IssueStatus.open) {
-    return "Unresolved";
-  }
-  return "Resolved";
-}
+const statusOptions = [
+  { value: undefined, label: "--None--" },
+  { value: IssueStatus.open, label: "Unresolved" },
+  { value: IssueStatus.resolved, label: "Resolved" },
+];
 
-function getLevelDefaultValue(filters: IssueFilters) {
-  if (!filters.level) {
-    return "Level";
-  }
-  return capitalize(filters.level);
-}
+const levelOptions = [
+  { value: undefined, label: "--None--" },
+  { value: IssueLevel.error, label: "Error" },
+  { value: IssueLevel.warning, label: "Warning" },
+  { value: IssueLevel.info, label: "Info" },
+];
 
 export function Filters() {
   const { handleFilters, filters } = useFilters();
@@ -34,57 +28,21 @@ export function Filters() {
     debouncedHandleFilters({ project: project.toLowerCase() });
   };
 
-  const handleLevel = (level?: string) => {
-    if (level) {
-      level = level.toLowerCase();
-    }
-    handleFilters({ level: level as IssueLevel });
-  };
-
-  const handleStatus = (status?: string) => {
-    if (status === "Unresolved") {
-      status = "open";
-    }
-    if (status) {
-      status = status.toLowerCase();
-    }
-    handleFilters({ status: status as IssueStatus });
-  };
-
   return (
     <S.Container>
       <S.Select
         placeholder="Status"
-        defaultValue={getStatusDefaultValue(filters)}
-      >
-        <Option value={undefined} handleCallback={handleStatus}>
-          --None--
-        </Option>
-        <Option value="Unresolved" handleCallback={handleStatus}>
-          Unresolved
-        </Option>
-        <Option value="Resolved" handleCallback={handleStatus}>
-          Resolved
-        </Option>
-      </S.Select>
+        value={filters.status}
+        options={statusOptions}
+        onChange={(status) => handleFilters({ status })}
+      />
 
       <S.Select
         placeholder="Level"
-        defaultValue={getLevelDefaultValue(filters)}
-      >
-        <Option value={undefined} handleCallback={handleLevel}>
-          --None--
-        </Option>
-        <Option value="Error" handleCallback={handleLevel}>
-          Error
-        </Option>
-        <Option value="Warning" handleCallback={handleLevel}>
-          Warning
-        </Option>
-        <Option value="Info" handleCallback={handleLevel}>
-          Info
-        </Option>
-      </S.Select>
+        value={filters.level}
+        options={levelOptions}
+        onChange={(level) => handleFilters({ level })}
+      />
 
       <S.Input
         handleChange={handleChange}

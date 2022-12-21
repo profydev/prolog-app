@@ -22,7 +22,7 @@ export const Select = styled(UnstyledSelect)`
   @media (min-width: ${breakpoint("desktop")}) {
     width: 10rem;
   }
-`;
+` as typeof UnstyledSelect;
 
 export const Input = styled(UnstyledInput)`
   width: 100%;
