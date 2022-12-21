@@ -1,34 +1,32 @@
 import React, { ReactNode } from "react";
-import { useSelectContext } from "./select-context";
 import * as S from "./option.styled";
 
-type OptionProps = {
-  children: ReactNode | ReactNode[];
-  value: any;
-  handleCallback?: (value: any) => unknown;
+type OptionProps<P> = {
+  children: ReactNode;
+  value: P;
+  isSelected: boolean;
+  onClick: (value: P) => void;
+  onKeyDown: (event: React.KeyboardEvent, value: P) => void;
 };
 
-export function Option({ children, value, handleCallback }: OptionProps) {
-  const { changeSelectedOption, selectedOption } = useSelectContext();
-  const isCurrentlySelected = selectedOption === value;
-
+export function Option<P>({
+  children,
+  value,
+  onClick,
+  onKeyDown,
+  isSelected,
+}: OptionProps<P>) {
   return (
     <S.ListItem
-      isCurrentlySelected={isCurrentlySelected}
-      aria-selected={isCurrentlySelected}
-      onClick={() => {
-        changeSelectedOption(value);
-        if (handleCallback) {
-          handleCallback(value);
-        }
-      }}
+      isSelected={isSelected}
+      aria-selected={isSelected}
+      onClick={() => onClick(value)}
+      onKeyDown={(event) => onKeyDown(event, value)}
       role="option"
+      tabIndex={0}
     >
       {children}
-      <S.ListItemIcon
-        isCurrentlySelected={isCurrentlySelected}
-        src="/icons/checked.svg"
-      />
+      {isSelected && <S.ListItemIcon src="/icons/checked.svg" />}
     </S.ListItem>
   );
 }

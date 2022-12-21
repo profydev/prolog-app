@@ -17,6 +17,7 @@ export const InputContainer = styled.input<{
   border-radius: 7px;
   width: calc(${space(20)} * 4 - ${space(6)});
   padding: ${space(2, 3)};
+  box-sizing: border-box;
   letter-spacing: 0.05rem;
   color: ${color("gray", 900)};
   ${textFont("md", "regular")};
