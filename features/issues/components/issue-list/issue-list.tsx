@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { color, space, textFont } from "@styles/theme";
 import { ProjectLanguage } from "@api/projects.types";
-import { useProjects } from "@features/projects";
+import { useGetProjects } from "@features/projects";
 import { useGetIssues } from "../../api";
 import { IssueRow } from "./issue-row";
 
@@ -72,7 +72,7 @@ export function IssueList() {
     });
 
   const issuesPage = useGetIssues(page);
-  const projects = useProjects();
+  const projects = useGetProjects();
 
   if (projects.isLoading || issuesPage.isLoading) {
     return <div>Loading</div>;

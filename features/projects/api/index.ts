@@ -1,1 +1,1 @@
-export * from "./use-projects";
+export * from "./use-get-projects";
