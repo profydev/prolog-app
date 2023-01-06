@@ -9,5 +9,18 @@
   "env": {
     "cypress/globals": true
   },
-  "parser": "@typescript-eslint/parser"
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": ["@features/*/*"],
+            "message": "Please import from the root @features folder (e.g. @features/ui instead of @features/ui/button)."
+          }
+        ]
+      }
+    ]
+  }
 }
