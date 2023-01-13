@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { breakpoint, space } from "@styles/theme";
 import { ProjectCard } from "../project-card";
-import { useProjects } from "../../api/use-projects";
+import { useGetProjects } from "../../api/use-get-projects";
 
 const List = styled.ul`
   display: grid;
@@ -19,7 +19,7 @@ const List = styled.ul`
 `;
 
 export function ProjectList() {
-  const { data, isLoading, isError, error } = useProjects();
+  const { data, isLoading, isError, error } = useGetProjects();
 
   if (isLoading) {
     return <div>Loading</div>;
