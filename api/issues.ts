@@ -14,10 +14,3 @@ export async function getIssues(
   });
   return data;
 }
-
-export async function resolveIssue(issueId: string) {
-  const { data } = await axios.patch(`${ENDPOINT}/${issueId}`, {
-    status: "resolved",
-  });
-  return data;
-}
