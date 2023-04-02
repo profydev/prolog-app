@@ -32,6 +32,7 @@ const IssuesPage = () => {
   return (
     <div>
       <Header>
+        <a href = "/">Home</a>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/logo-large.svg" alt="Prolog logo" />
         <a href={Routes.projects}>Dashboard</a>
