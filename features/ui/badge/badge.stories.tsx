@@ -11,10 +11,10 @@ export default {
   },
 } as ComponentMeta<typeof Badge>;
 
-const Template: ComponentStory<typeof Badge> = ({ size, color }) => (
+const Template: ComponentStory<typeof Badge> = ({ size, color, children }) => (
   <div style={{ padding: 50 }}>
     <Badge color={color} size={size}>
-      Label
+      {children}
     </Badge>
   </div>
 );
@@ -23,6 +23,7 @@ export const Default = Template.bind({});
 Default.args = {
   size: BadgeSize.sm,
   color: BadgeColor.primary,
+  children: "Label",
 };
 Default.parameters = {
   viewMode: "docs",
