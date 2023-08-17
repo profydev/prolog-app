@@ -1,8 +1,8 @@
-import { createGlobalStyle } from "styled-components";
+import { DefaultTheme, createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
-import { color, Theme } from "./theme";
+import { color } from "./theme";
 
-export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
+export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
   ${normalize}
   
   body {
