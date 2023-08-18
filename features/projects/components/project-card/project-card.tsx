@@ -1,11 +1,10 @@
 import Link from "next/link";
-import styled from "styled-components";
 import capitalize from "lodash/capitalize";
 import { Badge, BadgeColor } from "@features/ui";
-import { color, displayFont, space, textFont } from "@styles/theme";
 import { Routes } from "@config/routes";
 import { ProjectLanguage, ProjectStatus } from "@api/projects.types";
 import type { Project } from "@api/projects.types";
+import styles from "./project-card.module.scss";
 
 type ProjectCardProps = {
   project: Project;
@@ -23,114 +22,43 @@ const statusColors = {
   [ProjectStatus.critical]: BadgeColor.error,
 };
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  background: white;
-  box-shadow:
-    0px 1px 3px rgba(16, 24, 40, 0.1),
-    0px 1px 2px rgba(16, 24, 40, 0.06);
-  border-radius: 8px;
-`;
-
-const TopContainer = styled.div`
-  padding: ${space(6)};
-`;
-
-const BottomContainer = styled.div`
-  padding: ${space(4, 6)};
-  border-top: 3px solid ${color("gray", 200)};
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const NameAndIconContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: ${space(6)};
-`;
-
-const LanguageIcon = styled.img`
-  margin-right: ${space(3)};
-`;
-
-const Name = styled.div`
-  ${textFont("md", "medium")}
-`;
-
-const Language = styled.div`
-  color: ${color("gray", 500)};
-  ${textFont("sm", "regular")}
-`;
-
-const InfoContainer = styled.div`
-  display: flex;
-`;
-
-const Issues = styled.div`
-  margin-left: ${space(6)};
-
-  &:first-of-type {
-    margin-left: 0;
-  }
-`;
-
-const IssuesTitle = styled.div`
-  margin-bottom: ${space(2)};
-  color: ${color("gray", 500)};
-  ${textFont("sm", "medium")}
-`;
-
-const IssuesNumber = styled.div`
-  ${displayFont("md", "semibold")}
-`;
-
-const Status = styled.div`
-  // line-height of issue number element
-  height: 2.75rem;
-  margin-top: auto;
-  margin-left: ${space(6)};
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex: 1;
-`;
-
-const ViewIssuesAnchor = styled(Link)`
-  text-decoration: none;
-  ${textFont("sm", "medium")}
-`;
-
 export function ProjectCard({ project }: ProjectCardProps) {
   const { name, language, numIssues, numEvents24h, status } = project;
+
   return (
-    <Container>
-      <TopContainer>
-        <NameAndIconContainer>
-          <LanguageIcon src={`/icons/${language}.svg`} alt={language} />
+    <div className={styles.container}>
+      <div className={styles.topContainer}>
+        <div className={styles.nameAndIconContainer}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className={styles.languageIcon}
+            src={`/icons/${language}.svg`}
+            alt={language}
+          />
           <div>
-            <Name>{name}</Name>
-            <Language>{languageNames[language]}</Language>
+            <div className={styles.name}>{name}</div>
+            <div className={styles.language}>{languageNames[language]}</div>
           </div>
-        </NameAndIconContainer>
-        <InfoContainer>
-          <Issues>
-            <IssuesTitle>Total issues</IssuesTitle>
-            <IssuesNumber>{numIssues}</IssuesNumber>
-          </Issues>
-          <Issues>
-            <IssuesTitle>Last 24h</IssuesTitle>
-            <IssuesNumber>{numEvents24h}</IssuesNumber>
-          </Issues>
-          <Status>
+        </div>
+        <div className={styles.infoContainer}>
+          <div className={styles.issues}>
+            <div className={styles.issuesTitle}>Total issues</div>
+            <div className={styles.issuesNumber}>{numIssues}</div>
+          </div>
+          <div className={styles.issues}>
+            <div className={styles.issuesTitle}>Last 24h</div>
+            <div className={styles.issuesNumber}>{numEvents24h}</div>
+          </div>
+          <div className={styles.status}>
             <Badge color={statusColors[status]}>{capitalize(status)}</Badge>
-          </Status>
-        </InfoContainer>
-      </TopContainer>
-      <BottomContainer>
-        <ViewIssuesAnchor href={Routes.issues}>View issues</ViewIssuesAnchor>
-      </BottomContainer>
-    </Container>
+          </div>
+        </div>
+      </div>
+      <div className={styles.bottomContainer}>
+        <Link href={Routes.issues} className={styles.viewIssuesAnchor}>
+          View issues
+        </Link>
+      </div>
+    </div>
   );
 }
