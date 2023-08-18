@@ -28,6 +28,7 @@
     "@tanstack/react-query": "^4.32.6",
     "@tanstack/react-query-devtools": "^4.32.6",
     "axios": "^1.4.0",
+    "classnames": "^2.3.2",
     "lodash": "^4.17.21",
     "next": "^13.4.18",
     "react": "^18.2.0",
