@@ -100,7 +100,8 @@ const MenuOverlay = styled.div<{ isMobileMenuOpen: boolean }>`
   transform: translateX(
     ${({ isMobileMenuOpen }) => (isMobileMenuOpen ? "0" : "100%")}
   );
-  transition: opacity 300ms,
+  transition:
+    opacity 300ms,
     transform 0s
       ${({ isMobileMenuOpen }) => (isMobileMenuOpen ? "0s" : "300ms")};
 
