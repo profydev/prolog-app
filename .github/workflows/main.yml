@@ -25,7 +25,8 @@ jobs:
       # install dependencies
       - run: npm ci
       # run ESLint & Prettier
-      - run: npm run lint
+      - run: npm run lint:code
+      - run: npm run lint:styles
       - run: npm run prettier
       # verify that there are no type and build errors
       - run: npm run build

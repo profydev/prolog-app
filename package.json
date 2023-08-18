@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --ignore-path .gitignore .",
+    "lint:code": "eslint --ignore-path .gitignore .",
+    "lint:styles": "stylelint \"**/*.scss\"",
     "prettier": "prettier --check .",
     "cypress": "cypress open",
     "test": "jest --watch",
@@ -64,6 +65,9 @@
     "prettier": "^3.0.2",
     "sass": "^1.66.0",
     "storybook": "^7.3.1",
+    "stylelint": "^15.10.3",
+    "stylelint-config-standard-scss": "^10.0.0",
+    "stylelint-prettier": "^4.0.2",
     "typescript": "^5.1.6"
   }
 }
