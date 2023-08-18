@@ -10,7 +10,8 @@ const Container = styled.div`
   background: white;
   border: 1px solid ${color("gray", 200)};
   box-sizing: border-box;
-  box-shadow: 0px 4px 8px -2px rgba(16, 24, 40, 0.1),
+  box-shadow:
+    0px 4px 8px -2px rgba(16, 24, 40, 0.1),
     0px 2px 4px -2px rgba(16, 24, 40, 0.06);
   border-radius: ${space(2)};
   overflow: hidden;
@@ -93,7 +94,7 @@ export function IssueList() {
       ...prev,
       [project.id]: project.language,
     }),
-    {} as Record<string, ProjectLanguage>
+    {} as Record<string, ProjectLanguage>,
   );
   const { items, meta } = issuesPage.data || {};
 

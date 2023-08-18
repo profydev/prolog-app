@@ -6,7 +6,7 @@ const ENDPOINT = "/issue";
 
 export async function getIssues(
   page: number,
-  options?: { signal?: AbortSignal }
+  options?: { signal?: AbortSignal },
 ) {
   const { data } = await axios.get<Page<Issue>>(ENDPOINT, {
     params: { page },

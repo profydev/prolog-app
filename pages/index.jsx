@@ -39,7 +39,7 @@ const IssuesPage = () => {
       <ContactButton
         onClick={() =>
           alert(
-            "Implement this in Challenge 2 - Modal:\n\nhttps://profy.dev/rjs-challenge-modal"
+            "Implement this in Challenge 2 - Modal:\n\nhttps://profy.dev/rjs-challenge-modal",
           )
         }
       >

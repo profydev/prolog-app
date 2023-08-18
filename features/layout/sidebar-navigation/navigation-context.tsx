@@ -16,7 +16,7 @@ export function NavigationProvider({
   children,
 }: NavigationContextProviderProps) {
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(
-    defaultContext.isSidebarCollapsed
+    defaultContext.isSidebarCollapsed,
   );
 
   return (
