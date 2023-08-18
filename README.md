@@ -16,7 +16,7 @@ Watch this video for a tour through the codebase.
 
 ### 1. Clone & Install
 
-This project is built with Next.js, TypeScript, Cypress & styled-components among others. To start working on the project, first clone the repository on your local machine and install the dependencies.
+This project is built with Next.js, TypeScript, Cypress & SCSS modules among others. To start working on the project, first clone the repository on your local machine and install the dependencies.
 
 ```bash
 npm install
