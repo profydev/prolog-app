@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "eslint --ignore-path .gitignore .",
     "prettier": "prettier --check .",
     "cypress": "cypress open",
     "test": "jest --watch",
