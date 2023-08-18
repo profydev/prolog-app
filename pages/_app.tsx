@@ -1,7 +1,8 @@
+import "normalize.css";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/600.css";
-import "@styles/global.css";
+import "@styles/global.scss";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
 import { QueryClientProvider } from "@tanstack/react-query";

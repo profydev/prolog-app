@@ -1,11 +1,15 @@
+@use "@styles/color";
+@use "@styles/space";
+@use "@styles/font";
+
 .container {
   background: white;
-  border: 1px solid var(--color-gray-200);
+  border: 1px solid color.$gray-200;
   box-sizing: border-box;
   box-shadow:
     0px 4px 8px -2px rgba(16, 24, 40, 0.1),
     0px 2px 4px -2px rgba(16, 24, 40, 0.06);
-  border-radius: var(--space-2);
+  border-radius: space.$s2;
   overflow: hidden;
 }
 
@@ -15,42 +19,42 @@
 }
 
 .headerRow {
-  border-bottom: 1px solid var(--color-gray-200);
+  border-bottom: 1px solid color.$gray-200;
 }
 
 .headerCell {
-  padding: var(--space-3) var(--space-6);
+  padding: space.$s3 space.$s6;
   text-align: left;
-  color: var(--color-gray-500);
-  font: var(--font-text-xs-medium);
+  color: color.$gray-500;
+  font: font.$text-xs-medium;
 }
 
 .paginationContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-4) var(--space-6);
-  border-top: 1px solid var(--color-gray-200);
+  padding: space.$s4 space.$s6;
+  border-top: 1px solid color.$gray-200;
 }
 
 .paginationButton {
   height: 38px;
-  padding: var(--space-0) var(--space-4);
+  padding: space.$s0 space.$s4;
   background: white;
-  border: 1px solid var(--color-gray-300);
+  border: 1px solid color.$gray-300;
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
   border-radius: 6px;
 }
 
 .paginationButton:not(:first-of-type) {
-  margin-left: var(--space-3);
+  margin-left: space.$s3;
 }
 
 .pageInfo {
-  color: var(--color-gray-300);
-  font: var(--font-text-sm-regular);
+  color: color.$gray-300;
+  font: font.$text-sm-regular;
 }
 
 .pageNumber {
-  font: var(--font-text-sm-medium);
+  font: font.$text-sm-medium;
 }

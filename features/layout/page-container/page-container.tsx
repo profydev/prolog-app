@@ -1,7 +1,6 @@
-import React from "react";
 import Head from "next/head";
 import { SidebarNavigation } from "../sidebar-navigation";
-import styles from "./page-container.module.css";
+import styles from "./page-container.module.scss";
 
 type PageContainerProps = {
   children: React.ReactNode;
@@ -10,11 +9,10 @@ type PageContainerProps = {
 };
 
 export function PageContainer({ children, title, info }: PageContainerProps) {
-  // combine title in a single string to prevent below warning
-  // "Warning: A title element received an array with more than 1 element as children."
   const documentTitle = `ProLog - ${title}`;
+
   return (
-    <div className={`${styles.container} ${styles.containerDesktop}`}>
+    <div className={styles.container}>
       <Head>
         <title>{documentTitle}</title>
         <meta name="description" content="Error monitoring" />
@@ -23,9 +21,7 @@ export function PageContainer({ children, title, info }: PageContainerProps) {
 
       <SidebarNavigation />
       <main className={styles.main}>
-        <div
-          className={`${styles.contentContainer} ${styles.contentContainerDesktop}`}
-        >
+        <div className={styles.contentContainer}>
           <h1 className={styles.title}>{title}</h1>
           <div className={styles.info}>{info}</div>
           {children}

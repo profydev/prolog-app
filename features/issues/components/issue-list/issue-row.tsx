@@ -3,7 +3,7 @@ import { Badge, BadgeColor, BadgeSize } from "@features/ui";
 import { ProjectLanguage } from "@api/projects.types";
 import { IssueLevel } from "@api/issues.types";
 import type { Issue } from "@api/issues.types";
-import styles from "./issue-row.module.css";
+import styles from "./issue-row.module.scss";
 
 type IssueRowProps = {
   projectLanguage: ProjectLanguage;

@@ -3,7 +3,7 @@ import { ProjectLanguage } from "@api/projects.types";
 import { useGetProjects } from "@features/projects";
 import { useGetIssues } from "../../api/use-get-issues";
 import { IssueRow } from "./issue-row";
-import styles from "./issue-list.module.css";
+import styles from "./issue-list.module.scss";
 
 export function IssueList() {
   const router = useRouter();
