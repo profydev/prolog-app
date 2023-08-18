@@ -127,6 +127,7 @@
 }
 
 .linkList {
+  composes: list;
   flex: 1;
 }
 
