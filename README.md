@@ -36,6 +36,24 @@ npm run dev
 
 Now you can open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
+## Recommended VS Code Extensions
+
+This project uses tools like ESLint, Stylelint, and Prettier. To make the most of these tools it's recommended to install the corresponding extensions. For VS Code those are:
+
+- ESLint
+- Stylelint
+- Prettier
+- SCSS IntelliSense (e.g. for auto-completion of SCSS variables)
+
+The official Stylelint extension might need some adjustment of your `settings.json` file. If it doesn't work out of the box try adding these lines:
+
+```
+"css.validate": false,
+"less.validate": false,
+"scss.validate": false,
+"stylelint.validate": ["css", "scss"],
+```
+
 ## Tests
 
 This project is covered with Cypress tests. Although most tests for production apps are currently written with React Testing Library, Cypress is the best option to get started with testing. When you're new to testing the start can be very cumbersome and feel like you're in a completely new dev environment.
