@@ -27,7 +27,12 @@ export function SidebarNavigation() {
         isSidebarCollapsed && styles.isCollapsed,
       )}
     >
-      <div className={styles.fixedContainer}>
+      <div
+        className={classNames(
+          styles.fixedContainer,
+          isSidebarCollapsed && styles.isCollapsed,
+        )}
+      >
         <header className={styles.header}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
