@@ -1,36 +1,76 @@
 name: CI
 
 on:
-  # runs on pushes to the main branch
   push:
     branches: [main]
-  # also runs inside pull requests that target the main branch
   pull_request:
     branches: [main]
 
 jobs:
-  build:
+  install:
     runs-on: ubuntu-latest
 
-    env:
-      ## Set API base URL from GitHub secrets
-      NEXT_PUBLIC_API_BASE_URL: ${{secrets.NEXT_PUBLIC_API_BASE_URL}}
-
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: "18"
           cache: "npm"
-      # install dependencies
       - run: npm ci
-      # run ESLint & Prettier
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: install
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+      - run: npm ci
       - run: npm run lint:code
       - run: npm run lint:styles
       - run: npm run prettier
-      # verify that there are no type and build errors
+      - name: Check TypeScript types
+        run: npx tsc --noEmit
+
+  build:
+    runs-on: ubuntu-latest
+    needs: install
+    env:
+      NEXT_PUBLIC_API_BASE_URL: ${{secrets.NEXT_PUBLIC_API_BASE_URL}}
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+      - run: npm ci
       - run: npm run build
-      # run tests with Cypress
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: nextjs-build
+          path: .next/
+
+  e2e:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+      - run: npm ci
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: nextjs-build
+          path: .next/
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
