@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint:code": "eslint --ignore-path .gitignore .",
-    "lint:styles": "stylelint \"**/*.scss\"",
-    "prettier": "prettier --check .",
+    "lint:styles": "stylelint  --ignore-path .gitignore \"**/*.scss\"",
+    "prettier": "prettier  --ignore-path .gitignore --check .",
     "cypress": "cypress open",
     "test": "jest --watch",
     "storybook": "storybook dev -p 6006",
@@ -20,9 +20,10 @@
     "node": ">=16.0.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
-    "*.{ts,tsx}": "bash -c 'tsc --noEmit'",
-    "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
+    "*.{js,jsx,ts,tsx}": "eslint --ignore-path .gitignore --cache --fix",
+    "*.{css,scss}": "stylelint  --ignore-path .gitignore --cache --fix",
+    "*.{ts,tsx}": "npx tsc --noEmit",
+    "*": "prettier --ignore-path .gitignore --write"
   },
   "dependencies": {
     "@fontsource/inter": "^5.0.8",
