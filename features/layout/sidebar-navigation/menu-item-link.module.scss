@@ -1,0 +1,32 @@
+@use "@styles/color";
+@use "@styles/space";
+
+.listItem {
+  height: space.$s12;
+  display: flex;
+  align-items: center;
+  margin-top: space.$s1;
+  padding: space.$s0 space.$s3;
+  background: transparent;
+  border-radius: 6px;
+}
+
+.listItem.active {
+  background: color.$gray-700;
+}
+
+.listItem:first-child {
+  margin-top: 0;
+}
+
+.anchor {
+  display: flex;
+  align-items: center;
+  color: color.$gray-100;
+  text-decoration: none;
+}
+
+.icon {
+  width: space.$s6;
+  margin-right: space.$s3;
+}

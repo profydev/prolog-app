@@ -1,0 +1,81 @@
+@use "@styles/color";
+@use "@styles/font";
+@use "@styles/space";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: white;
+  box-shadow:
+    0 1px 3px rgb(16 24 40 / 10%),
+    0 1px 2px rgb(16 24 40 / 6%);
+  border-radius: 8px;
+}
+
+.topContainer {
+  padding: space.$s6;
+}
+
+.bottomContainer {
+  padding: space.$s4 space.$s6;
+  border-top: 3px solid color.$gray-200;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nameAndIconContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: space.$s6;
+}
+
+.languageIcon {
+  margin-right: space.$s3;
+}
+
+.name {
+  font: font.$text-md-medium;
+}
+
+.language {
+  color: color.$gray-500;
+  font: font.$text-sm-regular;
+}
+
+.infoContainer {
+  display: flex;
+}
+
+.issues {
+  margin-left: space.$s6;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+}
+
+.issuesTitle {
+  margin-bottom: space.$s2;
+  color: color.$gray-500;
+  font: font.$text-sm-medium;
+}
+
+.issuesNumber {
+  font: font.$display-md-semibold;
+}
+
+.status {
+  height: 2.75rem;
+  margin-top: auto;
+  margin-left: space.$s6;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.viewIssuesAnchor {
+  text-decoration: none;
+  font: font.$text-sm-medium;
+}

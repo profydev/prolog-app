@@ -1,0 +1,141 @@
+@use "@styles/color";
+@use "@styles/space";
+@use "@styles/breakpoint";
+@use "@styles/z-index";
+@use "@styles/misc";
+
+.container,
+.fixedContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: breakpoint.$desktop) {
+    width: 17.5rem;
+    height: 100vh;
+  }
+
+  &.isCollapsed {
+    @media (min-width: breakpoint.$desktop) {
+      width: 5.1875rem;
+
+      .logo {
+        width: 1.4375rem;
+      }
+    }
+  }
+}
+
+.fixedContainer {
+  composes: container;
+  position: fixed;
+}
+
+.header {
+  width: calc(100% - 2 * space.$s4);
+  height: misc.$header-height;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: space.$s0 space.$s4;
+  background: color.$gray-900;
+  position: relative;
+  z-index: z-index.$header;
+
+  @media (min-width: breakpoint.$desktop) {
+    height: unset;
+    padding: space.$s8 space.$s4 space.$s6;
+  }
+}
+
+.logo {
+  width: 7.375rem;
+
+  @media (min-width: breakpoint.$desktop) {
+    margin: space.$s0 space.$s4;
+  }
+}
+
+.menuButton {
+  @media (min-width: breakpoint.$desktop) {
+    display: none;
+  }
+}
+
+.menuIcon {
+  display: block;
+  width: space.$s10;
+}
+
+.menuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: color.$gray-700;
+  z-index: z-index.$header - 1;
+  transform: translateX(100%);
+  opacity: 0;
+  transition:
+    opacity 300ms,
+    transform 0s 300ms;
+
+  &.isMobileMenuOpen {
+    opacity: 0.6;
+    transform: translateX(0);
+    transition:
+      opacity 300ms,
+      transform 0s 0s;
+  }
+
+  @media (min-width: breakpoint.$desktop) {
+    display: none;
+  }
+}
+
+.nav {
+  position: fixed;
+  top: misc.$header-height;
+  bottom: 0;
+  width: 19.5rem;
+  padding: space.$s1 space.$s2 space.$s6;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: color.$gray-900;
+  z-index: z-index.$header;
+  transform: translateX(-100%);
+  transition: transform 300ms;
+
+  &.isMobileMenuOpen {
+    transform: translateX(0);
+  }
+
+  @media (min-width: breakpoint.$desktop) {
+    position: relative;
+    top: 0;
+    width: calc(100% - space.$s8);
+    padding: space.$s0 space.$s4 space.$s8;
+    transform: none;
+  }
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.linkList {
+  composes: list;
+  flex: 1;
+}
+
+.collapseMenuItem {
+  display: none;
+
+  @media (min-width: breakpoint.$desktop) {
+    display: flex;
+  }
+}

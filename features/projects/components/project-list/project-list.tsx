@@ -1,22 +1,6 @@
-import styled from "styled-components";
-import { breakpoint, space } from "@styles/theme";
 import { ProjectCard } from "../project-card";
 import { useGetProjects } from "../../api/use-get-projects";
-
-const List = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: ${space(6)};
-
-  // reset list styles
-  list-style: none;
-  padding: 0;
-  margin: 0;
-
-  @media (min-width: ${breakpoint("desktop")}) {
-    grid-template-columns: repeat(auto-fit, 400px);
-  }
-`;
+import styles from "./project-list.module.scss";
 
 export function ProjectList() {
   const { data, isLoading, isError, error } = useGetProjects();
@@ -31,12 +15,12 @@ export function ProjectList() {
   }
 
   return (
-    <List>
+    <ul className={styles.list}>
       {data?.map((project) => (
         <li key={project.id}>
           <ProjectCard project={project} />
         </li>
       ))}
-    </List>
+    </ul>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@features/ui";
-import { ListItem, Anchor, Icon } from "./menu-item-link";
+import classNames from "classnames";
+import styles from "./menu-item-link.module.scss";
 
 type MenuItemProps = {
   className?: string;
@@ -18,11 +19,12 @@ export function MenuItemButton({
   isCollapsed,
 }: MenuItemProps) {
   return (
-    <ListItem className={className}>
-      <Anchor as={Button} onClick={onClick}>
+    <li className={classNames(styles.listItem, className)}>
+      <Button className={styles.anchor} onClick={onClick}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <Icon src={iconSrc} alt={`${text} icon`} /> {!isCollapsed && text}
-      </Anchor>
-    </ListItem>
+        <img className={styles.icon} src={iconSrc} alt={`${text} icon`} />{" "}
+        {!isCollapsed && text}{" "}
+      </Button>
+    </li>
   );
 }

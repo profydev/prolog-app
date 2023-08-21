@@ -1,0 +1,32 @@
+@use "@styles/color";
+@use "@styles/space";
+@use "@styles/font";
+
+.row:nth-child(2n) {
+  background: color.$gray-50;
+}
+
+.cell {
+  padding: space.$s4 space.$s6;
+  color: color.$gray-500;
+  font: font.$text-sm-regular;
+}
+
+.issueCell {
+  composes: cell;
+  display: flex;
+  align-items: center;
+}
+
+.languageIcon {
+  width: space.$s10;
+  margin-right: space.$s3;
+}
+
+.errorTypeAndMessage {
+  color: color.$gray-900;
+}
+
+.errorType {
+  font: font.$text-sm-medium;
+}

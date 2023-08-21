@@ -6,8 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --ignore-path .gitignore .",
-    "prettier": "prettier --check .",
+    "lint:code": "eslint --ignore-path .gitignore .",
+    "lint:styles": "stylelint  --ignore-path .gitignore \"**/*.scss\"",
+    "prettier": "prettier  --ignore-path .gitignore --check .",
     "cypress": "cypress open",
     "test": "jest --watch",
     "storybook": "storybook dev -p 6006",
@@ -19,21 +20,22 @@
     "node": ">=16.0.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
-    "*.{ts,tsx}": "bash -c 'tsc --noEmit'",
-    "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
+    "*.{js,jsx,ts,tsx}": "eslint --ignore-path .gitignore --cache --fix",
+    "*.{css,scss}": "stylelint  --ignore-path .gitignore --cache --fix",
+    "*.{ts,tsx}": "npx tsc --noEmit",
+    "*": "prettier --ignore-path .gitignore --write"
   },
   "dependencies": {
     "@fontsource/inter": "^5.0.8",
     "@tanstack/react-query": "^4.32.6",
     "@tanstack/react-query-devtools": "^4.32.6",
     "axios": "^1.4.0",
+    "classnames": "^2.3.2",
     "lodash": "^4.17.21",
     "next": "^13.4.18",
+    "normalize.css": "^8.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "styled-components": "^5.3.11",
-    "styled-normalize": "^8.0.7"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.10",
@@ -48,7 +50,6 @@
     "@types/jest": "^29.5.3",
     "@types/lodash": "^4.14.197",
     "@types/node": "^20.5.0",
-    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^6.4.0",
     "babel-loader": "^9.1.3",
@@ -63,7 +64,11 @@
     "jest-environment-jsdom": "^29.6.2",
     "lint-staged": "^14.0.0",
     "prettier": "^3.0.2",
+    "sass": "^1.66.0",
     "storybook": "^7.3.1",
+    "stylelint": "^15.10.3",
+    "stylelint-config-standard-scss": "^10.0.0",
+    "stylelint-prettier": "^4.0.2",
     "typescript": "^5.1.6"
   }
 }

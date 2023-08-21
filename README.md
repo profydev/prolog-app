@@ -16,7 +16,7 @@ Watch this video for a tour through the codebase.
 
 ### 1. Clone & Install
 
-This project is built with Next.js, TypeScript, Cypress & styled-components among others. To start working on the project, first clone the repository on your local machine and install the dependencies.
+This project is built with Next.js, TypeScript, Cypress & SCSS modules among others. To start working on the project, first clone the repository on your local machine and install the dependencies.
 
 ```bash
 npm install
@@ -35,6 +35,24 @@ npm run dev
 ```
 
 Now you can open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
+
+## Recommended VS Code Extensions
+
+This project uses tools like ESLint, Stylelint, and Prettier. To make the most of these tools it's recommended to install the corresponding extensions. For VS Code those are:
+
+- ESLint
+- Stylelint
+- Prettier
+- SCSS IntelliSense (e.g. for auto-completion of SCSS variables)
+
+The official Stylelint extension might need some adjustment of your `settings.json` file. If it doesn't work out of the box try adding these lines:
+
+```
+"css.validate": false,
+"less.validate": false,
+"scss.validate": false,
+"stylelint.validate": ["css", "scss"],
+```
 
 ## Tests
 

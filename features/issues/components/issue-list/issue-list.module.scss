@@ -1,0 +1,60 @@
+@use "@styles/color";
+@use "@styles/space";
+@use "@styles/font";
+
+.container {
+  background: white;
+  border: 1px solid color.$gray-200;
+  box-sizing: border-box;
+  box-shadow:
+    0 4px 8px -2px rgb(16 24 40 / 10%),
+    0 2px 4px -2px rgb(16 24 40 / 6%);
+  border-radius: space.$s2;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.headerRow {
+  border-bottom: 1px solid color.$gray-200;
+}
+
+.headerCell {
+  padding: space.$s3 space.$s6;
+  text-align: left;
+  color: color.$gray-500;
+  font: font.$text-xs-medium;
+}
+
+.paginationContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: space.$s4 space.$s6;
+  border-top: 1px solid color.$gray-200;
+}
+
+.paginationButton {
+  height: 38px;
+  padding: space.$s0 space.$s4;
+  background: white;
+  border: 1px solid color.$gray-300;
+  box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
+  border-radius: 6px;
+}
+
+.paginationButton:not(:first-of-type) {
+  margin-left: space.$s3;
+}
+
+.pageInfo {
+  color: color.$gray-300;
+  font: font.$text-sm-regular;
+}
+
+.pageNumber {
+  font: font.$text-sm-medium;
+}

@@ -1,67 +1,9 @@
 import { useRouter } from "next/router";
-import styled from "styled-components";
-import { color, space, textFont } from "@styles/theme";
 import { ProjectLanguage } from "@api/projects.types";
 import { useGetProjects } from "@features/projects";
 import { useGetIssues } from "../../api/use-get-issues";
 import { IssueRow } from "./issue-row";
-
-const Container = styled.div`
-  background: white;
-  border: 1px solid ${color("gray", 200)};
-  box-sizing: border-box;
-  box-shadow:
-    0px 4px 8px -2px rgba(16, 24, 40, 0.1),
-    0px 2px 4px -2px rgba(16, 24, 40, 0.06);
-  border-radius: ${space(2)};
-  overflow: hidden;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-`;
-
-const HeaderRow = styled.tr`
-  border-bottom: 1px solid ${color("gray", 200)};
-`;
-
-const HeaderCell = styled.th`
-  padding: ${space(3, 6)};
-  text-align: left;
-  color: ${color("gray", 500)};
-  ${textFont("xs", "medium")};
-`;
-
-const PaginationContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: ${space(4, 6)};
-  border-top: 1px solid ${color("gray", 200)};
-`;
-
-const PaginationButton = styled.button`
-  height: 38px;
-  padding: ${space(0, 4)};
-  background: white;
-  border: 1px solid ${color("gray", 300)};
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
-  border-radius: 6px;
-
-  &:not(:first-of-type) {
-    margin-left: ${space(3)};
-  }
-`;
-
-const PageInfo = styled.div`
-  color: ${color("gray", 300)};
-  ${textFont("sm", "regular")}
-`;
-
-const PageNumber = styled.span`
-  ${textFont("sm", "medium")}
-`;
+import styles from "./issue-list.module.scss";
 
 export function IssueList() {
   const router = useRouter();
@@ -99,15 +41,15 @@ export function IssueList() {
   const { items, meta } = issuesPage.data || {};
 
   return (
-    <Container>
-      <Table>
+    <div className={styles.container}>
+      <table className={styles.table}>
         <thead>
-          <HeaderRow>
-            <HeaderCell>Issue</HeaderCell>
-            <HeaderCell>Level</HeaderCell>
-            <HeaderCell>Events</HeaderCell>
-            <HeaderCell>Users</HeaderCell>
-          </HeaderRow>
+          <tr className={styles.headerRow}>
+            <th className={styles.headerCell}>Issue</th>
+            <th className={styles.headerCell}>Level</th>
+            <th className={styles.headerCell}>Events</th>
+            <th className={styles.headerCell}>Users</th>
+          </tr>
         </thead>
         <tbody>
           {(items || []).map((issue) => (
@@ -118,27 +60,29 @@ export function IssueList() {
             />
           ))}
         </tbody>
-      </Table>
-      <PaginationContainer>
+      </table>
+      <div className={styles.paginationContainer}>
         <div>
-          <PaginationButton
+          <button
+            className={styles.paginationButton}
             onClick={() => navigateToPage(page - 1)}
             disabled={page === 1}
           >
             Previous
-          </PaginationButton>
-          <PaginationButton
+          </button>
+          <button
+            className={styles.paginationButton}
             onClick={() => navigateToPage(page + 1)}
             disabled={page === meta?.totalPages}
           >
             Next
-          </PaginationButton>
+          </button>
         </div>
-        <PageInfo>
-          Page <PageNumber>{meta?.currentPage}</PageNumber> of{" "}
-          <PageNumber>{meta?.totalPages}</PageNumber>
-        </PageInfo>
-      </PaginationContainer>
-    </Container>
+        <div className={styles.pageInfo}>
+          Page <span className={styles.pageNumber}>{meta?.currentPage}</span> of{" "}
+          <span className={styles.pageNumber}>{meta?.totalPages}</span>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -1,0 +1,17 @@
+@use "@styles/breakpoint";
+@use "@styles/space";
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: space.$s6;
+
+  /* reset list styles */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  @media (min-width: breakpoint.$desktop) {
+    grid-template-columns: repeat(auto-fit, 400px);
+  }
+}
