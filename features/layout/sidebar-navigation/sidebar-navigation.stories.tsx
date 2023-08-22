@@ -1,5 +1,5 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { SidebarNavigation } from "./sidebar-navigation";
 import { Routes } from "@config/routes";
 
@@ -10,11 +10,9 @@ export default {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof SidebarNavigation>;
+} as Meta<typeof SidebarNavigation>;
 
-const Template: ComponentStory<typeof SidebarNavigation> = () => (
-  <SidebarNavigation />
-);
+const Template: StoryFn<typeof SidebarNavigation> = () => <SidebarNavigation />;
 
 export const Default = Template.bind({});
 Default.parameters = {

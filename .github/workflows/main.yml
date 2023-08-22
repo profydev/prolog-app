@@ -32,8 +32,7 @@ jobs:
       - run: npm run lint:code
       - run: npm run lint:styles
       - run: npm run prettier
-      - name: Check TypeScript types
-        run: npx tsc --noEmit
+      - run: npm run check:types
 
   build:
     runs-on: ubuntu-latest

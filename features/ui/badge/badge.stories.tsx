@@ -1,5 +1,5 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { Badge, BadgeSize, BadgeColor } from "./badge";
 
 export default {
@@ -9,9 +9,9 @@ export default {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof Badge>;
+} as Meta<typeof Badge>;
 
-const Template: ComponentStory<typeof Badge> = ({ size, color, children }) => (
+const Template: StoryFn<typeof Badge> = ({ size, color, children }) => (
   <div style={{ padding: 50 }}>
     <Badge color={color} size={size}>
       {children}
