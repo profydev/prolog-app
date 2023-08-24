@@ -44,6 +44,7 @@ This project uses tools like ESLint, Stylelint, and Prettier. To make the most o
 - Stylelint
 - Prettier
 - SCSS IntelliSense (e.g. for auto-completion of SCSS variables)
+- React CSS modules (e.g. to open the CSS class definition with CMD/Ctrl + click and warn about non-existent class names)
 
 The official Stylelint extension might need some adjustment of your `settings.json` file. If it doesn't work out of the box try adding these lines:
 
