@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: install
     env:
-      NEXT_PUBLIC_API_BASE_URL: ${{secrets.NEXT_PUBLIC_API_BASE_URL}}
+      NEXT_PUBLIC_API_BASE_URL: ${{vars.NEXT_PUBLIC_API_BASE_URL}}
 
     steps:
       - uses: actions/checkout@v3
