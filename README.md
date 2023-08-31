@@ -40,11 +40,11 @@ Now you can open [http://localhost:3000](http://localhost:3000) with your browse
 
 This project uses tools like ESLint, Stylelint, and Prettier. To make the most of these tools it's recommended to install the corresponding extensions. For VS Code those are:
 
-- ESLint
-- Stylelint
-- Prettier
-- SCSS IntelliSense (e.g. for auto-completion of SCSS variables)
-- React CSS modules (e.g. to open the CSS class definition with CMD/Ctrl + click and warn about non-existent class names)
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [Stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [SCSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-scss) (e.g. for auto-completion of SCSS variables)
+- [React CSS modules](https://marketplace.visualstudio.com/items?itemName=viijay-kr.react-ts-css) (e.g. to open the CSS class definition with CMD/Ctrl + click and warn about non-existent class names)
 
 The official Stylelint extension might need some adjustment of your `settings.json` file. If it doesn't work out of the box try adding these lines:
 
@@ -54,6 +54,13 @@ The official Stylelint extension might need some adjustment of your `settings.js
 "scss.validate": false,
 "stylelint.validate": ["css", "scss"],
 ```
+
+Additional extensions that I find very valuable are
+
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+[GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+[SVG](https://marketplace.visualstudio.com/items?itemName=jock.svg)
+[GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) (paid)
 
 ## Tests
 
