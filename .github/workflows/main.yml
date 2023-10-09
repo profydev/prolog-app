@@ -49,7 +49,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: nextjs-build
           path: .next/
@@ -66,7 +66,7 @@ jobs:
           cache: "npm"
       - run: npm ci
       - name: Download build artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: nextjs-build
           path: .next/
