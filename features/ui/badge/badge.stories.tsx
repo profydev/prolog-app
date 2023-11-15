@@ -12,7 +12,7 @@ export default {
 } as Meta<typeof Badge>;
 
 const Template: StoryFn<typeof Badge> = ({ size, color, children }) => (
-  <div style={{ padding: 50 }}>
+  <div style={{ padding: 10 }}>
     <Badge color={color} size={size}>
       {children}
     </Badge>

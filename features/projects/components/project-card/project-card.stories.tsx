@@ -13,7 +13,14 @@ export default {
 } as Meta<typeof ProjectCard>;
 
 const Template: StoryFn<typeof ProjectCard> = (props) => (
-  <div style={{ width: 500, padding: 50 }}>
+  <div
+    style={{
+      maxWidth: 500,
+      width: "100%",
+      boxSizing: "border-box",
+      padding: 10,
+    }}
+  >
     <ProjectCard {...props} />
   </div>
 );
