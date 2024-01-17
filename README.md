@@ -10,7 +10,7 @@ The application is an error logging and monitoring tool similar to Sentry or Rol
 
 Watch this video for a tour through the codebase.
 
-[![Codebase tour](docs/codebase-tour.png)](https://youtu.be/jehH--7FnBo)
+[![Codebase tour](docs/codebase-tour.png)](https://youtu.be/nYEZ1vVGYkw)
 
 ## Getting Started
 
