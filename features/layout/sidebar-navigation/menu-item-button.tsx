@@ -9,6 +9,7 @@ type MenuItemProps = {
   iconSrc: string;
   onClick: () => void;
   isCollapsed: boolean;
+  isCollapseButton: boolean;
 };
 
 export function MenuItemButton({
@@ -17,13 +18,17 @@ export function MenuItemButton({
   onClick,
   iconSrc,
   isCollapsed,
+  isCollapseButton,
 }: MenuItemProps) {
   return (
     <li className={classNames(styles.listItem, className)}>
       <Button className={styles.anchor} onClick={onClick}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          className={classNames(styles.icon, isCollapsed && styles.invert)}
+          className={classNames(
+            styles.icon,
+            isCollapsed && isCollapseButton && styles.invert,
+          )}
           src={iconSrc}
           alt={`${text} icon`}
         />{" "}
