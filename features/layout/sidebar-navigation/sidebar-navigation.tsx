@@ -83,16 +83,17 @@ export function SidebarNavigation() {
               text="Support"
               iconSrc="/icons/support.svg"
               isCollapsed={isSidebarCollapsed}
-              isCollapseButton={false}
               onClick={() => alert("Support")}
             />
             <MenuItemButton
               text="Collapse"
               iconSrc="/icons/arrow-left.svg"
               isCollapsed={isSidebarCollapsed}
-              isCollapseButton={true}
               onClick={() => toggleSidebar()}
-              className={styles.collapseMenuItem}
+              className={classNames(
+                styles.collapseMenuItem,
+                isSidebarCollapsed && styles.collapsed,
+              )}
             />
           </ul>
         </nav>
