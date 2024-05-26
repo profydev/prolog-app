@@ -30,3 +30,7 @@
   width: space.$s6;
   margin-right: space.$s3;
 }
+
+.invert {
+  transform: scaleX(-1);
+}
