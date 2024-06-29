@@ -1,4 +1,5 @@
 import { ProjectCard } from "../project-card";
+import { Loader } from "@features/ui";
 import { useGetProjects } from "../../api/use-get-projects";
 import styles from "./project-list.module.scss";
 
@@ -6,7 +7,7 @@ export function ProjectList() {
   const { data, isLoading, isError, error } = useGetProjects();
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
 
   if (isError) {

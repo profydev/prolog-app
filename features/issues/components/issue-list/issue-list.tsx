@@ -3,6 +3,7 @@ import { ProjectLanguage } from "@api/projects.types";
 import { useGetProjects } from "@features/projects";
 import { useGetIssues } from "../../api/use-get-issues";
 import { IssueRow } from "./issue-row";
+import { Loader } from "@features/ui";
 import styles from "./issue-list.module.scss";
 
 export function IssueList() {
@@ -18,7 +19,7 @@ export function IssueList() {
   const projects = useGetProjects();
 
   if (projects.isLoading || issuesPage.isLoading) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
 
   if (projects.isError) {
